@@ -8,8 +8,8 @@
         
         <div class="collapse navbar-collapse" id="nav-bar">
             <ul class="navbar-nav mr-auto"></ul>
-            <ul class="navbar-nav">
-                <li class="nav-item"><a href="#" class="nav-link">Signup</a></li>
+            <ul class="nav navbar-nav navbar-right">
+                <li>{!! link_to_route("signup.get", "Signup", [], ["class" => "nav-link"]) !!}</li>
                 <li class="nav-item"><a href="#" class="nav-link">Login</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">About</a></li>
             </ul>
