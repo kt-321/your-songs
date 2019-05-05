@@ -4,8 +4,10 @@
         <img class="mr-2 rounded" src="{{ Gravatar::src($song->user->email, 50) }}" alt="">
         <div class="media-body">
             <div>
-                {!! link_to_route("users.show", $song->user->name, ["id" => $song->user->id]) !!}<span class="text-muted">posted at {{ $song->created_at }}</span>
+                {!! link_to_route("users.show", $song->user->name, ["id" => $song->user->id]) !!}<span class="text-muted"> posted at {{ $song->created_at }}</span>
             </div>
+            
+            <!--曲情報-->
             <div>
                 <p class="mb-0">曲名：{!! nl2br(e($song->song_name)) !!}</p>
                 <p class="mb-0">アーティスト名：{!! nl2br(e($song->artist_name)) !!}</p>
@@ -17,7 +19,7 @@
             <div>
                 @if(Auth::id() == $song->user_id)
                     {!! Form::open(["route" => ["songs.destroy", "$song->id"], "method" => "delete" ]) !!}
-                        {!! Form::submit("Delete", ["class" => "btn btn-danger btn-sm"]) !!}
+                        {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm"]) !!}
                     {!! Form::close() !!}
                 @endif
             </div>
