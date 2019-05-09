@@ -15,9 +15,9 @@
 　　        </aside>
 　　        <div class="col-sm-8">
 　　            @if (Auth::id() == $user->id)
-　　                {!! Form::open(["route" => "songs.store"]) !!}
+　　                {!! Form::open(["route" => "songs.store", "class" => "form-horizontal"]) !!}
 　　                    <div class="form-group">
-　　                        <div class="pull-left">{!! Form::label("song_name", "曲名") !!}</div>
+　　                        {!! Form::label("song_name", "曲名") !!}</div>
 　　                        {!! Form::text("song_name", old("song_name"), ["class" => "form-control", "rows" => "1"]) !!}
 　　                        {!! Form::label("artist_name", "アーティスト名") !!}
 　　                        {!! Form::text("artist_name", old("artist_name"), ["class" => "form-control", "rows" => "1"]) !!}

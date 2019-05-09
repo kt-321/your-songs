@@ -27,7 +27,12 @@ class SongsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            "comment" => "required|max:191",    
+            "song_name" => "required|max:191",
+            "artist_name" => "required|max:191",
+            "music_age" => "required|integer",
+            "comment" => "nullable|max:191",
+            "image_url" => "nullable|string",
+            "video_url" => "nullable|string"
         ]);
         
         $request->user()->songs()->create([
