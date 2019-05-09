@@ -13,7 +13,7 @@ class SongsController extends Controller
         $data = [];
         if(\Auth::check()) {
             $user = \Auth::user();
-            $songs = $user->songs()->orderBy("created_at", "desc")->paginate(10);
+            $songs = $user->feed_songs()->orderBy("created_at", "desc")->paginate(10);
             
             $data = [
                 "user" => $user,
