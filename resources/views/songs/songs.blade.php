@@ -16,7 +16,8 @@
                 <p class="mb-0">画像：{!! nl2br(e($song->image_url)) !!}</p>
                 <p class="mb-0">映像：<a href ="{!! nl2br(e($song->video_url)) !!}">{!! nl2br(e($song->video_url)) !!}</a></p>
             </div>
-            <div>
+            <div class="d-flex">
+                @include("favorite.favorite_button", ["song" => $song])
                 @if(Auth::id() == $song->user_id)
                     {!! Form::open(["route" => ["songs.destroy", "$song->id"], "method" => "delete" ]) !!}
                         {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm"]) !!}
