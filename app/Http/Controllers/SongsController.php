@@ -24,6 +24,12 @@ class SongsController extends Controller
         return view("welcome", $data);
     }
     
+    public function create()
+    {
+        $user = \Auth::user();
+        return view("songs.create", ["user" => $user]);
+    }
+    
     public function store(Request $request)
     {
         $this->validate($request,[
@@ -32,7 +38,7 @@ class SongsController extends Controller
             "music_age" => "required|integer",
             "comment" => "nullable|max:191",
             "image_url" => "nullable|string",
-            "video_url" => "nullable|string"
+            "video_url" => "nullable|string",
         ]);
         
         $request->user()->songs()->create([
@@ -44,7 +50,32 @@ class SongsController extends Controller
             "video_url" => $request->video_url,
         ]);
         
-        return back();
+       return redirect("/");
+    }
+    
+    public function edit($id)
+    {
+        $song = Song::find($id);
+        
+        return view("songs.edit",[
+            "song" => $song,
+        ]);
+    }
+    
+    public function update(Request $request, $id)
+    {
+        $song = Song::find($id);
+        
+        $song->song_name = $request->song_name;
+        $song->artist_name = $request->artist_name;
+        $song->music_age = $request->music_age;
+        $song->comment = $request->comment;
+        $song->image_url = $request->image_url;
+        $song->video_url = $request->video_url;
+        
+        $song->save();
+        
+        return redirect("/");
     }
     
     public function destroy($id)
@@ -58,6 +89,7 @@ class SongsController extends Controller
         return back();
     }
     
+   
     
   
 }

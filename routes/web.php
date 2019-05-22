@@ -21,7 +21,7 @@ Route::post("login", "Auth\LoginController@login")->name("login.post");
 Route::get("logout", "Auth\LoginController@logout")->name("logout.get");
 
 Route::group(["middleware" => ["auth"]], function(){
-    Route::resource("users", "UsersController", ["only" => ["index", "show"]]);
+    Route::resource("users", "UsersController", ["only" => ["index", "show", "edit", "update"]]);
     
     Route::group(["prefix" => "users/{id}"], function(){
         Route::post("follow", "UserFollowController@store")->name("user.follow");
@@ -36,5 +36,13 @@ Route::group(["middleware" => ["auth"]], function(){
         Route::delete("unfavorite", "FavoritesController@destroy")->name("favorites.unfavorite");
     });
     
-    Route::resource("songs", "SongsController", ["only" => ["store", "destroy"]]);
+
+    Route::resource("songs", "SongsController", ["only" => ["create", "store", "edit", "update", "destroy"]]);
+    
+    // Route::get("images", "ImagesController@uploadForm")->name("images.uploadForm");
+    // Route::post("images", "ImagesController@upload")->name("images.upload");
+    // Route::get("images", "ImagesController@display")->name("images.display");
+    
+    Route::get("userImages", "UserImagesController@uploadForm")->name("userImages.uploadForm");
+    Route::post("userImages", "UserImagesController@upload")->name("userImages.upload");
 });
