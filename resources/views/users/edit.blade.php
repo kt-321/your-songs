@@ -26,11 +26,6 @@
                     {!! Form::select("gender", [1 => "男性", 2 => "女性"], [], ["placeholder" => "選択してください"]) !!}
                 </div>
                                 
-                <!--<div class="form-group">-->
-                <!--    {!! Form::label("image_url", "アイコン（任意）") !!}-->
-                <!--    {{ Form::file("image_url") }}-->
-                <!--</div>-->
-                                
                 <div class="form-group">
                     {!! Form::label("favorite_music_age", "好きな音楽の年代（任意）") !!}
                     {!! Form::select("favorite_music_age", [1970 => "1970年代", 1980 => "1980年代", 1990 => "1990年代", 2000 => "2000年代", 2010 => "2010年代"], [], ["placeholder" => "選択してください"]) !!}

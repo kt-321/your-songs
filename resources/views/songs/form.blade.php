@@ -1,4 +1,3 @@
-<!--{!! Form::open(["route" => "songs.store"]) !!}-->
                     <div class="form-group row mb-0">
                         {!! Form::label("song_name", "曲名", ["class" => "col-form-label col-sm-2"]) !!}
                         <div class="col-sm-10">
@@ -26,15 +25,6 @@
                             {!! Form::textarea("comment", old("comment"), ["class" => "form-control", "rows" => "2"]) !!}
                         </div>
                     </div>
-                         
-                    <div class="form-group row">        
-                        {!! Form::label("image_url", "画像", ["class" => "col-form-label col-sm-2"]) !!}
-                        <div class="col-sm-10">
-                            {{ Form::file('image_url', old("image_url"), ["class" => "form-control"]) }}
-                        </div>
-                    </div>
-                    
-                    
                     
                     <div class="form-group row">        
                         {!! Form::label("video_url", "映像", ["class" => "col-form-label col-sm-2"]) !!}
@@ -42,6 +32,3 @@
                             {!! Form::url("video_url", old("video_url"), ["class" => "form-control", "rows" => "2"]) !!}
                         </div>
                     </div>
-                    
-                    <!--{!! Form::submit("投稿", ["class" => "btn btn-primary btn-block"]) !!}-->
-<!--{!! Form::close() !!}-->

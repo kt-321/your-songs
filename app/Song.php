@@ -17,4 +17,5 @@ class Song extends Model
     {
         return $this->belongsToMany(User::class, "favorites", "song_id", "user_id")->withTimestamps;
     }
+    
 }

@@ -11,9 +11,9 @@ use App\User;
 class UserImagesController extends Controller
 {   
     public function uploadForm()
-    {
+    {   
         $user = \Auth::user();
-        return view("images.upload", ["user" => $user]);
+        return view("userImages.upload", ["user" => $user]);
     }
     
     public function upload(Request $request)

@@ -53,7 +53,6 @@ class RegisterController extends Controller
             "password" => "required|string|min:6|confirmed",
             "age" => "required|integer",
             "gender" => "required|string",
-            // "image_url" => "nullable|string",
             "favorite_music_age" => "nullable|integer",
             "favorite_artist" => "nullable|string|max:255",
             "comment" => "nullable|string|max:1000"

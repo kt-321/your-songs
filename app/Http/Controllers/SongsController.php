@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+
+use App\User;
+
 use App\Song;
 
 class SongsController extends Controller
@@ -37,7 +41,6 @@ class SongsController extends Controller
             "artist_name" => "required|max:191",
             "music_age" => "required|integer",
             "comment" => "nullable|max:191",
-            "image_url" => "nullable|string",
             "video_url" => "nullable|string",
         ]);
         
@@ -46,12 +49,12 @@ class SongsController extends Controller
             "artist_name" => $request->artist_name,
             "music_age" => $request->music_age,
             "comment" => $request->comment,
-            "image_url" => $request->image_url,
             "video_url" => $request->video_url,
         ]);
         
        return redirect("/");
     }
+    
     
     public function edit($id)
     {
@@ -70,7 +73,6 @@ class SongsController extends Controller
         $song->artist_name = $request->artist_name;
         $song->music_age = $request->music_age;
         $song->comment = $request->comment;
-        $song->image_url = $request->image_url;
         $song->video_url = $request->video_url;
         
         $song->save();
@@ -88,8 +90,4 @@ class SongsController extends Controller
         
         return back();
     }
-    
-   
-    
-  
 }
