@@ -13,20 +13,9 @@ class Song extends Model
         return $this->belongsTo(User::class);
     }
     
-    // public function favorite_users()
-    // {
-    //     return $this->belongsToMany(User::class, "favorites", "song_id", "user_id")->withTimestamps;
-    // }
-    
     public function favorite_users()
     {
         return $this->belongsToMany(User::class, "favorites", "song_id", "user_id");
-        // $songs = Song::withCount("favorites")->get();
-        // foreach ($songs as $song){
-        //     return $post->favorites_count;
-        // }
-        
-        // $songs = Song::withCount("favorites")->orderBy("favorites_count", "desc")->paginate(20);
     }
     
 }

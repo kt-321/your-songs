@@ -30,8 +30,11 @@
                     <p class="mb-0">アーティスト名：{!! nl2br(e($song->artist_name)) !!}</p>
                     <p class="mb-0">曲の年代：{!! nl2br(e($song->music_age)) !!}年代</p>
                     <p class="mb-0">コメント：{!! nl2br(e($song->comment)) !!}</p>
-                    <p class="mb-0">映像：<a href ="{!! nl2br(e($song->video_url)) !!}">{!! nl2br(e($song->video_url)) !!}</a></p>
-                    <iframe width="560" height="315" src="{!! nl2br(e($song->video_url)) !!}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    @if($song->video_url)
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/{!! nl2br(e($song->video_url)) !!}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>           
+                    @else
+                    <p class="mb-0">映像はありません。</p>
+                    @endif
                 </div>
             </div>
             

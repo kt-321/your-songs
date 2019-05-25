@@ -1,4 +1,4 @@
-                    <div class="form-group row mb-0">
+                    <div class="form-group row">
                         {!! Form::label("song_name", "曲名", ["class" => "col-form-label col-sm-2"]) !!}
                         <div class="col-sm-10">
                             {!! Form::text("song_name", old("song_name"), ["class" => "form-control", "rows" => "1"]) !!}
@@ -29,6 +29,7 @@
                     <div class="form-group row">        
                         {!! Form::label("video_url", "映像", ["class" => "col-form-label col-sm-2"]) !!}
                         <div class="col-sm-10">
-                            {!! Form::url("video_url", old("video_url"), ["class" => "form-control", "rows" => "2"]) !!}
+                            {!! Form::text("video_url", old("video_url"), ["class" => "form-control", "rows" => "1"]) !!}
+                            <p>アップしたいYouTube動画のURLのうち「v=」以降の文字列を打ち込んでください。</p>
                         </div>
                     </div>
