@@ -34,7 +34,11 @@
                     <iframe width="560" height="315" src="{!! nl2br(e($song->video_url)) !!}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
-           
+            
+            <div>
+                <p>お気に入り数 <span class="badge badge-secondary"> {{ count($song->favorite_users) }}</span></p>    
+            </div>
+            
             <div class="d-flex">
                 @include("favorite.favorite_button", ["song" => $song])
                 @if(Auth::id() == $song->user_id)
@@ -56,6 +60,7 @@
                     
                 @endif
             </div>
+            
         </div>
     </li>
     @endforeach

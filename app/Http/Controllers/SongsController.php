@@ -17,11 +17,17 @@ class SongsController extends Controller
         $data = [];
         if(\Auth::check()) {
             $user = \Auth::user();
-            $songs = $user->feed_songs()->orderBy("created_at", "desc")->paginate(10);
+            // $songs = $user->feed_songs()->orderBy("created_at", "desc")->paginate(10);
+            // $songs = Song::withCount("favorites")->orderBy("favorites_count", "desc")->paginate(20);
+            // $songs = Song::withCount("favorites")->get();
+            // $songs = Song::all();
+            // $count = $songs->favoriteUsers()->count();
+            $songs = Song::withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(20);
             
             $data = [
                 "user" => $user,
                 "songs" => $songs,
+                // "count" => $count,
              ];
          }
         

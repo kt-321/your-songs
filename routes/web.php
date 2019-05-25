@@ -37,10 +37,8 @@ Route::group(["middleware" => ["auth"]], function(){
         Route::post("songImages", "SongImagesController@upload")->name("songImages.upload");
     });
     
-
+    // Route::resource("songs", "SongsController", ["only" => ["create", "store", "edit", "update", "destroy"]]);
     Route::resource("songs", "SongsController", ["only" => ["create", "store", "edit", "update", "destroy"]]);
-    
-   
     
     Route::get("userImages", "UserImagesController@uploadForm")->name("userImages.uploadForm");
     Route::post("userImages", "UserImagesController@upload")->name("userImages.upload");
