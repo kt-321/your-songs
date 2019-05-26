@@ -22,8 +22,8 @@
                     </li>
                     <li class="nav-item"><a href="#" class="nav-link">About</a></li>
                 @else
-                    <li class="nav-item">{!! link_to_route("signup.get", "Signup", [], ["class" => "nav-link"]) !!}</li>
-                    <li class="nav-item">{!! link_to_route("login", "Login", [], ["class" => "nav-link"]) !!}</li>
+                    <li class="nav-item"><a href="{{ route("signup.get") }}" class="nav-link">Signup</a></li>
+                    <li class="nav-item"><a href="{{ route("login") }}" class="nav-link">Login</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">About</a></li>
                 @endif
             </ul>

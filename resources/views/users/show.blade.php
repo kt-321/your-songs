@@ -13,7 +13,7 @@
                     <div class="col-sm-10">
                     {{Form::file("file", ["class" => "form-control"])}}
                     </div>
-                    {!! Form::submit("プロフィール画像を変更する", ["class" => "btn btn-primary"]) !!}
+                    {!! Form::submit("プロフィール画像", ["class" => "btn btn-primary"]) !!}
                 </div>
                 {!! Form::close() !!}
                 @endif
@@ -26,7 +26,7 @@
             </div>
             
             @if(Auth::id() == $user->id)
-                {!! link_to_route("users.edit", "プロフィールを変更", ["id" => $user->id], ["class" => "btn btn-primary"]) !!}
+                <a href="{{ route("users.edit", ["id" => $user->id]) }}" class="btn btn-primary">プロフィールを変更</a>
             @endif
             
             <!--フォローボタンまたはフォロー解除ボタン-->
@@ -34,7 +34,7 @@
             
             <!--曲投稿-->
             @if(Auth::id() == $user->id)
-                {!! link_to_route("songs.create", "曲を投稿", [], ["class" => "btn btn-lg btn-primary"]) !!}
+                <a href="{{ route("songs.create") }}" class="btn btn-lg btn-primary">おすすめ曲を投稿</a>
             @endif
         </aside>
         

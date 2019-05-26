@@ -11,7 +11,7 @@
         
         <div class="media-body">
             <div>
-                {!! link_to_route("users.show", $song->user->name, ["id" => $song->user->id]) !!}<span class="text-muted">   投稿日時   {{ $song->created_at }}</span>
+                <a href="{{ route("users.show", ["id" => $song->user->id]) }}">{{ $song->user->name }}</a><span class="text-muted">  投稿日時  {{ $song->created_at }}</span>
             </div>
             
             <div class="row">
@@ -49,8 +49,8 @@
                         {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm"]) !!}
                     {!! Form::close() !!}
                     
-                    {!! link_to_route("songs.edit", "曲情報を編集", ["id" => $song->id], ["class" => "btn btn-light"]) !!}
-                
+                    <a href="{{ route("songs.edit", ["id" => $song->id]) }}" class="btn btn-light">曲情報を編集</a>
+                    
                 {!! Form::open(["route" => ["songImages.upload", $song->id], "enctype" => "multipart/form-data"]) !!}
                 <div class="form-group row">
                     {!! Form::label("file", "画像", ["class" => "col-form-label col-sm-2"]) !!}

@@ -2,7 +2,7 @@
 
 @section("content")
 
-<h1>{{ $song->id }}の曲情報編集ページ</h1>
+<h1>『{{ $song->song_name }}』の曲情報編集ページ</h1>
 
 <div class="row">
     <div class="col-sm-6">

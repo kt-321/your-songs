@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @section("content")
-    <h1>{{ $user->id }}の編集ページ</h1>
+    <h1>マイプロフィールの編集ページ</h1>
     <div class="row">
         <div class="col-sm-6">
             {!! Form::model($user, ["route" => ["users.update", $user->id], "method" => "put"] ) !!}

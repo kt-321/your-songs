@@ -16,7 +16,7 @@
                         {{ $user->name }}
                     </div>
                     <div>
-                        <p>{!! link_to_route("users.show", "View Profile", ["id" => $user->id]) !!}</p>
+                        <a href="{{ route("users.show", ["id" => $user->id]) }}">プロフィールを見る</a>
                     </div>
                 </div>
             </li>

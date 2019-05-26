@@ -8,7 +8,7 @@
     　　<div class="center-jumbotron">      
             <div class="text-center">
                 <h1>Welcome to the YourSongs</h1>
-                {!! link_to_route("signup.get", "Sign up now!", [], ["class" => "btn btn-lg btn-primary"]) !!}
+                <a href="{{ route("signup.get") }}" class="btn btn-lg btn-primary">ユーザー登録する</a>
             </div>
         </div>
     @endif
