@@ -15,7 +15,7 @@
                     <div class="form-group row">
                         {!! Form::label("music_age", "曲の年代", ["class" => "col-form-label col-sm-2"]) !!}
                         <div class="col-sm-3">
-                            {{ Form::select("music_age", [1980 => "1980年代", 1990 => "1990年代", 2000 => "2000年代", 2010 => "2010年代"],old("music_age"), ["class" => "form-control"]) }}
+                            {{ Form::select("music_age", [1980 => "1980年代", 1990 => "1990年代", 2000 => "2000年代", 2010 => "2010年代"],old("music_age"), ["class" => "form-control", "placeholder" => "－"]) }}
                         </div>    
                     </div>     
                     

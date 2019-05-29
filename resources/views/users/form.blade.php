@@ -20,19 +20,19 @@
                 
 <div class="form-group">
     {!! Form::label("age", "年齢") !!}
-    {!! Form::select("age", [10 => "10代", 20 => "20代", 30 => "30代", 40 => "40代", 50 => "50代", 60 => "60代", 70 => "70代"], [], ["placeholder" => "選択してください"]) !!}
+    {!! Form::select("age", [10 => "10代", 20 => "20代", 30 => "30代", 40 => "40代", 50 => "50代", 60 => "60代", 70 => "70代"], old("age"), ["placeholder" => "－"]) !!}
 </div>
                 
 <div class="form-group">
     {!! Form::label("gender", "性別") !!}
-    {!! Form::select("gender", [1 => "男性", 2 => "女性"], [], ["placeholder" => "選択してください"]) !!}
+    {!! Form::select("gender", [1 => "男性", 2 => "女性"], old("gender"), ["placeholder" => "－"]) !!}
 </div>
                 
 
                 
 <div class="form-group">
     {!! Form::label("favorite_music_age", "好きな音楽の年代（任意）") !!}
-    {!! Form::select("favorite_music_age", [1970 => "1970年代", 1980 => "1980年代", 1990 => "1990年代", 2000 => "2000年代", 2010 => "2010年代"], [], ["placeholder" => "選択してください"]) !!}
+    {!! Form::select("favorite_music_age", [1970 => "1970年代", 1980 => "1980年代", 1990 => "1990年代", 2000 => "2000年代", 2010 => "2010年代"], old("favorite_music_age"), ["placeholder" => "－"]) !!}
 </div>
                 
 <div class="form-group">
