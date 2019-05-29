@@ -20,9 +20,9 @@
                     </div>     
                     
                     <div class="form-group row">
-                        {!! Form::label("comment", "コメント", ["class" => "col-form-label col-sm-2"]) !!}
+                        {!! Form::label("description", "曲の説明", ["class" => "col-form-label col-sm-2"]) !!}
                         <div class="col-sm-10">
-                            {!! Form::textarea("comment", old("comment"), ["class" => "form-control", "rows" => "2"]) !!}
+                            {!! Form::textarea("description", old("description"), ["class" => "form-control", "rows" => "2"]) !!}
                         </div>
                     </div>
                     

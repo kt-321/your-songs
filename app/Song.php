@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Song extends Model
 {
-    protected $fillable = ["comment" , "user_id", "image_url", "video_url", "artist_name", "song_name", "music_age"];
+    protected $fillable = ["description", "user_id", "image_url", "video_url", "artist_name", "song_name", "music_age"];
     
     public function user()
     {
@@ -17,5 +17,15 @@ class Song extends Model
     {
         return $this->belongsToMany(User::class, "favorites", "song_id", "user_id");
     }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    
+    // public function comment_users()
+    // {
+    //     return $this->belongsToMany(User::class, "comments", "song_id", "user_id");
+    // }
     
 }

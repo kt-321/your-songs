@@ -35,10 +35,14 @@ Route::group(["middleware" => ["auth"]], function(){
         Route::post("favorite", "FavoritesController@store")->name("favorites.favorite");
         Route::delete("unfavorite", "FavoritesController@destroy")->name("favorites.unfavorite");
         Route::post("songImages", "SongImagesController@upload")->name("songImages.upload");
+        
     });
     
-    Route::resource("songs", "SongsController", ["only" => ["create", "store", "edit", "update", "destroy"]]);
+    
+    Route::resource("songs", "SongsController", ["only" => ["create", "store", "show", "edit", "update", "destroy"]]);
     
     Route::post("userImages", "UserImagesController@upload")->name("userImages.upload");
+    
+    Route::resource("comments", "CommentsController", ["only" =>["store"]]);
     
 });

@@ -13,7 +13,7 @@
                     <div class="col-sm-10">
                     {{Form::file("file", ["class" => "form-control"])}}
                     </div>
-                    {!! Form::submit("プロフィール画像", ["class" => "btn btn-primary"]) !!}
+                    {!! Form::submit("プロフィール画像を変更する", ["class" => "btn btn-primary"]) !!}
                 </div>
                 {!! Form::close() !!}
                 @endif

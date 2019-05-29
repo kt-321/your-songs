@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        "name", "email", "password", "age", "gender", "image_url", "favorite_music_age", "favorite_artist", "comment"
+        "name", "email", "password", "age", "gender", "image_url", "favorite_music_age", "favorite_artist", "comment",
     ];
 
     /**
@@ -32,6 +32,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(Song::class);
     }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    
+    //  public function comment($commentId)
+    // {
+    //     $this->comments()->attach($commentId);       
+    // }
+    
+    // public funcion comment_songs()
+    // {
+    //     return $this->belongsToMany(Song::class, "comments", "user_id", "song_id")->withTimestamps();
+    // }
     
     public function followings()
     {

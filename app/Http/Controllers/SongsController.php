@@ -22,7 +22,6 @@ class SongsController extends Controller
             $data = [
                 "user" => $user,
                 "songs" => $songs,
-                // "count" => $count,
              ];
          }
         
@@ -41,7 +40,7 @@ class SongsController extends Controller
             "song_name" => "required|max:191",
             "artist_name" => "required|max:191",
             "music_age" => "required|integer",
-            "comment" => "nullable|max:191",
+            "description" => "nullable|max:191",
             "video_url" => "nullable|string|max:191",
         ]);
         
@@ -49,13 +48,25 @@ class SongsController extends Controller
             "song_name" => $request->song_name,
             "artist_name" => $request->artist_name,
             "music_age" => $request->music_age,
-            "comment" => $request->comment,
+            "description" => $request->description,
             "video_url" => $request->video_url,
         ]);
         
        return redirect("/");
     }
     
+    public function show($id)
+    {
+        $song = Song::find($id);
+        $comments = $song->comments()->orderBy("created_at", "desc")->paginate(10);
+        $user = \Auth::user();
+        
+        return view("songs.show",[
+            "song" => $song,
+            "comments" => $comments,
+            "user" => $user,
+        ]);
+    }
     
     public function edit($id)
     {
@@ -73,7 +84,7 @@ class SongsController extends Controller
         $song->song_name = $request->song_name;
         $song->artist_name = $request->artist_name;
         $song->music_age = $request->music_age;
-        $song->comment = $request->comment;
+        $song->description = $request->description;
         $song->video_url = $request->video_url;
         
         $song->save();
