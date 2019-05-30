@@ -17,14 +17,13 @@
                     <p class="mb-0">曲名：{!! nl2br(e($song->song_name)) !!}</p>
                     <p class="mb-0">アーティスト：{!! nl2br(e($song->artist_name)) !!}</p>
                     <p class="mb-0">曲の年代：{!! nl2br(e($song->music_age)) !!}年代</p>
-                    <p class="mb-0">説明：{!! nl2br(e($song->description)) !!}</p>
+                    <p class="mb-0">曲紹介：{!! nl2br(e($song->description)) !!}</p>
                     
                     @if($song->video_url)
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/{!! nl2br(e($song->video_url)) !!}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>           
-                    @else
-                        <p class="mb-0">映像はありません。</p>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/{!! nl2br(e($song->video_url)) !!}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     @endif
                     
+                    <a href="{{ route("songs.show", ["song" => $song]) }}" class="btn btn-light">続きを読む</a>
                     <div>
                         @if($song->user->image_url)
                             <img src="{{ $song->user->image_url }}" style="width: 50px; height: 50px" alt="画像"> 
@@ -35,13 +34,13 @@
                         @endif
                         <a href="{{ route("users.show", ["id" => $song->user->id]) }}">{{ $song->user->name }}</a><span class="text-muted">  投稿日時  {{ $song->created_at }}</span>
                     </div>
-                    <a href="{{ route("songs.show", ["song" => $song]) }}" class="btn btn-light">続きを読む</a>
                 </div>
             </div>
             
             <div class="d-flex">
-                <p>お気に入り数 <span class="badge badge-secondary"> {{ count($song->favorite_users) }}</span></p> 
                 @include("favorite.favorite_button", ["song" => $song])
+                <p class="favorite-counts"><span class="badge badge-secondary"> {{ count($song->favorite_users) }}</span></p>
+                
                 @if(Auth::id() == $song->user_id)
                     {!! Form::open(["route" => ["songs.destroy", "$song->id"], "method" => "delete" ]) !!}
                         {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm"]) !!}
