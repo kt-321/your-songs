@@ -43,6 +43,6 @@ Route::group(["middleware" => ["auth"]], function(){
     
     Route::post("userImages", "UserImagesController@upload")->name("userImages.upload");
     
-    Route::resource("comments", "CommentsController", ["only" =>["store"]]);
+    Route::resource("comments", "CommentsController", ["only" =>["store", "destroy"]]);
     
 });

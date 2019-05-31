@@ -22,8 +22,6 @@ class CommentsController extends Controller
             "body" => "required|max:2000",
         ]);
         
-        // $song=Song::find($id);
-        
         Comment::create([
             'user_id' => $request->user()->id,
             'song_id' => $request->song_id,
@@ -34,5 +32,16 @@ class CommentsController extends Controller
         
     }
     
+    
+    public function destroy($id)
+    {
+        $comment = Comment::find($id);
+        
+        if(\Auth::id() === $comment->user_id){
+            $comment->delete();
+        }
+        
+        return back();
+    }
     
 }

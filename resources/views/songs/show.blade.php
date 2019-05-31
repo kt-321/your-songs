@@ -114,6 +114,11 @@
                                     <!--<p style="word-wrap:break-word">{{ $comment->body }}</p>-->
                                     <p>{{ $comment->body }}</p>
                                     <p class="text-right"><span class="text-muted">  投稿日時  {{ $comment->created_at }}</span></p>
+                                    @if(Auth::id() == $comment->user_id)
+                                    {!! Form::open(["route" => ["comments.destroy", $comment->id], "method" => "delete"]) !!}
+                                        {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm"]) !!}
+                                    {!! Form::close() !!}
+                                    @endif
                                 </div>
                                 
                             </div>
