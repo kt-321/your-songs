@@ -2,7 +2,9 @@
 
 @section("content")
 　　@if(Auth::check())
-　　    <h1>人気曲ランキング</h1>
+　　    <h1>お気に入り数ランキング</h1>
+　　    <a href="{{ url('/commentsRanking') }}">→　コメント数ランキング</a>
+　　    
 　　    @include("songs.songs", ["songs" => $songs])
 　　@else
     　　<div class="center-jumbotron">      

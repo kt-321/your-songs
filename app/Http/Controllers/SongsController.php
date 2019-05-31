@@ -16,11 +16,8 @@ class SongsController extends Controller
     {   
         $data = [];
         if(\Auth::check()) {
-            $user = \Auth::user();
             $songs = Song::withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(20);
-            
             $data = [
-                "user" => $user,
                 "songs" => $songs,
              ];
          }
@@ -101,5 +98,19 @@ class SongsController extends Controller
         }
         
         return back();
+    }
+    
+    public function commentsRanking()
+    {    
+        $songs = Song::withCount("comments")->orderBy("comments_count", "desc")->paginate(20);
+            
+        return view("songs.comments_ranking", ["songs" => $songs]);
+    }
+    
+    public function favoritesRanking()
+    {    
+        $songs = Song::withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(20);
+        
+        return view("songs.favorites_ranking", ["songs" => $songs]);
     }
 }

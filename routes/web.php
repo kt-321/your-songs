@@ -40,6 +40,9 @@ Route::group(["middleware" => ["auth"]], function(){
     
     
     Route::resource("songs", "SongsController", ["only" => ["create", "store", "show", "edit", "update", "destroy"]]);
+   
+    Route::get("commentsRanking", "SongsController@commentsRanking")->name("songs.commentsRanking");
+    Route::get("favoritesRanking", "SongsController@favoritesRanking")->name("songs.favoritesRanking");
     
     Route::post("userImages", "UserImagesController@upload")->name("userImages.upload");
     
