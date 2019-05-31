@@ -41,6 +41,8 @@
                 @include("favorite.favorite_button", ["song" => $song])
                 <p class="favorite-counts"><span class="badge badge-secondary"> {{ count($song->favorite_users) }}</span></p>
                 
+                <p class="comment-counts">コメント {{ count($song->comments) }} 件</p>
+                
                 @if(Auth::id() == $song->user_id)
                     {!! Form::open(["route" => ["songs.destroy", "$song->id"], "method" => "delete" ]) !!}
                         {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm"]) !!}

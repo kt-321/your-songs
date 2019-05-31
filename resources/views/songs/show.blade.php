@@ -91,7 +91,13 @@
     <section class="comment">
         <div class="comment-index mb-5">
             <h2 class="mb-3">コメント一覧</h2>
-                
+            
+            @if(count($song->comments) > 0)
+            <p class="comment-counts">コメント {{ count($song->comments) }} 件</p>
+            @else
+            <p>コメントはまだありません。</p>
+            @endif
+            
             <div class="comment-display">
                     @foreach($comments as $comment)
                             <div class="media mb-3">
