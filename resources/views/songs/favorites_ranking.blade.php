@@ -1,8 +1,8 @@
 @extends("layouts.app")
 
 @section("content")
-
-　　    <h1>お気に入り数ランキング</h1>
-　　    <a href="{{ url('/commentsRanking') }}">→　コメント数ランキング</a>
+        <h1>人気曲ランキング</h1>
+　　    <h2>お気に入り数順</h2>
+　　    <a href="{{ url('/commentsRanking') }}">→　コメント数順</a>
 　　    @include("songs.songs", ["songs" => $songs])
 @endsection
