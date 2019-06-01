@@ -32,7 +32,14 @@
                         @else
                             <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="画像" style="width: 50px; height: 50px">
                         @endif
-                        <a href="{{ route("users.show", ["id" => $song->user->id]) }}">{{ $song->user->name }}</a><span class="text-muted">  投稿日時  {{ $song->created_at }}</span>
+                        
+                        <a href="{{ route("users.show", ["id" => $song->user->id]) }}">{{ $song->user->name }}</a>
+                        
+                        <span class="text-muted">  投稿  {{ $song->created_at }}</span>
+                        
+                        @if($song->updated_at)
+                        <span class="text-muted">  更新  {{ $song->updated_at }}</span>
+                        @endif
                     </div>
                 </div>
             </div>
