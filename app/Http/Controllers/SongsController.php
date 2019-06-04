@@ -100,17 +100,32 @@ class SongsController extends Controller
         return back();
     }
     
-    public function commentsRanking()
-    {    
-        $songs = Song::withCount("comments")->orderBy("comments_count", "desc")->paginate(20);
-            
-        return view("songs.comments_ranking", ["songs" => $songs]);
-    }
     
-    public function favoritesRanking()
+    public function favoritesRankingAll()
     {    
         $songs = Song::withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(20);
         
         return view("songs.favorites_ranking", ["songs" => $songs]);
+    }
+    
+    public function favoritesRanking($id)
+    {    
+        $songs = Song::withCount("favorite_users")->where("music_age", $id)->orderBy("favorite_users_count", "desc")->paginate(20);
+        
+        return view("songs.favorites_ranking", ["songs" => $songs]);
+    }
+    
+     public function commentsRankingAll()
+    {    
+        $songs = Song::withCount("comments")->orderBy("comments_count", "desc")->paginate(20);
+            
+        return view("songs.comments_ranking", ["songs" => $songs]);
+    } 
+    
+    public function commentsRanking($id)
+    {    
+        $songs = Song::withCount("comments")->where("music_age", $id)->orderBy("comments_count", "desc")->paginate(20);
+            
+        return view("songs.comments_ranking", ["songs" => $songs]);
     }
 }

@@ -14,9 +14,9 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">人気曲ランキング</a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li class="dropdown-item"><a href="{{ url("favoritesRanking") }}">お気に入り数順</a></li>
+                            <li class="dropdown-item"><a href="{{ url("/favoritesRanking/all") }}">お気に入り数順</a></li>
                             <li class="dropdown-divider"></li>
-                            <li class="dropdown-item"><a href="{{ url("commentsRanking") }}">コメント数順</a></li>
+                            <li class="dropdown-item"><a href="{{ url("/commentsRanking/all") }}">コメント数順</a></li>
                         </ul>
                     </li>  
                     <li class="nav-item">{!! link_to_route("users.index", "ユーザー一覧", [],["class" => "nav-link"] ) !!}</li>
@@ -29,6 +29,7 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+                
                 <!--ログアウト中のナビゲーションバー-->
                 @else
                     <li class="nav-item"><a href="{{ route("signup.get") }}" class="nav-link">Signup</a></li>
