@@ -1,40 +1,36 @@
-/*p{*/
-/*    color:red;*/
+.navbar{
+    height: 6vh;
+}
+
+.header-before-login{
+    position: relative;
+    height: 50vh;
+    background: url("https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/header-live.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+}
+
+.caption{
+    position: absolute;
+    color: #fff;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 200px;
+    height: 50px;
+}
+
+/*.container-before-login{*/
+/*    height: 40vh;*/
 /*}*/
 
-/*li{*/
-/*    word-break: break-all;*/
-/*}*/
-
-/*ul {*/
-/*    list-style: none;*/
-/*}*/
-
-/*.song-video{*/
-/*    display: block;*/
-/*}*/
-
-/*.read-more{*/
-/*    display: block;*/
-    
-/*}*/
-
-
-/*.unfavorite {*/
-/*  border-color: #;*/
-/*}*/
-
-/*.favorite::after {*/
-/*  content: "\f005";*/
-/*  font-family: "Font Awesome 5 Free";*/
-/*  font-weight: 900;*/
-/*  color: #c0c0c0;*/
-/*}*/
-
-/*.add-favorite{*/
-/*    font-family: Font Awesome 5 Free;*/
-/*}*/
-
-/*.container{*/
-/*    background-color: #64f9c1;*/
-/*}*/
+footer {
+    background-color: #000080;
+    text-align: center;
+    color: #fff;
+    height: 3vh;
+}

@@ -5,14 +5,15 @@
         <title>YourSongs</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-        <link href="style.css" type="text/css" rel="stylesheet">
+        <link href="css/style.css" type="text/css" rel="stylesheet">
        
     </head>
     
     <body>
         @include("commons.navbar")
-        
-        <button type="button" onclick=history.back()>戻る</button> 
+        <header>
+            <button type="button" onclick=history.back()>戻る</button> 
+        </header>
         
         <div class="container">
             @include("commons.error_messages")
