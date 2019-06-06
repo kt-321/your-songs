@@ -10,7 +10,7 @@
            
             @include("songs.form")
         
-            {!! Form::submit("更新", ["class" => "btn btn-primary"]) !!}
+            {!! Form::submit("更新する", ["class" => "btn btn-primary"]) !!}
             
         {!! Form::close() !!}
     </div>

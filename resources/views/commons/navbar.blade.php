@@ -11,18 +11,26 @@
             <!--ログイン中のナビゲーションバー-->
             @if (Auth::check())
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">人気曲ランキング</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ランキング</a>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li class="dropdown-item"><a href="{{ url("/favoritesRanking/all") }}">お気に入り数順</a></li>
                         <li class="dropdown-divider"></li>
                         <li class="dropdown-item"><a href="{{ url("/commentsRanking/all") }}">コメント数順</a></li>
                     </ul>
                 </li>  
-                <li class="nav-item">{!! link_to_route("users.index", "ユーザー一覧", [],["class" => "nav-link"] ) !!}</li>
+                <li class="nav-item">{!! link_to_route("users.index", "ユーザー", [],["class" => "nav-link"] ) !!}</li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+                 
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        @if(Auth::user()->image_url)  
+                        <img src="{{ Auth::user()->image_url }}" alt="アイコン" class="img-fluid mh-100" style="height: 4vh; width: 4vh;">
+                        @endif
+                        {{ Auth::user()->name }}
+                        
+                    </a>
+                    
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li class="dropdown-item">{!! link_to_route("users.show", "マイプロフィール", ["id" => Auth::id()]) !!}</li>
+                        <li class="dropdown-item">{!! link_to_route("users.show", "マイページ", ["id" => Auth::id()]) !!}</li>
                         <li class="dropdown-divider"></li>
                         <li class="dropdown-item">{!! link_to_route("logout.get", "ログアウト") !!}</li>
                     </ul>
@@ -31,8 +39,8 @@
             
             <!--ログアウト中のナビゲーションバー-->
             @else
-                <li class="nav-item"><a href="{{ route("signup.get") }}" class="nav-link">Signup</a></li>
-                <li class="nav-item"><a href="{{ route("login") }}" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="{{ route("login") }}" class="nav-link">ログイン</a></li>
+                <li class="nav-item"><a href="{{ route("signup.get") }}" class="nav-link">新規登録</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">About</a></li>
             @endif
         </ul>

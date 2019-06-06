@@ -9,14 +9,14 @@
     </head>
     
     <body>
+        @include("commons.navbar")
         @if(Auth::check())
-            @include("commons.navbar")
-            <header class="mb-4">
-                <h1 class="caption">YourSongs</h1>
+            <header>
             </header>
              
             <div class="container">
                 @include("commons.error_messages")
+           
                 
                     <h1>人気曲ランキング</h1>
                     <h2>お気に入り数が多い順</h2>
@@ -39,8 +39,6 @@
             </div> 
        
         @else
-            @include("commons.navbar")
-            
             <header class="text-center header-before-login">
                 <h1 class="caption">YourSongs</h1>
             </header>
@@ -56,7 +54,8 @@
         
         <footer class="bg-dark mt-5">
             <small>&copy; 2019 YourSongs</small>
-        </footer>
+        </footer>s
+     
         
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>

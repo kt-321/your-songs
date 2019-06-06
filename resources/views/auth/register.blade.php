@@ -7,7 +7,6 @@
     
     <div class="row">
         <div class="col-sm-6 offset-sm-3">
-           
             {!! Form::open(["route" => "signup.post"]) !!}
             
                 @include("users.form")

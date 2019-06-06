@@ -7,13 +7,15 @@
             
             <div>
                 @if(Auth::id() == $user->id) 
-                 {!! Form::open(["route" => "userImages.upload", "enctype" => "multipart/form-data"]) !!}
-                <div class="form-group row">
-                    {!! Form::label("file", "画像", ["class" => "col-form-label col-sm-2"]) !!}
-                    <div class="col-sm-10">
-                    {{Form::file("file", ["class" => "form-control"])}}
+                {!! Form::open(["route" => "userImages.upload", "enctype" => "multipart/form-data"]) !!}
+                <div class="form-group">
+                    <div class="row">
+                        {!! Form::label("file", "画像", ["class" => "col-form-label col-sm-2"]) !!}
+                        <div class="col-sm-10">
+                        {{Form::file("file", ["class" => "form-control"])}}
+                        </div>
                     </div>
-                    {!! Form::submit("プロフィール画像", ["class" => "btn btn-primary"]) !!}
+                    {!! Form::submit("アイコンを変更", ["class" => "btn btn-primary"]) !!}
                 </div>
                 {!! Form::close() !!}
                 @endif

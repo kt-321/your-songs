@@ -4,38 +4,20 @@
     <div class="row">
         <aside class="col-sm-4">
             @include("users.card", ["user" => $user])
-            
-            <div>
-                @if(Auth::id() == $user->id) 
-                 {!! Form::open(["route" => "userImages.upload", "enctype" => "multipart/form-data"]) !!}
-                <div class="form-group row">
-                    {!! Form::label("file", "画像", ["class" => "col-form-label col-sm-2"]) !!}
-                    <div class="col-sm-10">
-                    {{Form::file("file", ["class" => "form-control"])}}
-                    </div>
-                    {!! Form::submit("プロフィール画像を変更する", ["class" => "btn btn-primary"]) !!}
-                </div>
-                {!! Form::close() !!}
-                @endif
-                 
-            </div>
            
             <!--ユーザー情報-->
-            <div class="user-profile">
+            <div class="user-profile border p-3 mb-5">
                 @include("users.profile")
+                <!--プロフィール変更-->
+                @if(Auth::id() == $user->id)
+                    <a href="{{ route("users.edit", ["id" => $user->id]) }}" class="btn btn-primary btn-modify-profile">プロフィールを編集</a>
+                @endif
             </div>
             
-            @if(Auth::id() == $user->id)
-                <a href="{{ route("users.edit", ["id" => $user->id]) }}" class="btn btn-primary">プロフィールを変更</a>
-            @endif
+            <div class="buttons-under-profile">
+                @include("users.buttons_under_profile")
+            </div>
             
-            <!--フォローボタンまたはフォロー解除ボタン-->
-            @include("user_follow.follow_button", ["user" => $user])
-            
-            <!--曲投稿-->
-            @if(Auth::id() == $user->id)
-                <a href="{{ route("songs.create") }}" class="btn btn-lg btn-primary">おすすめ曲を投稿</a>
-            @endif
         </aside>
         
         <div class="col-sm-8">
