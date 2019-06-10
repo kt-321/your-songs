@@ -5,7 +5,8 @@
         <title>YourSongs</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-        <link href="css/style.css" type="text/css" rel="stylesheet">
+        <link href="../css/style.css" type="text/css" rel="stylesheet">
+        <!--<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">-->
     </head>
     
     <body>
@@ -15,7 +16,7 @@
             <button type="button" onclick=history.back()>戻る</button> 
         </header>
         
-        <div class="container">
+        <div class="container p-4">
             @include("commons.error_messages")
             
             @yield("content")

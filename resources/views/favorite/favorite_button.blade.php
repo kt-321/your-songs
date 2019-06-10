@@ -1,9 +1,13 @@
 @if (Auth::user()->is_favoriting($song->id))
     {!! Form::open(["route" => ["favorites.unfavorite", $song->id], "method" => "delete"]) !!}
-        {!! Form::submit("お気に入りから外す ", ["class" => "btn btn-warning btn-sm"]) !!}
+        <i class="fas fa-star favorite-orange"></i>
+        {{ count($song->favorite_users) }}
+        {!! Form::submit("登録済み", ["class" => "btn btn-warning btn-sm btn-unfavorite"]) !!}
     {!! Form::close() !!}
 @else
     {!! Form::open(["route" => ["favorites.favorite", $song->id]]) !!}
-        {!! Form::submit("お気に入りに登録", ["class" => "btn btn-success btn-sm"]) !!}
+        <i class="fas fa-star"></i>
+        {{ count($song->favorite_users) }}
+        {!! Form::submit("登録する", ["class" => "btn btn-default btn-sm btn-favorite"]) !!}
     {!! Form::close() !!}
 @endif

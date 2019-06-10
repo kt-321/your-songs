@@ -1,12 +1,13 @@
 @extends("layouts.app")
 
 @section("content")
-    <h1>『 {!! nl2br(e($song->song_name)) !!} 』</h1>
+    <!--<h1>『 {!! nl2br(e($song->song_name)) !!} 』</h1>-->
+    <h1 class="text-center">『 {{ $song->song_name }} 』</h1>
     
     <!--曲情報-->
-    <section class="song-details mt-5 mb-5">
+    <section class="song-details mt-4 mb-4">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-5 text-center">
                 <!--曲画像-->
                 @if($song->image_url)
                     <img src="{{ $song->image_url }}" style="width:150px; height:150px;">
@@ -15,7 +16,7 @@
                 @endif
             </div>
         
-            <div class="col-sm-8">
+            <div class="col-sm-7">
                 <p class="mb-0">アーティスト：{!! nl2br(e($song->artist_name)) !!}</p>
                 <p class="mb-0">曲の年代：{!! nl2br(e($song->music_age)) !!}年代</p>
                 <p class="mb-0">説明：{!! nl2br(e($song->description)) !!}</p>

@@ -2,7 +2,7 @@
 
 @section("content")
     <div class="text-center">
-        <h1>ユーザー登録</h1>
+        <h1><i class="fas fa-user-plus mr-2"></i>新規登録</h1>
     </div>
     
     <div class="row">

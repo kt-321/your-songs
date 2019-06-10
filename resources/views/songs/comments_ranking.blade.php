@@ -1,12 +1,12 @@
 @extends("layouts.app")
 
 @section("content")
-    <h1>人気曲ランキング</h1>
-    <h2>コメント数が多い順</h2>
+    <h1 class="mb-4 text-center"><i class="fas fa-trophy mr-1"></i>人気曲ランキング</h1>
+    <h2><i class="far fa-comments mr-1"></i>コメント数が多い順</h2>
     
     <ul class="nav nav-tabs nav-justified mb-3">
-        <li class="nav-item"><a href="{{ url("favoritesRanking/all") }}" class="nav-link {{ Request::is("favoritesRanking/*") ? "active" : ""}}">お気に入り数が多い順</a></li>
-        <li class="nav-item"><a href="{{ url("commentsRanking/all") }}" class="nav-link {{ Request::is("commentsRanking/*") ? "active" : ""}}">コメント数が多い順</a></li>
+        <li class="nav-item"><a href="{{ url("favoritesRanking/all") }}" class="nav-link {{ Request::is("favoritesRanking/*") ? "active" : ""}}"><i class="fas fa-star mr-1"></i>お気に入り数が多い順</a></li>
+        <li class="nav-item"><a href="{{ url("commentsRanking/all") }}" class="nav-link {{ Request::is("commentsRanking/*") ? "active" : ""}}"><i class="far fa-comments mr-1"></i>コメント数が多い順</a></li>
     </ul>  
 
    <select class="mb-2" name="select" onChange="location.href=value;">

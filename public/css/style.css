@@ -1,6 +1,13 @@
 /*.navbar{*/
 /*    height: 6vh;*/
 /*}*/
+body{
+    background-color: #eeeeee;    
+}
+
+.container{
+    background-color: #ffffff;
+}
 
 .header-before-login{
     position: relative;
@@ -24,8 +31,16 @@
     height: 50px;
 }
 
-/*.container-before-login{*/
-/*    height: 40vh;*/
+.my-orange {
+    color: #fecb81;
+}
+
+.favorite-orange{
+    color: #fecb81;
+}
+
+/*h3{*/
+/*    background-color: yellow;*/
 /*}*/
 
 footer {
@@ -34,6 +49,98 @@ footer {
     color: #fff;
     height: 3vh;
 }
+
+.btn-unfavorite{
+    /*background-color: #ffd700;*/
+    /*border: 1px solid #000099;*/
+    border: 1px solid #ff3366;
+    font-weight: bold;
+}
+
+.btn-favorite{
+    /*background-color: #ffd700;*/
+    /*border: 1px solid #000099;*/
+    border: 2px solid #ffd700;
+    font-weight: bold;
+}
+
+.song-video{
+    width: 180px;
+    height: 120px;
+}
+
+@media screen and (min-width:480px) { 
+    /*　画面サイズが480pxからはここを読み込む　*/
+.song-video { 
+    width: 200px;
+    height: 150px;
+}
+}
+
+@media screen and (min-width:768px) and ( max-width:1024px) {
+    /*　画面サイズが768pxから1024pxまではここを読み込む　*/
+.song-video {
+    width: 300px;
+    height: 200px;
+}
+}
+
+@media screen and (min-width:1024px) {
+    /*　画面サイズが1024pxからはここを読み込む　*/
+ .song-video{
+    width: 400px;
+    height: 300px;
+ }
+}
+
+
+
+/*.song-name:before{*/
+/*    position: absolute;*/
+/*    font-family: FontAwesome;*/
+/*    font-family: "Font Awesome 5 Free";*/
+/*    content: "\f001";*/
+/*    font-weight: 900;*/
+/*    font-weight: normal;*/
+/*    background: #ffca2c;*/
+/*    color: white;*/
+/*}*/
+
+/*h3{*/
+/*    position: relative;*/
+/*    padding-left: 35px;*/
+    
+/*}*/
+
+
+
+/*.user-profile .status ul{*/
+    /*display: table;*/
+/*    list-style: none;*/
+/*}*/
+
+/*.status-list{*/
+/*    list-style: none;*/
+/*}*/
+
+/*ul{*/
+/*    list-style: none;*/
+/*}*/
+
+/*li{*/
+/*    display: list-item;*/
+/*}*/
+
+/*.user-profile .status ul li{*/
+/*    display: table-cell;*/
+/*    border-right: 1px solid;    */
+/*}*/
+
+/*.container-before-login{*/
+/*    height: 40vh;*/
+/*}*/
+
+
 
 /*.user-name{*/
 /*    font-size: 15px;*/

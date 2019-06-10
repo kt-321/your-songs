@@ -1,9 +1,11 @@
 <ul class="song-cards list-unstyled">
     @foreach($songs as $song)
-        <li class="song-card mb-4 border">
-            <h3 class="m-3" style="word-wrap: break-word;">{!! nl2br(e($song->song_name)) !!}</h3>
+        <li class="song-card mb-4 pb-3 border">
+            
+            <h3 class="song-name p-3 mb-4 text-center" style="word-wrap: break-word;"><i class="fas fa-music mr-3"></i>{!! nl2br(e($song->song_name)) !!}</h3>
+            
             <div class="row m-0">
-                <div class="col-md-3">
+                <div class="col-md-4 text-center song-image">
                     <!--曲画像-->
                     <figure>
                         @if($song->image_url)
@@ -31,28 +33,37 @@
                     </figure>
                 </div>
                         
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <!--曲情報-->
-                    <ul class="list-unstyled">
-                        <li class="mb-1" style="word-wrap: break-word;">アーティスト：{!! nl2br(e($song->artist_name)) !!}</li>
-                        <li class="mb-1" style="word-wrap: break-word;">曲の年代：{!! nl2br(e($song->music_age)) !!}年代</li>
-                        <li class="mb-1" style="word-wrap: break-word;">曲紹介：{!! nl2br(e($song->description)) !!}</li>
-                        <li class="mb-1">
+                    <ul class="list-unstyled px-3">
+                        <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-guitar mr-1"></i>アーティスト：{!! nl2br(e($song->artist_name)) !!}</li>
+                        <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-history mr-1"></i>曲の年代：{!! nl2br(e($song->music_age)) !!}年代</li>
+                        <li class="mb-1" style="word-wrap: break-word;">
+                            <div>
+                                <i class="far fa-comment-dots mr-1"></i>About
+                            </div>
+                            <div class="ml-2 mb-3" style="word-wrap: break-word;">
+                                {!! nl2br(e($song->description)) !!}
+                            </div>
+                        </li>
+                        
+                        <li class="mb-1 text-center">
                             @if($song->video_url)
                                <iframe class="song-video" src="https://www.youtube.com/embed/{!! nl2br(e($song->video_url)) !!}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             @endif
                         </li>
                     </ul>
+                
                 </div>
             </div>
             
-            <a href="{{ route("songs.show", ["song" => $song]) }}" class="btn btn-light d-block m-2">続きを読む</a>
+            <a href="{{ route("songs.show", ["song" => $song]) }}" class="btn btn-light d-block mx-4 my-2">続きを読む</a>
             
             @if(Auth::id() !== $song->user_id)
-            <div class="about-user ml-3">
+            <div class="about-user ml-2">
                 <h4>投稿者情報</h4>
                 <div class="media">
-                    <div class="media-left mr-5">
+                    <div class="media-left ml-3 mr-3">
                         <figure>
                             @if($song->user->image_url)
                                 <img src="{{ $song->user->image_url }}" style="width: 50px; height: 50px" alt="画像"> 
@@ -103,19 +114,18 @@
                 </ul> 
             </div>
             
-            <div class="d-flex m-2">
+            <div class="d-flex ml-4 my-2">
                 @include("favorite.favorite_button", ["song" => $song])
-                <p class="favorite-counts"><span class="badge badge-secondary"> {{ count($song->favorite_users) }}</span></p>
                 
-                <p class="comment-counts ml-2">コメント {{ count($song->comments) }} 件</p>
+                <a href="{{ route("songs.show", ["song" => $song]) }}" class="btn btn-light d-block p-1 ml-2"><i class="far fa-comments mr-2"></i>コメント {{ count($song->comments) }} 件</a>
             </div>
             
-            <div class="d-flex m-2">
+            <div class="d-flex ml-4">
                 @if(Auth::id() == $song->user_id)
-                    <a href="{{ route("songs.edit", ["id" => $song->id]) }}" class="btn btn-light">曲情報を編集</a>
+                    <a href="{{ route("songs.edit", ["id" => $song->id]) }}" class="btn btn-light mr-3 px-2 py-1">編集</a>
                 
                     {!! Form::open(["route" => ["songs.destroy", "$song->id"], "method" => "delete" ]) !!}
-                        {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm"]) !!}
+                        {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm px-2 py-1"]) !!}
                     {!! Form::close() !!}
                 @endif
             </div>
