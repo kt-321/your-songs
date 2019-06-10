@@ -51,4 +51,5 @@ Route::group(["middleware" => ["auth"]], function(){
     
     Route::resource("comments", "CommentsController", ["only" =>["store", "destroy"]]);
     
+    Route::get("search", "SearchController@index")->name("search.index");
 });
