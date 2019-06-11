@@ -1,6 +1,6 @@
 <ul class="song-cards list-unstyled">
     @foreach($songs as $song)
-        <li class="song-card mb-4 pb-3 border">
+        <li class="song-card mb-4 pb-3 px-2 border">
             
             <h3 class="song-name p-3 mb-4 text-center" style="word-wrap: break-word;"><i class="fas fa-music mr-3"></i>{!! nl2br(e($song->song_name)) !!}</h3>
             
@@ -57,8 +57,9 @@
                 </div>
             </div>
             
-            <a href="{{ route("songs.show", ["song" => $song]) }}" class="btn btn-light d-block mx-4 my-2">続きを読む</a>
+            <a href="{{ route("songs.show", ["song" => $song]) }}" class="btn btn-light d-block mx-2 my-3">続きを読む</a>
             
+            <!--投稿者が自分でないときに限り投稿者情報を表示-->
             @if(Auth::id() !== $song->user_id)
             <div class="about-user ml-2">
                 <h4>投稿者情報</h4>
@@ -79,17 +80,18 @@
                     </div>
                     
                     <div class="media-body">
-                        @if($song->user->gender == 1)
-                        <p class="mb-0">{!! nl2br(e($song->user->age)) !!}代男性 </p>
-                        @else
-                        <p class="mb-0">{!! nl2br(e($song->user->age)) !!}代女性 </p>
-                        @endif
-                       
-                        <p>{!! nl2br(e($song->user->favorite_music_age)) !!}年代の音楽が好き</p>
-                       
-                        @if($song->user->favorite_artist)
-                        <p class="mb-0">好きなミュージシャン：{!! nl2br(e($song->user->favorite_artist)) !!}</p>
-                        @endif
+                        <ul class="list-unstyled px-3">
+                            @if($song->user->gender == 1)
+                            <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->age)) !!}代男性</li>
+                            @else
+                            <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->age)) !!}代女性</li>
+                            @endif
+                            <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->favorite_music_age)) !!}年代の音楽が好き</li>
+                            
+                            @if($song->user->favorite_artist)
+                            <li class="mb-1" style="word-wrap: break-word;">好きなミュージシャン：{!! nl2br(e($song->user->favorite_artist)) !!}</li>
+                            @endif
+                        </ul>
                         
                         <div style="display:inline-block">
                             @include("user_follow.follow_button", ["user" => $song->user])
@@ -120,7 +122,7 @@
                 <a href="{{ route("songs.show", ["song" => $song]) }}" class="btn btn-light d-block p-1 ml-2"><i class="far fa-comments mr-2"></i>コメント {{ count($song->comments) }} 件</a>
             </div>
             
-            <div class="d-flex ml-4">
+            <div class="ml-4 pr-2" style="display: flex; justify-content: flex-end;">
                 @if(Auth::id() == $song->user_id)
                     <a href="{{ route("songs.edit", ["id" => $song->id]) }}" class="btn btn-light mr-3 px-2 py-1">編集</a>
                 

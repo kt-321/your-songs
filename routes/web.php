@@ -29,6 +29,9 @@ Route::group(["middleware" => ["auth"]], function(){
         Route::get("followings", "UsersController@followings")->name("users.followings");
         Route::get("followers", "UsersController@followers")->name("users.followers");
         Route::get("favorites", "UsersController@favorites")->name("users.favorites");
+       
+        Route::get("userImages", "UserImagesController@uploadForm")->name("users.userImages");
+        Route::post("userImages", "UserImagesController@upload")->name("users.userImagesUpload");
     });
     
     Route::group(["prefix" => "song/{id}"], function(){
@@ -46,8 +49,10 @@ Route::group(["middleware" => ["auth"]], function(){
     Route::get("/commentsRanking/all", "SongsController@commentsRankingAll")->name("songs.commentsRankingAll");
     Route::get("/commentsRanking/{id}", "SongsController@commentsRanking")->name("songs.commentsRanking");
     
+    // Route::get("userImagesUploadform", "UserImagesController@uploadForm")->name("userImages.uploadForm");
     
-    Route::post("userImages", "UserImagesController@upload")->name("userImages.upload");
+    // Route::get("userImages", "UserImagesController@uploadForm")->name("userImages");
+    // Route::post("userImages", "UserImagesController@upload")->name("userImages.upload");
     
     Route::resource("comments", "CommentsController", ["only" =>["store", "destroy"]]);
     

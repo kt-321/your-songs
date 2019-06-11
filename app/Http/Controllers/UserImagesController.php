@@ -10,6 +10,12 @@ use App\User;
 
 class UserImagesController extends Controller
 {   
+    public function uploadForm()
+    {
+        $user = \Auth::user();
+        return view("users.imageUpload", ["user" => $user]);
+    }
+    
     public function upload(Request $request)
     {
         $file = $request->file("file");
@@ -18,13 +24,12 @@ class UserImagesController extends Controller
         
         $url = Storage::disk("s3")->url($path);
         
-        $user=User::find(auth()->id());
-        
+        $user= User::find(auth()->id());
         
         $user->image_url =  $url;
         $user->save();
         
-        return redirect()->back()->with("s3url", $url);
+        return redirect()->route('users.show', ['id' => $user])->with("s3url", $url);
     }
     
 }
