@@ -1,7 +1,6 @@
 @extends("layouts.app")
 
 @section("content")
-    <!--<h1>『 {!! nl2br(e($song->song_name)) !!} 』</h1>-->
     <h1 class="text-center">『 {{ $song->song_name }} 』</h1>
     
     <!--曲情報-->
@@ -9,11 +8,23 @@
         <div class="row">
             <div class="col-sm-5 text-center">
                 <!--曲画像-->
-                @if($song->image_url)
-                    <img src="{{ $song->image_url }}" style="width:150px; height:150px;">
-                @else
-                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/song.jpeg" style="width:150px; height:150px;">
-                @endif
+                <figure>
+                        @if($song->image_url)
+                            <img src="{{ $song->image_url }}" style="width:150px; height:150px;" class="img-thumbnail">
+                        @else
+                            <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/song.jpeg" style="width:150px; height:150px;" class="img-thumbnail">
+                        @endif
+                    
+                    <figcaption>
+                        <!--ログイン時、曲画像のアップロード-->
+                        @if(Auth::id() == $song->user_id)
+                        
+                        <a href="{{ route("songs.songImages", ["id" => $song->id]) }}" class="btn btn-primary btn-modify-profile">画像を変更する</a>
+                        
+                          
+                        @endif
+                    </figcaption>
+                </figure>
             </div>
         
             <div class="col-sm-7">
@@ -73,18 +84,6 @@
                 <div>
                     <a href="{{ route("songs.edit", ["id" => $song->id]) }}" class="btn btn-light">曲情報を編集</a>
                 </div>   
-                        
-                <div>    
-                    {!! Form::open(["route" => ["songImages.upload", $song->id], "enctype" => "multipart/form-data"]) !!}
-                    <div class="form-group row">
-                        {!! Form::label("file", "画像", ["class" => "col-form-label col-sm-2"]) !!}
-                        <div class="col-sm-10">
-                            {{Form::file("file", ["class" => "form-control"])}}
-                        </div>
-                        {!! Form::submit("画像アップロード", ["class" => "btn btn-primary"]) !!}
-                    </div>
-                    {!! Form::close() !!}
-                </div>    
             @endif
         </div>
     </section>

@@ -11,7 +11,13 @@ use App\User;
 use App\Song;
 
 class SongImagesController extends Controller
-{
+{   
+    
+     public function uploadForm($id)
+    { 
+        $song = Song::find($id);
+        return view("songs.image_upload", ["song" => $song]);
+    }
     
      public function upload(Request $request)
     {
@@ -21,8 +27,10 @@ class SongImagesController extends Controller
         
         $url = Storage::disk("s3")->url($path);
         
-        Song::where("id", $request->id)->update(["image_url" => $url]);
-        return redirect()->back();
+        $song = Song::find($request->id);
+        $song->update(["image_url" => $url]);
+        
+        return redirect()->route('songs.show', ['id' => $song->id])->with("s3url", $url);
     }
 }
 

@@ -10,10 +10,8 @@
     <figcaption>
         @if(Auth::id() == $user->id)
         <div class="mt-2">
-            <!--@if(Auth::id() == $user->id) -->
             <a href="{{ route("users.userImages", ["id" => $user->id]) }}" class="btn btn-primary btn-modify-profile">アイコンを変更する</a>
             <h1 class="text-center">{{ $user->name }}</h1>
-            <!--@endif-->
         </div>
         @endif
     </figcaption>

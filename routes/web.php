@@ -37,10 +37,11 @@ Route::group(["middleware" => ["auth"]], function(){
     Route::group(["prefix" => "song/{id}"], function(){
         Route::post("favorite", "FavoritesController@store")->name("favorites.favorite");
         Route::delete("unfavorite", "FavoritesController@destroy")->name("favorites.unfavorite");
-        Route::post("songImages", "SongImagesController@upload")->name("songImages.upload");
+        
+        Route::get("songImages", "SongImagesController@uploadForm")->name("songs.songImages");
+        Route::post("songImages", "SongImagesController@upload")->name("songs.songImagesUpload");
         
     });
-    
     
     Route::resource("songs", "SongsController", ["only" => ["create", "store", "show", "edit", "update", "destroy"]]);
    
@@ -48,11 +49,6 @@ Route::group(["middleware" => ["auth"]], function(){
     Route::get("/favoritesRanking/{id}", "SongsController@favoritesRanking")->name("songs.favoritesRanking");
     Route::get("/commentsRanking/all", "SongsController@commentsRankingAll")->name("songs.commentsRankingAll");
     Route::get("/commentsRanking/{id}", "SongsController@commentsRanking")->name("songs.commentsRanking");
-    
-    // Route::get("userImagesUploadform", "UserImagesController@uploadForm")->name("userImages.uploadForm");
-    
-    // Route::get("userImages", "UserImagesController@uploadForm")->name("userImages");
-    // Route::post("userImages", "UserImagesController@upload")->name("userImages.upload");
     
     Route::resource("comments", "CommentsController", ["only" =>["store", "destroy"]]);
     

@@ -17,17 +17,10 @@
                     <figcaption>
                         <!--ログイン時、曲画像のアップロード-->
                         @if(Auth::id() == $song->user_id)
-                            {!! Form::open(["route" => ["songImages.upload", $song->id], "enctype" => "multipart/form-data"]) !!}
-                            <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label("file", "画像", ["class" => "col-form-label col-sm-2"]) !!}
-                                    <div class="col-sm-10">
-                                    {{Form::file("file", ["class" => "form-control"])}}
-                                    </div>
-                                </div>
-                                {!! Form::submit("画像アップロード", ["class" => "btn btn-primary", "name" => "btn-upload"]) !!}
-                            </div>
-                            {!! Form::close() !!}
+                        
+                        <a href="{{ route("songs.songImages", ["id" => $song->id]) }}" class="btn btn-primary btn-modify-profile">画像を変更する</a>
+                        
+                          
                         @endif
                     </figcaption>
                     </figure>

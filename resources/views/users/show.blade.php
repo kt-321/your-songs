@@ -10,15 +10,6 @@
     <div class="user-profile mb-5">
         @include("users.image", ["user" => $user])
        
-　          <!--<input id="test" type="button" value="test" onClick="window.open("https://www.sejuku.net/blog/48540#windowopen", '_blank')">-->
-       <!--<input type="button" value="新たにウィンドウを開く" onClick="window.open('https://www.sejuku.net/blog/48540#windowopen', '_blank', 'menubar=0,width=300,height=200,top=100,left=100');">-->
-       <!--<input type="button" value="新たにウィンドウを開く" onClick="window.open('/search', '_blank', 'menubar=0,width=500,height=500,top=200,left=200');">-->
-       <!--<input type="button" value="新たにウィンドウを開く" onClick="window.open('/userImagesUploadform', '_blank', 'menubar=0,width=500,height=500,top=200,left=200');">-->
-       <!--<input type="button" value="新たにウィンドウを開く" onClick="window.open('/userImagesUploadform');">-->
-        
-        
-        
-       
         <!--ユーザー情報-->
         <div class="status text-center mt-3" >
             <h4 class="mt-2"><i class="far fa-address-card mr-2"></i>プロフィール</h4>
