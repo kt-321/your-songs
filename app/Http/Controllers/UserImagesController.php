@@ -29,7 +29,7 @@ class UserImagesController extends Controller
         $user->image_url =  $url;
         $user->save();
         
-        return redirect()->route('users.show', ['id' => $user])->with("s3url", $url);
+        return redirect()->route('users.show', ['id' => $user->id])->with("s3url", $url);
     }
     
 }

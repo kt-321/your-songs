@@ -14,15 +14,14 @@
                             <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/song.jpeg" style="width:150px; height:150px;" class="img-thumbnail">
                         @endif
                     
-                    <figcaption>
-                        <!--ログイン時、曲画像のアップロード-->
-                        @if(Auth::id() == $song->user_id)
-                        
-                        <a href="{{ route("songs.songImages", ["id" => $song->id]) }}" class="btn btn-primary btn-modify-profile">画像を変更する</a>
-                        
-                          
-                        @endif
-                    </figcaption>
+                        <figcaption>
+                            <!--ログイン時、曲画像のアップロード-->
+                            @if(Auth::id() == $song->user_id)
+                            <div class="mt-2">
+                                <a href="{{ route("songs.songImages", ["id" => $song->id]) }}" class="btn btn-primary btn-modify-profile">画像を変更</a>
+                            </div>
+                            @endif
+                        </figcaption>
                     </figure>
                 </div>
                         
@@ -53,8 +52,10 @@
             <a href="{{ route("songs.show", ["song" => $song]) }}" class="btn btn-light d-block mx-2 my-3">続きを読む</a>
             
             <!--投稿者が自分でないときに限り投稿者情報を表示-->
-            @if(Auth::id() !== $song->user_id)
             <div class="about-user ml-2">
+                @if(Auth::id() == $song->user_id)
+                <span class="badge badge-success ml-1">自分の投稿</span>
+                @else
                 <h4>投稿者情報</h4>
                 <div class="media">
                     <div class="media-left ml-3 mr-3">
@@ -93,8 +94,8 @@
                         <a class="btn btn-success btn-sm" href="{{ route("users.show", ["id" => $song->user->id]) }}">プロフィール</a>
                     </div>
                 </div>
+                @endif
             </div>
-            @endif
             
             <div style="width:180px; margin-left:auto;">
                 <ul class="list-unstyled">

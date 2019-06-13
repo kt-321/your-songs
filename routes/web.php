@@ -20,7 +20,8 @@ Route::get("login", "Auth\LoginController@showLoginForm")->name("login");
 Route::post("login", "Auth\LoginController@login")->name("login.post");
 Route::get("logout", "Auth\LoginController@logout")->name("logout.get");
 
-Route::group(["middleware" => ["auth"]], function(){
+// 全ユーザ
+Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
     Route::resource("users", "UsersController", ["only" => ["index", "show", "edit", "update"]]);
     
     Route::group(["prefix" => "users/{id}"], function(){
@@ -52,5 +53,9 @@ Route::group(["middleware" => ["auth"]], function(){
     
     Route::resource("comments", "CommentsController", ["only" =>["store", "destroy"]]);
     
+    // Route::get("search", "SearchController@index")->name("search.index");
+});
+
+Route::group(["middleware" => ["auth", "can:admin-higher"]], function(){
     Route::get("search", "SearchController@index")->name("search.index");
 });

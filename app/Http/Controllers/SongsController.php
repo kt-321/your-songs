@@ -90,14 +90,15 @@ class SongsController extends Controller
     }
     
     public function destroy($id)
-    {
+    {  
+        $user = User::find(auth()->id());
         $song = Song::find($id);
         
         if(\Auth::id() === $song->user_id){
             $song->delete();
         }
         
-        return back();
+        return redirect()->route('users.show', ['id' => $user->id]);
     }
     
     
