@@ -102,4 +102,33 @@ class UsersController extends Controller
         
         return view("users.favorites", $data);
     }
+    
+     public function delete($id)
+    {
+        User::find($id)->delete();
+        return redirect()->route("users.indexForAdmin");
+    }
+    
+    public function restore($id)
+    {
+        User::onlyTrashed()->find($id)->restore();
+        return back();
+    }
+    
+    public function forceDelete($id)
+    {
+        User::onlyTrashed()->find($id)->forceDelete();
+        return back();
+    }
+    
+    public function indexForAdmin()
+    {   
+        $users = User::all(); 
+        $deleted = User::onlyTrashed()->get(); 
+    
+        return view("users.index_for_admin", [
+            "users" => $users,
+            "deleted" => $deleted,
+        ]);
+    }
 }

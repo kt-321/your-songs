@@ -22,10 +22,4 @@ class Song extends Model
     {
         return $this->hasMany(Comment::class);
     }
-    
-    // public function comment_users()
-    // {
-    //     return $this->belongsToMany(User::class, "comments", "song_id", "user_id");
-    // }
-    
 }

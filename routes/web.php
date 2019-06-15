@@ -46,16 +46,19 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
     
     Route::resource("songs", "SongsController", ["only" => ["create", "store", "show", "edit", "update", "destroy"]]);
    
-    Route::get("/favoritesRanking/all", "SongsController@favoritesRankingAll")->name("songs.favoritesRankingAll");
-    Route::get("/favoritesRanking/{id}", "SongsController@favoritesRanking")->name("songs.favoritesRanking");
-    Route::get("/commentsRanking/all", "SongsController@commentsRankingAll")->name("songs.commentsRankingAll");
-    Route::get("/commentsRanking/{id}", "SongsController@commentsRanking")->name("songs.commentsRanking");
+    Route::get("favoritesRanking/all", "SongsController@favoritesRankingAll")->name("songs.favoritesRankingAll");
+    Route::get("favoritesRanking/{id}", "SongsController@favoritesRanking")->name("songs.favoritesRanking");
+    Route::get("commentsRanking/all", "SongsController@commentsRankingAll")->name("songs.commentsRankingAll");
+    Route::get("commentsRanking/{id}", "SongsController@commentsRanking")->name("songs.commentsRanking");
     
     Route::resource("comments", "CommentsController", ["only" =>["store", "destroy"]]);
     
-    // Route::get("search", "SearchController@index")->name("search.index");
+    Route::get("search", "SearchController@index")->name("search.index");
 });
 
 Route::group(["middleware" => ["auth", "can:admin-higher"]], function(){
-    Route::get("search", "SearchController@index")->name("search.index");
+    Route::get("index-for-admin", "UsersController@indexForAdmin")->name("users.indexForAdmin");
+    Route::get("delete/{id}", "UsersController@delete")->name("users.delete");
+    Route::get("restore/{id}", "UsersController@restore")->name("users.restore");
+    Route::get("force-delete/{id}", "UsersController@forceDelete")->name("users.forceDelete");
 });

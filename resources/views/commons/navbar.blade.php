@@ -10,6 +10,12 @@
         <ul class="navbar-nav">
             <!--ログイン中のナビゲーションバー-->
             @if (Auth::check())
+                @if(Auth::user()->role == 5)
+                <li class="nav-item">
+                    <a href="{{ url("/index-for-admin") }}" class="nav-link"><i class="fas fa-user mr-1"></i>ユーザー管理</a>
+                </li>
+                @endif
+                
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-trophy mr-1"></i>ランキング</a>
                     <ul class="dropdown-menu dropdown-menu-right">
