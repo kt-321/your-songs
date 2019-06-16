@@ -24,7 +24,7 @@ class CreateSongsTable extends Migration
             $table->integer("music_age");
             $table->timestamps();
             
-            $table->foreign("user_id")->references("id")->on("users");
+            $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
         });
     }
 

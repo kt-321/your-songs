@@ -89,6 +89,7 @@ class SongsController extends Controller
         return redirect("/");
     }
     
+   
     public function destroy($id)
     {  
         $user = User::find(auth()->id());
@@ -128,5 +129,34 @@ class SongsController extends Controller
         $songs = Song::withCount("comments")->where("music_age", $id)->orderBy("comments_count", "desc")->paginate(20);
             
         return view("songs.comments_ranking", ["songs" => $songs]);
+    }
+    
+    public function indexForAdmin()
+    {   
+        $songs = Song::all(); 
+        $deleted = Song::onlyTrashed()->get(); 
+    
+        return view("songs.index_for_admin", [
+            "songs" => $songs,
+            "deleted" => $deleted,
+        ]);
+    }
+    
+    public function delete($id)
+    {
+        Song::find($id)->delete();
+        return redirect()->route("songs.indexForAdmin");
+    }
+    
+    public function restore($id)
+    {
+        Song::onlyTrashed()->find($id)->restore();
+        return back();
+    }
+    
+    public function forceDelete($id)
+    {
+        Song::onlyTrashed()->find($id)->forceDelete();
+        return back();
     }
 }

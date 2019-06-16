@@ -68,14 +68,7 @@
     <div class="buttons-folloe-unfollow mb-3 text-center">
         @include("user_follow.follow_button", ["user" => $user])
     </div>
-    
-    <!--管理者としてログインしている場合に限りアカウントを削除できる-->
-    @if(Auth::user()->role == 5 && Auth::id() !== $user->id)
-    <div class="buttons-delete-user mb-3 text-center">
-        <a class="btn btn-danger" href="/delete/{{ $user->id}}">このアカウントを削除</a>
-    </div>
-    @endif
-       
+   
     <div>
         @include("users.navtabs", ["user" => $user])
         @if (count($songs) > 0)

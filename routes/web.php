@@ -57,8 +57,8 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
 });
 
 Route::group(["middleware" => ["auth", "can:admin-higher"]], function(){
-    Route::get("index-for-admin", "UsersController@indexForAdmin")->name("users.indexForAdmin");
-    Route::get("delete/{id}", "UsersController@delete")->name("users.delete");
-    Route::get("restore/{id}", "UsersController@restore")->name("users.restore");
-    Route::get("force-delete/{id}", "UsersController@forceDelete")->name("users.forceDelete");
+        Route::get("index-for-admin", "SongsController@indexForAdmin")->name("songs.indexForAdmin");
+        Route::get("delete/{id}", "SongsController@delete")->name("songs.delete");
+        Route::get("restore/{id}", "SongsController@restore")->name("songs.restore");
+        Route::get("force-delete/{id}", "SongsController@forceDelete")->name("songs.forceDelete");
 });
