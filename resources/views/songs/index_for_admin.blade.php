@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @section("content")
-<h1 class="mb-4 text-center"><i class="fas fa-users-cog mr-1"></i>曲の管理画面</h1>
+<h1 class="mb-4 text-center"><i class="fas fa-trash-alt mr-1"></i>曲の管理画面</h1>
 
 <div class="users-index mb-3">
     <h4 class="text-center">未削除</h4>

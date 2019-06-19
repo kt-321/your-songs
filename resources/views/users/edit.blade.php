@@ -12,7 +12,7 @@
                 </div>
                 
                 <div class="form-group">
-                    {!! Form::label("email", "Ｅメール") !!}
+                    {!! Form::label("email", "メールアドレス") !!}
                     {!! Form::email("email", old("email"), ["class" => "form-control"]) !!}
                 </div>
                             

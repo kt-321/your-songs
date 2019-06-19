@@ -55,7 +55,7 @@ class RegisterController extends Controller
             "gender" => "required|string",
             "favorite_music_age" => "nullable|integer",
             "favorite_artist" => "nullable|string|max:20",
-            "comment" => "nullable|string|max:500"
+            "comment" => "nullable|string|max:200"
         ]);
     }
 

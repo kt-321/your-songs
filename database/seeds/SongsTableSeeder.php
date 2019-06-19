@@ -16,7 +16,7 @@ class SongsTableSeeder extends Seeder
                 "user_id" => ($i % 30) + 1,
                 "song_name" => "song". $i,
                 "artist_name" => "artist". $i,
-                "music_age" => "1980" + ($i % 4 * 10),
+                "music_age" => "1970" + ($i % 5 * 10),
                 "description" => "descriptiondescriptiondescriptiondescription". $i,
             ]);
         }

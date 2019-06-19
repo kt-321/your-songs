@@ -11,7 +11,7 @@
             
                 @include("users.form")
                 
-               {!! Form::submit("Sign up", ["class" => "btn btn-primary btn-block"]) !!}
+               {!! Form::submit("上記の内容で登録", ["class" => "btn btn-primary btn-block"]) !!}
             {!! Form::close() !!}
         </div>
     </div>

@@ -55,7 +55,7 @@ class UsersController extends Controller
         
         $user->save();
         
-        return redirect("/");
+        return redirect()->route('users.show', ['id' => $user->id]);
     }
     
     public function followings($id)

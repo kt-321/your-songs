@@ -16,12 +16,12 @@ class CreateSongsTable extends Migration
         Schema::create('songs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer("user_id")->unsigned()->index();
+            $table->string("song_name");
+            $table->string("artist_name");
+            $table->integer("music_age");
             $table->string("description")->nullable();
             $table->string("image_url")->nullable();
             $table->string("video_url")->nullable();
-            $table->string("artist_name");
-            $table->string("song_name");
-            $table->integer("music_age");
             $table->timestamps();
             
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");

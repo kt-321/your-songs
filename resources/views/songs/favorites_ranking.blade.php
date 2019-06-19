@@ -12,6 +12,7 @@
     <select class="mb-2" name="select" onChange="location.href=value;">
          <option value="#">年代を選択</option>
          <option value="{{ url("/favoritesRanking/all") }}">全ての年代</option>
+         <option value="{{ url("/favoritesRanking/1970") }}">1970年代</option>
          <option value="{{ url("/favoritesRanking/1980") }}">1980年代</option>
          <option value="{{ url("/favoritesRanking/1990") }}">1990年代</option>
          <option value="{{ url("/favoritesRanking/2000") }}">2000年代</option>

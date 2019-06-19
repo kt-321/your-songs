@@ -32,13 +32,15 @@ class SongsController extends Controller
     }
     
     public function store(Request $request)
-    {
+    {   
+        $user = \Auth::user();
+        
         $this->validate($request,[
-            "song_name" => "required|max:191",
-            "artist_name" => "required|max:191",
+            "song_name" => "required|max:15",
+            "artist_name" => "required|max:15",
             "music_age" => "required|integer",
-            "description" => "nullable|max:191",
-            "video_url" => "nullable|string|max:191",
+            "description" => "nullable|max:200",
+            "video_url" => "nullable|string|max:200",
         ]);
         
         $request->user()->songs()->create([
@@ -49,7 +51,8 @@ class SongsController extends Controller
             "video_url" => $request->video_url,
         ]);
         
-       return redirect("/");
+    //   return redirect("/");
+       return redirect()->route("users.show", ['id' => $user->id]);
     }
     
     public function show($id)

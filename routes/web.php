@@ -20,6 +20,9 @@ Route::get("login", "Auth\LoginController@showLoginForm")->name("login");
 Route::post("login", "Auth\LoginController@login")->name("login.post");
 Route::get("logout", "Auth\LoginController@logout")->name("logout.get");
 
+// Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+// Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
 // 全ユーザ
 Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
     Route::resource("users", "UsersController", ["only" => ["index", "show", "edit", "update"]]);
@@ -35,7 +38,7 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
         Route::post("userImages", "UserImagesController@upload")->name("users.userImagesUpload");
     });
     
-    Route::group(["prefix" => "song/{id}"], function(){
+    Route::group(["prefix" => "songs/{id}"], function(){
         Route::post("favorite", "FavoritesController@store")->name("favorites.favorite");
         Route::delete("unfavorite", "FavoritesController@destroy")->name("favorites.unfavorite");
         

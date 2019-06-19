@@ -12,7 +12,7 @@
             @if (Auth::check())
                 @if(Auth::user()->role == 5)
                 <li class="nav-item">
-                    <a href="{{ url("/index-for-admin") }}" class="nav-link"><i class="fas fa-users-cog mr-1"></i>曲の管理</a>
+                    <a href="{{ url("/index-for-admin") }}" class="nav-link"><i class="fas fa-trash-alt mr-1"></i>曲の管理</a>
                 </li>
                 @endif
                 

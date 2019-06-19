@@ -6,7 +6,7 @@
                 
 <div class="form-group">
     <i class="far fa-envelope mr-1"></i>
-    {!! Form::label("email", "Ｅメール") !!}
+    {!! Form::label("email", "メールアドレス") !!}
     {!! Form::email("email", old("email"), ["class" => "form-control"]) !!}
 </div>
             
