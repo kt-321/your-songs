@@ -28,8 +28,7 @@ class CommentsController extends Controller
             'body' => $request->body,
         ]);
        
-        return redirect()->back();
-        
+        return back();
     }
     
     

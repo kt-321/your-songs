@@ -16,21 +16,44 @@ class UsersTest extends TestCase
      * @return void
      */
      
-     use RefreshDatabase;
-     
-    public function test_users_index()
-    {
-        // $this->assertTrue(true);
+    use RefreshDatabase;
+    
+    public function test_users_show()
+    {   
+        // ユーザーを1人作成
+        $user = factory(User::class)->create();
         
-        // // ユーザーを1人作成
-        // $user1 = factory(User::class)->create();
-        // $user2 = factory(User::class)->create();
-        // $user3 = factory(User::class)->create();
-        
-        // $this->actingAs($user1)->get("/users")
-        // ->see("ユーザー")
-        // ->see($user3->name)
-        // ->see($user2->name)
-        // ->see($user1->name);
+        $response = $this->actingAs($user)->get("/users/{$user->id}");
+        $response->assertStatus(200);
     }
+    
+    public function test_users_edit()
+    {   
+        // ユーザーを1人作成
+        $user = factory(User::class)->create();
+        
+        $response = $this->actingAs($user)->get("/users/{$user->id}/edit");
+        $response->assertStatus(200);
+    }
+    
+    // public function test_users_update()
+    // {   
+    //     // ユーザーを1人作成
+    //     $user = factory(User::class)->create();
+        
+    //     $response = $this->actingAs($user)->get("/users/{$user->id}/edit");
+    //     $response->assertStatus(200);
+    // }
+    
+    
+    // public function test_users_index()
+    // {
+    //     // ユーザーを1人作成
+    //     $user1 = factory(User::class)->create();
+    //     $user2 = factory(User::class)->create();
+    //     $user3 = factory(User::class)->create();
+        
+    //     $response = $this->actingAs($user1)->get("/users");
+    //     $response->assertStatus(200);
+    // }
 }

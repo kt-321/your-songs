@@ -29,9 +29,6 @@ class HelloTest extends TestCase
         $response = $this->get("/signup");
         $response->assertStatus(200);
         
-        // $response = $this->get("/login");
-        // $response->assertStatus(200);
-        
         $response = $this -> get("/users");
         $response->assertStatus(302);
         
@@ -116,8 +113,8 @@ class HelloTest extends TestCase
         $response = $this->actingAs($user)->get("/login");
         $response->assertStatus(302);
         
-        $response = $this->actingAs($user)->get("/users");
-        $response->assertStatus(200);
+        // $response = $this->actingAs($user)->get("/users");
+        // $response->assertStatus(200);
         
         $response = $this->actingAs($user)->get("/users/{$user->id}");
         $response->assertStatus(200);

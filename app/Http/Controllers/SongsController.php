@@ -51,8 +51,7 @@ class SongsController extends Controller
             "video_url" => $request->video_url,
         ]);
         
-    //   return redirect("/");
-       return redirect()->route("users.show", ['id' => $user->id]);
+        return redirect()->route("users.show", ['id' => $user->id]);
     }
     
     public function show($id)
@@ -89,7 +88,7 @@ class SongsController extends Controller
         
         $song->save();
         
-        return redirect("/");
+        return redirect()->route('songs.show', ['id' => $song->id]);
     }
     
    
