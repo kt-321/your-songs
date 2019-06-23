@@ -93,6 +93,9 @@ footer {
  }
 }
 
+.pagination{
+    justify-content: center;
+}
 
 
 /*.song-name:before{*/
