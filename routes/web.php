@@ -34,31 +34,33 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
         Route::get("followers", "UsersController@followers")->name("users.followers");
         Route::get("favorites", "UsersController@favorites")->name("users.favorites");
        
-        Route::get("userImages", "UserImagesController@uploadForm")->name("users.userImages");
-        Route::post("userImages", "UserImagesController@upload")->name("users.userImagesUpload");
+        Route::get("images", "UserImagesController@uploadForm")->name("users.userImages");
+        Route::post("images", "UserImagesController@upload")->name("users.userImagesUpload");
     });
     
     Route::group(["prefix" => "songs/{id}"], function(){
         Route::post("favorite", "FavoritesController@store")->name("favorites.favorite");
         Route::delete("unfavorite", "FavoritesController@destroy")->name("favorites.unfavorite");
         
-        Route::get("songImages", "SongImagesController@uploadForm")->name("songs.songImages");
-        Route::post("songImages", "SongImagesController@upload")->name("songs.songImagesUpload");
+        Route::get("images", "SongImagesController@uploadForm")->name("songs.songImages");
+        Route::post("images", "SongImagesController@upload")->name("songs.songImagesUpload");
         
     });
     
     Route::resource("songs", "SongsController", ["only" => ["create", "store", "show", "edit", "update", "destroy"]]);
    
-    Route::get("favoritesRanking/all", "SongsController@favoritesRankingAll")->name("songs.favoritesRankingAll");
-    Route::get("favoritesRanking/{id}", "SongsController@favoritesRanking")->name("songs.favoritesRanking");
-    Route::get("commentsRanking/all", "SongsController@commentsRankingAll")->name("songs.commentsRankingAll");
-    Route::get("commentsRanking/{id}", "SongsController@commentsRanking")->name("songs.commentsRanking");
+    Route::get("favorites-ranking/all", "SongsController@favoritesRankingAll")->name("songs.favoritesRankingAll");
+    Route::get("favorites-ranking/{id}", "SongsController@favoritesRanking")->name("songs.favoritesRanking");
+    Route::get("comments-ranking/all", "SongsController@commentsRankingAll")->name("songs.commentsRankingAll");
+    Route::get("comments-ranking/{id}", "SongsController@commentsRanking")->name("songs.commentsRanking");
     
     Route::resource("comments", "CommentsController", ["only" =>["store", "destroy"]]);
     
     Route::get("search", "SearchController@index")->name("search.index");
 });
 
+
+// 管理者権限機能
 Route::group(["middleware" => ["auth", "can:admin-higher"]], function(){
         Route::get("index-for-admin", "SongsController@indexForAdmin")->name("songs.indexForAdmin");
         Route::get("delete/{id}", "SongsController@delete")->name("songs.delete");
