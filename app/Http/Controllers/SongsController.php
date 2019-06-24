@@ -14,9 +14,19 @@ class SongsController extends Controller
 {
     public function index()
     {   
+        // $data = [];
+        // if(\Auth::check()) {
+        //     $songs = Song::withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(20);
+        //     $data = [
+        //         "songs" => $songs,
+        //      ];
+        //  }
+        
+        // return view("welcome", $data);
+        
         $data = [];
         if(\Auth::check()) {
-            $songs = Song::withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(20);
+            $songs = Song::orderBy("created_at", "desc")->paginate(20);
             $data = [
                 "songs" => $songs,
              ];

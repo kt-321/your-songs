@@ -27,7 +27,7 @@
                 @include("users.image", ["user" => $user])
                
                 <!--ユーザー情報-->
-                <div class="status text-center border" >
+                <div class="status text-center" >
                     <h4 class="mt-2"><i class="far fa-address-card mr-2"></i>プロフィール</h4>
                     
                     <ul class="status-list text-center px-3 py-3" style="list-style: none; display: table; margin: auto;">

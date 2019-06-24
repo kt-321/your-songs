@@ -5,7 +5,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     
-    <div class="collapse navbar-collapse" id="nav-bar">
+    <div class="collapse navbar-collapse" id="nav_bar">
         <ul class="navbar-nav mr-auto"></ul>
         <ul class="navbar-nav">
             <!--ログイン中のナビゲーションバー-->
@@ -16,12 +16,14 @@
                 </li>
                 @endif
                 
+                <li class="nav-item"><a href="{{ url("/") }}" class="nav-link"><i class="far fa-lightbulb mr-1"></i>新しく投稿された曲</a></li>
+                
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-trophy mr-1"></i>ランキング</a>
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li class="dropdown-item"><a href="{{ url("/favoritesRanking/all") }}"><i class="far fa-star mr-1"></i>お気に入り数順</a></li>
+                        <li class="dropdown-item"><a href="{{ url("/favorites-ranking/all") }}"><i class="far fa-star mr-1"></i>お気に入り数順</a></li>
                         <li class="dropdown-divider"></li>
-                        <li class="dropdown-item"><a href="{{ url("/commentsRanking/all") }}"><i class="far fa-comments mr-1"></i>コメント数順</a></li>
+                        <li class="dropdown-item"><a href="{{ url("/comments-ranking/all") }}"><i class="far fa-comments mr-1"></i>コメント数順</a></li>
                     </ul>
                 </li>  
                 
