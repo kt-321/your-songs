@@ -31,16 +31,19 @@
                         <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-guitar mr-1"></i>アーティスト：{!! nl2br(e($song->artist_name)) !!}</li>
                         <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-history mr-1"></i>曲の年代：{!! nl2br(e($song->music_age)) !!}年代</li>
                         <li class="mb-1" style="word-wrap: break-word;">
-                            <div>
-                                <i class="far fa-comment-dots mr-1"></i>About
-                            </div>
-                            <div class="ml-2 mb-3" style="word-wrap: break-word;">
-                                {!! nl2br(e($song->description)) !!}
-                            </div>
+                            @if($song->description)
+                                <div>
+                                    <i class="far fa-comment-dots mr-1"></i>About
+                                </div>
+                                <div class="ml-2 mb-3 border" style="word-wrap: break-word;">
+                                    {!! nl2br(e($song->description)) !!}
+                                </div>
+                            @endif
                         </li>
                         
                         <li class="mb-1 text-center">
                             @if($song->video_url)
+                               <div class="text-left"><i class="fab fa-youtube mr-1"></i>映像</div>
                                <iframe class="song-video" src="https://www.youtube.com/embed/{!! nl2br(e($song->video_url)) !!}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             @endif
                         </li>
@@ -136,5 +139,6 @@
     @endforeach
 </ul>
 
-{{ $songs->render("pagination::bootstrap-4") }}
+
+    {{ $songs->render("pagination::bootstrap-4") }}
 

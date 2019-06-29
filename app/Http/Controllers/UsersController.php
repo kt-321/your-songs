@@ -9,7 +9,6 @@ use App\Song;
 
 class UsersController extends Controller
 {
-    
     public function index()
     {
         $users = User::orderBy("id", "desc")->paginate(10);
@@ -42,7 +41,17 @@ class UsersController extends Controller
     }
     
     public function update(Request $request, $id)
-    {
+    {   
+        $request->validate([
+            "name" => "required|string|max:15",
+            "email" => "required|string|email|max:30|unique:users,email,$id",
+            "age" => "nullable|integer",
+            "gender" => "nullable|string",
+            "favorite_music_age" => "nullable|integer",
+            "favorite_artist" => "nullable|string|max:20",
+            "comment" => "nullable|string|max:150"
+        ]);
+        
         $user = User::find($id);
         
         $user->name = $request->name;

@@ -2,7 +2,7 @@
 
 @section("content")
     <!--曲情報-->
-    <section class="song-details mb-4">
+    <section class="song-details mb-5">
         <h1 class="text-center" style="word-wrap: break-word;"><i class="fas fa-music mr-3"></i>{{ $song->song_name }}</h1>
         <div class="row">
             <div class="col-sm-5 text-center">
@@ -33,17 +33,18 @@
                         <div>
                             <i class="far fa-comment-dots mr-1"></i>About
                         </div>
-                        <div class="ml-2 mb-3" style="word-wrap: break-word;">
+                        <div class="ml-2 mb-3 border" style="word-wrap: break-word;">
                             {!! nl2br(e($song->description)) !!}
                         </div>
                     </li>
                     
                     @if($song->video_url)
                     <li class="mb-0 text-center" style="word-wrap: break-word;">
+                        <div class="text-left"><i class="fab fa-youtube mr-1"></i>映像</div>
                         <iframe class="song-video" width="560" height="315" src="https://www.youtube.com/embed/{!! nl2br(e($song->video_url)) !!}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>           
                     </li>
                     @else
-                    <li class="mb-0">映像はありません。</li>
+                    <li class="mb-0"><i class="fab fa-youtube mr-1"></i>映像はありません。</li>
                     @endif
                 </ul>
                 
@@ -93,7 +94,6 @@
                     </div>
                     @endif
                 </div>
-                
             </div>
         </div>
         
@@ -130,42 +130,52 @@
             @endif
             
             <div class="comment-display">
+                <ul class="list-unstyled">
                 @foreach($comments as $comment)
-                        <div class="media mb-3">
-                            <div class="media-left mr-5">
-                                <figure>
+                    <li class = "mb-2">
+                        <!--<div class="comment-display row ml-5">-->
+                        <div class="d-flex">
+                                <figure class="ml-3 mr-4 my-auto">
                                     @if($comment->user->image_url)
                                     <img src="{{ $comment->user->image_url }}" style="width: 50px; height: 50px" alt="画像"> 
                                     @elseif($comment->user->gender == 1)
                                     <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="画像" style="width: 50px; height: 50px">
                                     @else
-                                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="画像" style="width: 50px; height: 50px">
+                                    <img class="ml-3 mr-4 my-auto" src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="画像" style="width: 50px; height: 50px">
                                     @endif 
                                     <figcaption class="text-center m-0">
-                                        <a href="{{ route("users.show", ["id" => $comment->user->id]) }}">{{ $comment->user->name }}</a>
+                                        <a style="font-size: 15px;" href="{{ route("users.show", ["id" => $comment->user->id]) }}">{{ $comment->user->name }}</a>
                                     </figcaption>
                                 </figure>
-                            </div>
-                            
-                            <div class="media-body">
-                                <!--<p style="word-wrap:break-word">{{ $comment->body }}</p>-->
-                                <p>{{ $comment->body }}</p>
-                                <p class="text-right"><span class="text-muted">  投稿日時  {{ $comment->created_at }}</span></p>
-                                @if(Auth::id() == $comment->user_id)
-                                {!! Form::open(["route" => ["comments.destroy", $comment->id], "method" => "delete"]) !!}
-                                    {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm"]) !!}
-                                {!! Form::close() !!}
-                                @endif
-                            </div>
-                            
+                                
+                                <div class="balloon1-left ml-3 my-auto">
+                                    <p style="word-wrap: break-word;">{{ $comment->body }}</p>
+                                </div>
+                        </div>    
+                        
+                        <div class="ml-auto mb-1" style="width:200px;">
+                            <ul class="list-unstyled">
+                                <li class="mr-3">
+                                    <span class="text-muted" style="font-size:13px">  投稿  {{ $comment->created_at }}</span>
+                                </li>
+                                <li class="mr-3">
+                                    @if(Auth::id() == $comment->user_id)
+                                    {!! Form::open(["route" => ["comments.destroy", $comment->id], "method" => "delete"]) !!}
+                                        {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm"]) !!}
+                                    {!! Form::close() !!}
+                                    @endif
+                                </li>
+                            </ul>
                         </div>
+                    </li>
                 @endforeach
+                </ul>
             </div>
             
             {{ $comments->render("pagination::bootstrap-4") }}
         </div>
     
-        <div class="cpmment-post">        
+        <div class="comment-post-form">        
             <h2 class="mb-3">コメントを投稿する</h2>
             
             <div class="comment-form">   
