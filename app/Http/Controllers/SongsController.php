@@ -14,15 +14,26 @@ class SongsController extends Controller
 {
     public function index()
     {   
+        // $data = [];
+        // if(\Auth::check()) {
+        //     $songs = Song::withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(20);
+        //     $data = [
+        //         "songs" => $songs,
+        //      ];
+        //  }
+        
+        // return view("welcome", $data);
+        
         $data = [];
         if(\Auth::check()) {
-            $songs = Song::withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(20);
-            $data = [
-                "songs" => $songs,
-             ];
-         }
+        $songs = Song::orderBy("created_at", "desc")->paginate(20);;
         
+        $data = [
+            "songs" => $songs,
+        ];
+        }
         return view("welcome", $data);
+        
     }
     
     public function create()
@@ -153,12 +164,12 @@ class SongsController extends Controller
     public function restore($id)
     {
         Song::onlyTrashed()->find($id)->restore();
-        return back();
+        return redirect()->route("songs.indexForAdmin");
     }
     
     public function forceDelete($id)
     {
         Song::onlyTrashed()->find($id)->forceDelete();
-        return back();
+        return redirect()->route("songs.indexForAdmin");
     }
 }
