@@ -11,20 +11,39 @@
 |
 */
 
-Route::get('/', "SongsController@index");
+// Route::get("/", "SongsController@index");
 
-Route::get("signup", "Auth\RegisterController@showRegistrationForm")->name("signup.get");
-Route::post("signup", "Auth\RegisterController@register")->name("signup.post");
+// Route::get("signup", "Auth\RegisterController@showRegistrationForm")->name("signup.get");
+// Route::post("signup", "Auth\RegisterController@register")->name("signup.post");
 
-Route::get("login", "Auth\LoginController@showLoginForm")->name("login");
-Route::post("login", "Auth\LoginController@login")->name("login.post");
-Route::get("logout", "Auth\LoginController@logout")->name("logout.get");
+// Route::get("login", "Auth\LoginController@showLoginForm")->name("login");
+// Route::post("login", "Auth\LoginController@login")->name("login.post");
 
-// Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-// Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+// Route::get("password/reset/{token}", "Auth\ResetPasswordController@showResetForm")->name("password.reset");
+// Route::post("password/reset", "Auth\ResetPasswordController@reset");
 
-// 全ユーザ
+// 未ログイン時
+Route::group(["middleware" => "guest"], function(){
+    // 未ログイン時のトップページ
+    Route::get("/", "WelcomeController@welcome")->name("welcome");
+    
+    // ユーザ登録
+    Route::get("signup", "Auth\RegisterController@showRegistrationForm")->name("signup.get");
+    Route::post("signup", "Auth\RegisterController@register")->name("signup.post");
+    
+    // ログイン認証
+    Route::get("login", "Auth\LoginController@showLoginForm")->name("login");
+    Route::post("login", "Auth\LoginController@login")->name("login.post");
+});
+
+// 全ユーザー
 Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
+    // ログイン時のトップページ
+    Route::get("/home", "HomeController@index")->name("home");
+    
+    // ログアウト
+    Route::get("logout", "Auth\LoginController@logout")->name("logout.get");
+    
     Route::resource("users", "UsersController", ["only" => ["index", "show", "edit", "update"]]);
     
     Route::group(["prefix" => "users/{id}"], function(){
@@ -65,3 +84,6 @@ Route::group(["middleware" => ["auth", "can:admin-higher"]], function(){
         Route::get("restore/{id}", "SongsController@restore")->name("songs.restore");
         Route::get("force-delete/{id}", "SongsController@forceDelete")->name("songs.forceDelete");
 });
+// Auth::routes();
+
+
