@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Song extends Model
-{
-    protected $fillable = ["comment" , "user_id", "image_url", "video_url", "artist_name", "song_name", "music_age"];
+{   
+    use SoftDeletes;
+     
+    protected $fillable = ["description", "user_id", "image_url", "video_url", "artist_name", "song_name", "music_age"];
     
     public function user()
     {
@@ -15,6 +18,11 @@ class Song extends Model
     
     public function favorite_users()
     {
-        return $this->belongsToMany(User::class, "favorites", "song_id", "user_id")->withTimestamps;
+        return $this->belongsToMany(User::class, "favorites", "song_id", "user_id");
+    }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

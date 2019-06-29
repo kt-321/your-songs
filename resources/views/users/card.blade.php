@@ -1,9 +1,17 @@
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">{{ $user->name }}</h3>
-    </div>
-    <div class="card-body">
-        <img class="rounded img-fluid" src="{{ Gravatar::src($user->email,500) }}" alt="">
-    </div>
-</div>
-@include("user_follow.follow_button", ["user" => $user])
+ @if($user->image_url)
+                <img src="{{ $user->image_url }}" style="width: 50px; height: 50px" alt="アイコン">
+                @else
+                    @if($user->gender == 1)
+                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" style="width: 50px; height: 50px" >
+                    @elseif($user->gender == 2)
+                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" style="width: 50px; height: 50px" >
+                    @endif
+                @endif
+                <div class="media-body">
+                    <div>
+                        {{ $user->name }}
+                    </div>
+                    <div>
+                        <a href="{{ route("users.show", ["id" => $user->id]) }}">プロフィールを見る</a>
+                    </div>
+                </div>

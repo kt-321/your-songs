@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        "name", "email", "password", "age", "gender", "image_url", "favorite_music_age", "favorite_artist", "comment"
+        "name", "email", "password", "age", "gender", "image_url", "favorite_music_age", "favorite_artist", "comment",
     ];
 
     /**
@@ -27,11 +27,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     
+    
     public function songs()
     {
         return $this->hasMany(Song::class);
     }
     
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    
+   
     public function followings()
     {
         return $this->belongsToMany(User::class, "user_follow", "user_id", "follow_id")->withTimestamps();
