@@ -34,25 +34,25 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
         Route::get("followers", "UsersController@followers")->name("users.followers");
         Route::get("favorites", "UsersController@favorites")->name("users.favorites");
        
-        Route::get("user-images", "UserImagesController@uploadForm")->name("users.userImages");
-        Route::post("user-images", "UserImagesController@upload")->name("users.userImagesUpload");
+        Route::get("userImages", "UserImagesController@uploadForm")->name("users.userImages");
+        Route::post("userImages", "UserImagesController@upload")->name("users.userImagesUpload");
     });
     
     Route::group(["prefix" => "songs/{id}"], function(){
         Route::post("favorite", "FavoritesController@store")->name("favorites.favorite");
         Route::delete("unfavorite", "FavoritesController@destroy")->name("favorites.unfavorite");
         
-        Route::get("song-images", "SongImagesController@uploadForm")->name("songs.songImages");
-        Route::post("song-images", "SongImagesController@upload")->name("songs.songImagesUpload");
+        Route::get("songImages", "SongImagesController@uploadForm")->name("songs.songImages");
+        Route::post("songImages", "SongImagesController@upload")->name("songs.songImagesUpload");
         
     });
     
     Route::resource("songs", "SongsController", ["only" => ["create", "store", "show", "edit", "update", "destroy"]]);
    
-    Route::get("favorites-ranking/all", "SongsController@favoritesRankingAll")->name("songs.favoritesRankingAll");
-    Route::get("favorites-ranking/{id}", "SongsController@favoritesRanking")->name("songs.favoritesRanking");
-    Route::get("comments-ranking/all", "SongsController@commentsRankingAll")->name("songs.commentsRankingAll");
-    Route::get("comments-ranking/{id}", "SongsController@commentsRanking")->name("songs.commentsRanking");
+    Route::get("favoritesRanking/all", "SongsController@favoritesRankingAll")->name("songs.favoritesRankingAll");
+    Route::get("favoritesRanking/{id}", "SongsController@favoritesRanking")->name("songs.favoritesRanking");
+    Route::get("commentsRanking/all", "SongsController@commentsRankingAll")->name("songs.commentsRankingAll");
+    Route::get("commentsRanking/{id}", "SongsController@commentsRanking")->name("songs.commentsRanking");
     
     Route::resource("comments", "CommentsController", ["only" =>["store", "destroy"]]);
     
