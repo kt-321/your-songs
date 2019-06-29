@@ -16,7 +16,7 @@ class SongsController extends Controller
     {   
         $data = [];
         if(\Auth::check()) {
-            $songs = Song::orderBy("created_at", "desc")->paginate(20);
+            $songs = Song::withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(20);
             $data = [
                 "songs" => $songs,
              ];
