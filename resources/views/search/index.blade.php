@@ -47,33 +47,35 @@
             <!--    </carousel>-->
             <!--</div>-->
             
+            <!--@if(count($recommended_songs) > 0)-->
             <div id="example" class="mb-5">
                 <span class="badge badge-pill badge-success mb-2">あなたへのおすすめ曲</span>
                 <carousel :per-page-custom="[[0, 1], [768, 2], [992, 3]]" :autoplay="true" :loop="true" :speed=3000 :navigation-enabled="true" :pagination-enabled="false">
                     @foreach($recommended_songs as $recommended_song)
                     <slide class="border py-1">
-                    <a href="{{ url("songs/{$recommended_song->id}") }}" class="text-dark">
-                        <figure>
-                            @if($recommended_song->image_url)
-                                <img src="{{ $recommended_song->image_url }}" style="width:100px; height:100px;" class="img-thumbnail">
-                            @else
-                                <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/song.jpeg" style="width:100px; height:100px;" class="img-thumbnail">
-                            @endif
-                        
-                            <figcaption>
-                                
-                            </figcaption>
-                        </figure>
-                        <ul class="list-unstyled px-3">
-                            <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-music mr-3"></i>曲名：{!! nl2br(e($recommended_song->song_name)) !!}</li>
-                            <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-guitar mr-1"></i>アーティスト：{!! nl2br(e($recommended_song->artist_name)) !!}</li>
-                            <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-history mr-1"></i>曲の年代：{!! nl2br(e($recommended_song->music_age)) !!}年代</li>
-                        </ul>
-                    </a>
+                        <a href="{{ url("songs/{$recommended_song->id}") }}" class="text-dark">
+                            <figure>
+                                @if($recommended_song->image_url)
+                                    <img src="{{ $recommended_song->image_url }}" style="width:100px; height:100px;" class="img-thumbnail">
+                                @else
+                                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/song.jpeg" style="width:100px; height:100px;" class="img-thumbnail">
+                                @endif
+                            
+                                <figcaption>
+                                    
+                                </figcaption>
+                            </figure>
+                            <ul class="list-unstyled px-3">
+                                <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-music mr-3"></i>曲名：{!! nl2br(e($recommended_song->song_name)) !!}</li>
+                                <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-guitar mr-1"></i>アーティスト：{!! nl2br(e($recommended_song->artist_name)) !!}</li>
+                                <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-history mr-1"></i>曲の年代：{!! nl2br(e($recommended_song->music_age)) !!}年代</li>
+                            </ul>
+                        </a>
                     </slide>
                     @endforeach
                 </carousel>
             </div>
+            <!--@endif-->
             
 
             <h1 class="text-center mb-4"><i class="fas fa-search mr-1"></i>曲を探す</h1>

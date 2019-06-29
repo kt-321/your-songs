@@ -31,13 +31,32 @@ class SearchController extends Controller
         // である曲をユーザーへのおすすめ曲とする。
         $recommended_songs = Song::where("music_age", $favorite_music_age)
         ->orWhere("artist_name", "like", "%".$favorite_artist. "%")
+        ->inRandomOrder()
+        ->limit(12)
         ->get();
+        
+        //  $recommended_songs = Song::where("user_id" ,\Auth::user()->id)
+        // ->where(function($query){
+        //     $query->where("music_age", $favorite_music_age)
+        //         ->orWhere("artist_name", "like", "%".$favorite_artist. "%");
+        // })
+        // ->get();
+        
+        // $data = [
+        //     "songs" => $songs,
+        //     "keyword" => $keyword,
+        //     "recommended_songs" => $recommended_songs,
+        // ];
+        
+        // $data += $this->counts($recommended_songs);
         
         return view("search.index",[
             "songs" => $songs,
             "keyword" => $keyword,
             "recommended_songs" => $recommended_songs,
             ]);
+            
+        // return view("search.index", $data);
         
     }
 }
