@@ -13,7 +13,7 @@ class UserImagesController extends Controller
     public function uploadForm()
     {
         $user = \Auth::user();
-        return view("users.imageUpload", ["user" => $user]);
+        return view("users.image_upload", ["user" => $user]);
     }
     
     public function upload(Request $request)
