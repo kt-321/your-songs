@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">YourSongs</a>
+    <a class="navbar-brand" href="/home">YourSongs</a>
     
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
         <span class="navbar-toggler-icon"></span>
@@ -16,7 +16,7 @@
                 </li>
                 @endif
                 
-                <li class="nav-item"><a href="{{ url("/") }}" class="nav-link"><i class="far fa-lightbulb mr-1"></i>新しく投稿された曲</a></li>
+                <li class="nav-item"><a href="{{ url("/home") }}" class="nav-link"><i class="far fa-lightbulb mr-1"></i>新しく投稿された曲</a></li>
                 
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-trophy mr-1"></i>ランキング</a>

@@ -24,14 +24,14 @@ class SongsController extends Controller
         
         // return view("welcome", $data);
         
-         $data = [];
+        $data = [];
         if(\Auth::check()) {
             $songs = Song::orderBy("created_at", "desc")->paginate(20);
             $data = [
             "songs" => $songs,
             ];}
         
-        return view("welcome", $data);
+        return view("songs.index", $data);
     }
     
     public function create()
