@@ -13,16 +13,40 @@ class SearchController extends Controller
 {
     public function index(Request $request)
     {
-        $keyword = $request->input("keyword");
+        // 値を取得
+        $song_name = $request->input("song_name");
+        $artist_name = $request->input("artist_name");
+        $music_age = $request->input("music_age");
         
+        // 検索QUERY
         $query = Song::query();
         
-        if(!empty($keyword))
+        // if(!empty($keyword))
+        // {
+        //     $query->where("song_name", "like", "%".$keyword. "%")->orwhere("artist_name", "like", "%".$keyword. "%");
+        // }
+        
+        // もし「曲名」があれば
+        if(!empty($song_name))
         {
-            $query->where("song_name", "like", "%".$keyword. "%")->orwhere("artist_name", "like", "%".$keyword. "%");
+            $query->where("song_name", "like", "%".$song_name. "%");
         }
         
+        // もし「アーティスト名」があれば
+        if(!empty($artist_name))
+        {
+            $query->where("artist_name", "like", "%".$artist_name. "%");
+        }
+        
+        // もし「年代」が選択されていれば
+        if(!empty($music_age))
+        {
+            $query->where("music_age", $music_age);
+        }
+        
+        // ページネーション
         $songs = $query->orderBy("created_at", "desc")->paginate(5);
+        
         
         $favorite_music_age = \Auth::user()->favorite_music_age;
         $favorite_artist = \Auth::user()->favorite_artist;
@@ -35,28 +59,16 @@ class SearchController extends Controller
         ->limit(12)
         ->get();
         
-        //  $recommended_songs = Song::where("user_id" ,\Auth::user()->id)
-        // ->where(function($query){
-        //     $query->where("music_age", $favorite_music_age)
-        //         ->orWhere("artist_name", "like", "%".$favorite_artist. "%");
-        // })
-        // ->get();
         
-        // $data = [
-        //     "songs" => $songs,
-        //     "keyword" => $keyword,
-        //     "recommended_songs" => $recommended_songs,
-        // ];
+        $data = [
+        "song_name" => $song_name,
+        "artist_name" => $artist_name,
+        "music_age" => $music_age,
+        "songs" => $songs,
+        "recommended_songs" => $recommended_songs
+        ];
         
-        // $data += $this->counts($recommended_songs);
-        
-        return view("search.index",[
-            "songs" => $songs,
-            "keyword" => $keyword,
-            "recommended_songs" => $recommended_songs,
-            ]);
-            
-        // return view("search.index", $data);
+        return view("search.index", $data);
         
     }
 }
