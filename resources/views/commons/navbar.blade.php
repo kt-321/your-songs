@@ -1,5 +1,9 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    @if (Auth::check())
     <a class="navbar-brand" href="/home">YourSongs</a>
+    @else
+    <a class="navbar-brand" href="/">YourSongs</a>
+    @endif
     
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
         <span class="navbar-toggler-icon"></span>

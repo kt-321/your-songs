@@ -64,7 +64,23 @@ class UsersController extends Controller
         
         $user->save();
         
-        return redirect()->route('users.show', ['id' => $user->id]);
+        return redirect()->route("users.show", ["id" => $user->id]);
+    }
+    
+    public function timeline()
+    {
+        $data = [];
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $songs = $user->feed_songs()->orderBy("created_at", "desc")->paginate(10);
+
+            $data = [
+                "user" => $user,
+                "songs" => $songs,
+            ];
+            $data += $this->counts($user);
+        }
+        return view("users.timeline", $data);
     }
     
     public function followings($id)
