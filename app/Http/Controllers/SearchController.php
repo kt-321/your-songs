@@ -21,11 +21,6 @@ class SearchController extends Controller
         // 検索QUERY
         $query = Song::query();
         
-        // if(!empty($keyword))
-        // {
-        //     $query->where("song_name", "like", "%".$keyword. "%")->orwhere("artist_name", "like", "%".$keyword. "%");
-        // }
-        
         // もし「曲名」があれば
         if(!empty($song_name))
         {

@@ -18,43 +18,11 @@
         
         <div class="container p-4">
             @include("commons.error_messages")
-            
-            <!--@if(count($recommended_songs) > 0)-->
-            <div id="example" class="mb-5">
-                <span class="badge badge-pill badge-success mb-2">あなたへのおすすめ曲</span>
-                <carousel :per-page-custom="[[0, 1], [768, 2], [992, 3]]" :autoplay="true" :loop="true" :speed=3000 :navigation-enabled="true" :pagination-enabled="false">
-                    @foreach($recommended_songs as $recommended_song)
-                    <slide class="border py-1">
-                        <a href="{{ url("songs/{$recommended_song->id}") }}" class="text-dark">
-                            <figure>
-                                @if($recommended_song->image_url)
-                                    <img src="{{ $recommended_song->image_url }}" style="width:100px; height:100px;" class="img-thumbnail">
-                                @else
-                                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/song.jpeg" style="width:100px; height:100px;" class="img-thumbnail">
-                                @endif
-                            
-                                <figcaption>
-                                    
-                                </figcaption>
-                            </figure>
-                            <ul class="list-unstyled px-3">
-                                <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-music mr-3"></i>曲名：{!! nl2br(e($recommended_song->song_name)) !!}</li>
-                                <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-guitar mr-1"></i>アーティスト：{!! nl2br(e($recommended_song->artist_name)) !!}</li>
-                                <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-history mr-1"></i>曲の年代：{!! nl2br(e($recommended_song->music_age)) !!}年代</li>
-                            </ul>
-                        </a>
-                    </slide>
-                    @endforeach
-                </carousel>
-            </div>
-            <!--@endif-->
-            
-            <h1 class="text-center mb-4"><i class="fas fa-search mr-1"></i>曲を探す</h1>
-            
-            
+          
+            <h1 class="text-center mb-4"><i class="fas fa-search mr-1"></i>曲を検索</h1>
             
             <!--検索フォーム-->
-            <form class="px-3 mb-5">
+            <form class="px-3">
                 <div class="form-group">
                     <div class="row m-0">
                         <div class="col-sm-3 my-auto">
@@ -106,12 +74,18 @@
             <!--検索結果の表示-->
                 @if($song_name != "" || $artist_name != "" || $music_age != "")
                     @if(count($songs) == 0)
-                    <p class="text-center m-2">該当する曲は見つかりませんでした。</p>
+                    <p class="text-center mt-3 mb-0">該当する曲は見つかりませんでした。</p>
                     @endif   
                 @endif
             
+            <!--ページネーション-->
+                <div class="paginate text-center mt-3">
+                    {{ $songs->appends(["song_name"=>$song_name,"artist_name"=>$artist_name, "music_age"=>$music_age])->render("pagination::bootstrap-4") }}
+                </div>
+            
             <!--    該当する曲の一覧-->
-                <ul class="song-cards list-unstyled">
+                @if($songs)
+                <ul class="song-cards list-unstyled mt-5">
                 @foreach($songs as $song)
                     <li class="song-card mb-4 pb-3 px-2 border">
                         
@@ -251,10 +225,42 @@
                     </li>
                 @endforeach
                 </ul>
+                @endif
                 
                 <div class="paginate text-center">
                     {{ $songs->appends(["song_name"=>$song_name,"artist_name"=>$artist_name, "music_age"=>$music_age])->render("pagination::bootstrap-4") }}
                 </div>
+                
+                <!--おすすめ曲-->
+                <!--@if(count($recommended_songs) > 0)-->
+                <div id="example" class="mb-5">
+                    <span class="badge badge-pill badge-success mb-2">あなたへのおすすめ曲</span>
+                    <carousel :per-page-custom="[[0, 1], [768, 2], [992, 3]]" :autoplay="true" :loop="true" :speed=3000 :navigation-enabled="true" :pagination-enabled="false">
+                        @foreach($recommended_songs as $recommended_song)
+                        <slide class="border py-1">
+                            <a href="{{ url("songs/{$recommended_song->id}") }}" class="text-dark">
+                                <figure>
+                                    @if($recommended_song->image_url)
+                                        <img src="{{ $recommended_song->image_url }}" style="width:100px; height:100px;" class="img-thumbnail">
+                                    @else
+                                        <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/song.jpeg" style="width:100px; height:100px;" class="img-thumbnail">
+                                    @endif
+                                
+                                    <figcaption>
+                                        
+                                    </figcaption>
+                                </figure>
+                                <ul class="list-unstyled px-3">
+                                    <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-music mr-3"></i>曲名：{!! nl2br(e($recommended_song->song_name)) !!}</li>
+                                    <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-guitar mr-1"></i>アーティスト：{!! nl2br(e($recommended_song->artist_name)) !!}</li>
+                                    <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-history mr-1"></i>曲の年代：{!! nl2br(e($recommended_song->music_age)) !!}年代</li>
+                                </ul>
+                            </a>
+                        </slide>
+                        @endforeach
+                    </carousel>
+                </div>
+                <!--@endif-->
             </div>
                     
             <footer class="bg-dark mt-5">
