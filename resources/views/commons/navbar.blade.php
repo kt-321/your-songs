@@ -31,7 +31,7 @@
                     </ul>
                 </li>  
                 
-                <li class="nav-item"><a href="{{ url("/search") }}" class="nav-link"><i class="fas fa-search mr-1"></i>曲を検索</a></li>
+                <li class="nav-item"><a href="{{ url("/search") }}" class="nav-link"><i class="fas fa-music mr-1"></i>曲を検索</a></li>
                 
                 <li class="nav-item"><a href="{{ url("/users") }}" class="nav-link"><i class="fas fa-user mr-1"></i>ユーザーを検索</a></li>
                 

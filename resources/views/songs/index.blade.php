@@ -10,7 +10,9 @@
     
     <body>
         @include("commons.navbar")
-        <header></header>
+        <header>
+            <button type="button" onclick=history.back()>戻る</button> 
+        </header>
          
         <div class="container p-4">
             @include("commons.error_messages")

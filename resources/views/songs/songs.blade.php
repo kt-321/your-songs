@@ -33,10 +33,11 @@
                         <li class="mb-1" style="word-wrap: break-word;">
                             @if($song->description)
                                 <div>
-                                    <i class="far fa-comment-dots mr-1"></i>About
+                                    <i class="far fa-comment-dots mr-1"></i>説明
                                 </div>
-                                <div class="ml-2 mb-3 border" style="word-wrap: break-word;">
-                                    {!! nl2br(e($song->description)) !!}
+                                
+                                <div class="status-value balloon3 mx-auto my-auto">
+                                    <p style="word-wrap: break-word;">{!! nl2br(e($song->description)) !!}</p>
                                 </div>
                             @endif
                         </li>
@@ -48,7 +49,6 @@
                             @endif
                         </li>
                     </ul>
-                
                 </div>
             </div>
             
@@ -83,7 +83,10 @@
                             @else
                             <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->age)) !!}代女性</li>
                             @endif
+                            
+                            @if($song->user->favorite_artist)
                             <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->favorite_music_age)) !!}年代の音楽が好き</li>
+                            @endif
                             
                             @if($song->user->favorite_artist)
                             <li class="mb-1" style="word-wrap: break-word;">好きなミュージシャン：{!! nl2br(e($song->user->favorite_artist)) !!}</li>

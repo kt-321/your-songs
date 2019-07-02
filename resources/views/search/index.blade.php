@@ -19,7 +19,7 @@
         <div class="container p-4">
             @include("commons.error_messages")
           
-            <h1 class="text-center mb-4"><i class="fas fa-search mr-1"></i>曲を検索</h1>
+            <h1 class="text-center mb-4"><i class="fas fa-music mr-3"></i>曲を検索</h1>
             
             <!--検索フォーム-->
             <form class="px-3">
@@ -120,10 +120,11 @@
                                     <li class="mb-1" style="word-wrap: break-word;">
                                         @if($song->description)
                                             <div>
-                                                <i class="far fa-comment-dots mr-1"></i>About
+                                                <i class="far fa-comment-dots mr-1"></i>説明
                                             </div>
-                                            <div class="ml-2 mb-3 border" style="word-wrap: break-word;">
-                                                {!! nl2br(e($song->description)) !!}
+                                            
+                                            <div class="status-value balloon3 mx-auto my-auto">
+                                                <p style="word-wrap: break-word;">{!! nl2br(e($song->description)) !!}</p>
                                             </div>
                                         @endif
                                     </li>

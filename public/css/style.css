@@ -36,10 +36,6 @@ body{
     color: #fecb81;
 }
 
-/*h3{*/
-/*    background-color: yellow;*/
-/*}*/
-
 footer {
     background-color: #000080;
     text-align: center;
@@ -66,7 +62,22 @@ footer {
     height: 120px;
 }
 
+/*ページネーション*/
+.pagination{
+    justify-content: center;
+}
 
+/*カルーセル*/
+.VueCarousel-slide {
+  position: relative;
+  min-height: 50px;
+  text-align: center;
+  font-size: 15px;
+  background-color: #fff;
+  color: black;
+}
+
+/*コメント*/
 .balloon1-left {
   position: relative;
   display: inline-block;
@@ -94,6 +105,59 @@ footer {
   padding: 0;
 }
 
+/*自己紹介*/
+.balloon2 {
+  position: relative;
+  display: inline-block;
+  margin: 1.5em 0 1.5em 15px;
+  padding: 7px 10px;
+  min-width: 150px;
+  max-width: 300px;
+  color: #555;
+  font-size: 16px;
+  background: #e0edff;
+}
+
+.balloon2 p {
+  margin: 0;
+  padding: 0;
+}
+
+/*曲の説明*/
+.balloon3 {
+  position: relative;
+  display: inline-block;
+  margin: 1.5em 0 1.5em 15px;
+  padding: 7px 10px;
+  min-width: 150px;
+  max-width: 250px;
+  color: #555;
+  font-size: 16px;
+  background: #e0edff;
+}
+
+.balloon3 p {
+  margin: 0;
+  padding: 0;
+}
+
+/*曲詳細画面での曲の説明*/
+.balloon4 {
+  position: relative;
+  display: inline-block;
+  margin: 1.5em 0 1.5em 15px;
+  padding: 7px 10px;
+  min-width: 150px;
+  max-width: 300px;
+  color: #555;
+  font-size: 16px;
+  background: #e0edff;
+}
+
+.balloon4 p {
+  margin: 0;
+  padding: 0;
+}
 
 
  /*　画面サイズが480pxから768pxのとき　*/
@@ -104,6 +168,7 @@ footer {
         height: 150px;
     }
     
+    /*コメント*/
      .balloon1-left {
         position: relative;
         display: inline-block;
@@ -130,6 +195,60 @@ footer {
         margin: 0;
         padding: 0;
     }
+    
+    /*自己紹介*/
+    .balloon2 {
+      position: relative;
+      display: inline-block;
+      margin: 1.5em 0 1.5em 15px;
+      padding: 7px 10px;
+      min-width: 150px;
+      max-width: 400px;
+      color: #555;
+      font-size: 16px;
+      background: #e0edff;
+    }
+    
+    .balloon2 p {
+      margin: 0;
+      padding: 0;
+    }
+    
+    /*曲の説明*/
+    .balloon3 {
+      position: relative;
+      display: inline-block;
+      margin: 1.5em 0 1.5em 15px;
+      padding: 7px 10px;
+      min-width: 150px;
+      max-width: 400px;
+      color: #555;
+      font-size: 16px;
+      background: #e0edff;
+    }
+    
+    .balloon3 p {
+      margin: 0;
+      padding: 0;
+    }
+    
+    /*曲詳細画面での曲の説明*/
+    .balloon4 {
+      position: relative;
+      display: inline-block;
+      margin: 1.5em 0 1.5em 15px;
+      padding: 7px 10px;
+      min-width: 150px;
+      max-width: 400px;
+      color: #555;
+      font-size: 16px;
+      background: #e0edff;
+    }
+    
+    .balloon4 p {
+      margin: 0;
+      padding: 0;
+    }
 }
 
 
@@ -140,6 +259,7 @@ footer {
         height: 200px;
     }
     
+    /*コメント*/
     .balloon1-left {
         position: relative;
         display: inline-block;
@@ -166,6 +286,60 @@ footer {
         margin: 0;
         padding: 0;
     }
+    
+    /*自己紹介*/
+    .balloon2 {
+      position: relative;
+      display: inline-block;
+      margin: 1.5em 0 1.5em 15px;
+      padding: 7px 10px;
+      min-width: 150px;
+      max-width: 500px;
+      color: #555;
+      font-size: 16px;
+      background: #e0edff;
+    }
+    
+    .balloon2 p {
+      margin: 0;
+      padding: 0;
+    }
+    
+    /*曲の説明*/
+    .balloon3 {
+      position: relative;
+      display: inline-block;
+      margin: 1.5em 0 1.5em 15px;
+      padding: 7px 10px;
+      min-width: 150px;
+      max-width: 400px;
+      color: #555;
+      font-size: 16px;
+      background: #e0edff;
+    }
+    
+    .balloon3 p {
+      margin: 0;
+      padding: 0;
+    }
+    
+    /*曲詳細画面での曲の説明*/
+    .balloon4 {
+      position: relative;
+      display: inline-block;
+      margin: 1.5em 0 1.5em 15px;
+      padding: 7px 10px;
+      min-width: 150px;
+      max-width: 370px;
+      color: #555;
+      font-size: 16px;
+      background: #e0edff;
+    }
+    
+    .balloon4 p {
+      margin: 0;
+      padding: 0;
+    }
 }
 
 
@@ -178,6 +352,7 @@ footer {
         height: 300px;
     }
     
+    /*コメント*/
     .balloon1-left {
         position: relative;
         display: inline-block;
@@ -204,95 +379,60 @@ footer {
         margin: 0;
         padding: 0;
     }
- 
-}
-
-.pagination{
-    justify-content: center;
-}
-
-.VueCarousel-slide {
-  position: relative;
-  min-height: 50px;
-  text-align: center;
-  font-size: 15px;
-  background-color: #fff;
-  color: black;
-}
-
-
-
-
-
-/*.label {*/
-/*  position: absolute;*/
-/*  top: 50%;*/
-/*  left: 50%;*/
-/*  transform: translate(-50%, -50%);*/
-/*}*/
-
-
-/*.song-name:before{*/
-/*    position: absolute;*/
-/*    font-family: FontAwesome;*/
-/*    font-family: "Font Awesome 5 Free";*/
-/*    content: "\f001";*/
-/*    font-weight: 900;*/
-/*    font-weight: normal;*/
-/*    background: #ffca2c;*/
-/*    color: white;*/
-/*}*/
-
-/*h3{*/
-/*    position: relative;*/
-/*    padding-left: 35px;*/
     
-/*}*/
+    /*自己紹介*/
+    .balloon2 {
+      position: relative;
+      display: inline-block;
+      margin: 1.5em 0 1.5em 15px;
+      padding: 7px 10px;
+      min-width: 150px;
+      max-width: 600px;
+      color: #555;
+      font-size: 16px;
+      background: #e0edff;
+    }
+    
+    .balloon2 p {
+      margin: 0;
+      padding: 0;
+    }
+    
+    /*曲の説明*/
+    .balloon3 {
+      position: relative;
+      display: inline-block;
+      margin: 1.5em 0 1.5em 15px;
+      padding: 7px 10px;
+      min-width: 150px;
+      max-width: 550px;
+      color: #555;
+      font-size: 16px;
+      background: #e0edff;
+    }
+    
+    .balloon3 p {
+      margin: 0;
+      padding: 0;
+    }
+    
+    /*曲詳細画面での曲の説明*/
+    .balloon4 {
+      position: relative;
+      display: inline-block;
+      margin: 1.5em 0 1.5em 15px;
+      padding: 7px 10px;
+      min-width: 150px;
+      max-width: 500px;
+      color: #555;
+      font-size: 16px;
+      background: #e0edff;
+    }
+    
+    .balloon4 p {
+      margin: 0;
+      padding: 0;
+    } 
+}
 
 
-
-/*.user-profile .status ul{*/
-    /*display: table;*/
-/*    list-style: none;*/
-/*}*/
-
-/*.status-list{*/
-/*    list-style: none;*/
-/*}*/
-
-/*ul{*/
-/*    list-style: none;*/
-/*}*/
-
-/*li{*/
-/*    display: list-item;*/
-/*}*/
-
-/*.user-profile .status ul li{*/
-/*    display: table-cell;*/
-/*    border-right: 1px solid;    */
-/*}*/
-
-/*.container-before-login{*/
-/*    height: 40vh;*/
-/*}*/
-
-
-
-/*.user-name{*/
-/*    font-size: 15px;*/
-/*}*/
-
-/*.btn-modify-profile{*/
-/*    text-align: center; */
-/*}*/
-
-/*.user-profile{*/
-/*    border: 1px;*/
-/*}*/
-
-/*.user-image {*/
-/*  width: 200px;*/
-/*  height: 200px;*/
-/*  object-fit: cover;*/
-/*}*/

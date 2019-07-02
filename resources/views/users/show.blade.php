@@ -55,7 +55,9 @@
                 <ul class="status-list p-3" style="list-style: none; text-align: center; display: table; margin: auto;">
                     <li style="padding: 0 8px; display: table-cell;">
                         <div class="status-label mb-1"><i class="fas fa-user mr-1"></i><i class="far fa-comment-dots mr-1"></i>自己紹介</div>
-                        <div class="status-value" style="word-wrap: break-word;">{{ $user->comment }}</div>
+                        <div class="status-value balloon2 mx-0 my-auto">
+                            <p style="word-wrap: break-word;">{{ $user->comment }}</p>
+                        </div>
                     </li>    
                 </ul>
             </div>

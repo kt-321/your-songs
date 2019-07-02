@@ -5,7 +5,8 @@
     <section class="song-details mb-5">
         <h1 class="text-center" style="word-wrap: break-word;"><i class="fas fa-music mr-3"></i>{{ $song->song_name }}</h1>
         <div class="row">
-            <div class="col-sm-5 text-center">
+            <!--<div class="col-sm-5 text-center">-->
+            <div class="col-md-5 text-center">
                 <!--曲画像-->
                 <figure>
                         @if($song->image_url)
@@ -25,16 +26,18 @@
                 </figure>
             </div>
         
-            <div class="col-sm-7">
+            <!--<div class="col-sm-7">-->
+            <div class="col-md-7">
                 <ul class="list-unstyled px-3">
                     <li class="mb-0" style="word-wrap: break-word;"><i class="fas fa-guitar mr-1"></i>アーティスト：{!! nl2br(e($song->artist_name)) !!}</li>
                     <li class="mb-0" style="word-wrap: break-word;"><i class="fas fa-history mr-1"></i>曲の年代：{!! nl2br(e($song->music_age)) !!}年代</li>
                     <li class="mb-1" style="word-wrap: break-word;">
                         <div>
-                            <i class="far fa-comment-dots mr-1"></i>About
+                            <i class="far fa-comment-dots mr-1"></i>説明
                         </div>
-                        <div class="ml-2 mb-3 border" style="word-wrap: break-word;">
-                            {!! nl2br(e($song->description)) !!}
+                        
+                        <div class="status-value balloon4 mx-auto my-auto">
+                            <p style="word-wrap: break-word;">{!! nl2br(e($song->description)) !!}</p>
                         </div>
                     </li>
                     
@@ -145,7 +148,7 @@
                                     @endif 
                                     <figcaption class="text-center m-0">
                                         <a style="font-size: 15px;" href="{{ route("users.show", ["id" => $comment->user->id]) }}">{{ $comment->user->name }}</a>
-                                    </figcaption>
+                                    </figcaption>z
                                 </figure>
                                 
                                 <div class="balloon1-left ml-3 my-auto">
