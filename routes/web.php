@@ -74,10 +74,9 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
     
     Route::resource("songs", "SongsController", ["only" => ["create", "store", "show", "edit", "update", "destroy"]]);
    
-    Route::get("favorites-ranking/all", "SongsController@favoritesRankingAll")->name("songs.favoritesRankingAll");
-    Route::get("favorites-ranking/{id}", "SongsController@favoritesRanking")->name("songs.favoritesRanking");
-    Route::get("comments-ranking/all", "SongsController@commentsRankingAll")->name("songs.commentsRankingAll");
-    Route::get("comments-ranking/{id}", "SongsController@commentsRanking")->name("songs.commentsRanking");
+    Route::get("favorites-ranking", "SongsController@favoritesRanking")->name("songs.favoritesRanking");
+    
+    Route::get("comments-ranking", "SongsController@commentsRanking")->name("songs.commentsRanking");
     
     Route::resource("comments", "CommentsController", ["only" =>["store", "destroy"]]);
     

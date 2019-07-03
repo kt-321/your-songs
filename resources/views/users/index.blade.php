@@ -126,7 +126,7 @@
                             @if($user->comment)
                             <p class="mb-0">{{ $user->comment }}</p>
                             @else
-                            <p>...</p>
+                            <p>．．．</p>
                             @endif
                         </div>
                         

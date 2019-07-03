@@ -18,19 +18,20 @@
         
         <div class="container p-4">
             @include("commons.error_messages")
-          
-            <h1 class="text-center mb-4"><i class="fas fa-music mr-3"></i>曲を検索</h1>
+            
+            <!--ページタイトル-->
+            <h1 class="text-center"><i class="fas fa-music mr-3"></i>曲を検索</h1>
             
             <!--検索フォーム-->
             <form class="px-3">
                 <div class="form-group">
                     <div class="row m-0">
                         <div class="col-sm-3 my-auto">
-                            <label class="form-label m-0">曲名</label>
+                            <label class="form-label m-0"><i class="fas fa-music mr-1"></i>タイトル</label>
                         </div>
                         
                         <div class="col-sm-5">
-                            <input class="form-control" type="text" name="song_name" value="{{ $song_name }}" placeholder="曲名を入力">
+                            <input class="form-control" type="text" name="song_name" value="{{ $song_name }}" placeholder="タイトルを入力">
                         </div>
                     </div>
                 </div>
@@ -38,7 +39,7 @@
                 <div class="form-group">
                     <div class="row m-0">
                         <div class="col-sm-3 my-auto">
-                            <label class="form-label m-0">アーティスト名</label>
+                            <label class="form-label m-0"><i class="fas fa-guitar mr-1"></i>アーティスト名</label>
                         </div>
                         
                         <div class="col-sm-5">
@@ -50,7 +51,7 @@
                 <div class="form-group">
                     <div class="row m-0">
                         <div class="col-sm-3 my-auto">
-                            <label class="form-label m-0">年代</label>
+                            <label class="form-label m-0"><i class="fas fa-history mr-1"></i>年代</label>
                         </div>
                         
                         <div class="col-sm-4">
@@ -65,13 +66,30 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="form-group">
+                    <div class="row m-0">
+                        <div class="col-sm-3 my-auto">
+                            <label class="form-label m-0"><i class="fas fa-history mr-1"></i>並び替え</label>
+                        </div>
+                        
+                        <div class="col-sm-4">
+                            <select name="order" class="form-control select select-primary mbl" data-toggle="select">
+                                <option value="created_at" @if($order=="created_at") selected @endif>投稿が新しい順</option>
+                                <!--<option value="1980" @if($music_age=="1980") selected @endif>1980年代</option>-->
+                                <option value="favorites_ranking" @if($order=="favorites_ranking") selected @endif>お気に入りが多い順</option>
+                                <option value="comments_ranking" @if($order=="comments_ranking") selected @endif>コメントが多い順</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
              
-              <div class="col-xs-offset-2 col-xs-10 text-center">
-                  <button type="submit" class="btn btn-default btn-success">以上の条件で検索</button>
-              </div>
+                <div class="col-xs-offset-2 col-xs-10 text-center">
+                    <button type="submit" class="btn btn-default btn-success">以上の条件で検索</button>
+                </div>
             </form>
             
-            <!--検索結果の表示-->
+            <!--曲が見つからなかったときの表示-->
                 @if($song_name != "" || $artist_name != "" || $music_age != "")
                     @if(count($songs) == 0)
                     <p class="text-center mt-3 mb-0">該当する曲は見つかりませんでした。</p>
@@ -83,12 +101,13 @@
                     {{ $songs->appends(["song_name"=>$song_name,"artist_name"=>$artist_name, "music_age"=>$music_age])->render("pagination::bootstrap-4") }}
                 </div>
             
-            <!--    該当する曲の一覧-->
+            <!--該当する曲の一覧-->
                 @if($songs)
                 <ul class="song-cards list-unstyled mt-5">
                 @foreach($songs as $song)
-                    <li class="song-card mb-4 pb-3 px-2 border">
+                    <li class="song-card px-2 py-3 mb-5 border">
                         
+                        <!--曲タイトル-->
                         <h3 class="song-name p-3 mb-4 text-center" style="word-wrap: break-word;"><i class="fas fa-music mr-3"></i>{!! nl2br(e($song->song_name)) !!}</h3>
                         
                         <div class="row m-0">
@@ -143,20 +162,20 @@
                         <a href="{{ route("songs.show", ["song" => $song]) }}" class="btn btn-light d-block mx-2 my-3">続きを読む</a>
                         
                         <!--投稿者が自分でないときに限り投稿者情報を表示-->
-                        <div class="about-user ml-2">
+                        <div class="about-user ml-2 mb-2">
                             @if(Auth::id() == $song->user_id)
                             <span class="badge badge-success ml-1">自分の投稿</span>
                             @else
-                            <h4>投稿者情報</h4>
+                            <h4 class="user-info">投稿者情報</h4>
                             <div class="media">
                                 <div class="media-left ml-3 mr-3">
                                     <figure>
                                         @if($song->user->image_url)
-                                            <img src="{{ $song->user->image_url }}" style="width: 50px; height: 50px" alt="画像"> 
+                                            <img src="{{ $song->user->image_url }}" alt="画像" class="img-thumbnail" style="width: 50px; height: 50px" > 
                                         @elseif($song->user->gender == 1)
-                                            <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="画像" style="width: 50px; height: 50px">
+                                            <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="画像" class="img-thumbnail" style="width: 50px; height: 50px">
                                         @else
-                                            <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="画像" style="width: 50px; height: 50px">
+                                            <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="画像" class="img-thumbnail" style="width: 50px; height: 50px">
                                         @endif
                                         <figcaption class="text-center m-0">
                                             <a href="{{ route("users.show", ["id" => $song->user->id]) }}">{{ $song->user->name }}</a>
@@ -168,10 +187,13 @@
                                     <ul class="list-unstyled px-3">
                                         @if($song->user->gender == 1)
                                         <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->age)) !!}代男性</li>
-                                        @else
+                                        @elseif($song->user->gender == 2)
                                         <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->age)) !!}代女性</li>
                                         @endif
+                                        
+                                        @if($song->user->favorite_music_age)
                                         <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->favorite_music_age)) !!}年代の音楽が好き</li>
+                                        @endif
                                         
                                         @if($song->user->favorite_artist)
                                         <li class="mb-1" style="word-wrap: break-word;">好きなミュージシャン：{!! nl2br(e($song->user->favorite_artist)) !!}</li>
@@ -229,7 +251,7 @@
                 @endif
                 
                 <div class="paginate text-center">
-                    {{ $songs->appends(["song_name"=>$song_name,"artist_name"=>$artist_name, "music_age"=>$music_age])->render("pagination::bootstrap-4") }}
+                    {{ $songs->appends(["song_name"=>$song_name,"artist_name"=>$artist_name, "music_age"=>$music_age, "order"=>$order])->render("pagination::bootstrap-4") }}
                 </div>
                 
                 <!--おすすめ曲-->

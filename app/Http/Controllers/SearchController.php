@@ -17,6 +17,7 @@ class SearchController extends Controller
         $song_name = $request->input("song_name");
         $artist_name = $request->input("artist_name");
         $music_age = $request->input("music_age");
+        $order = $request->input("order");
         
         // 検索QUERY
         $query = Song::query();
@@ -39,8 +40,25 @@ class SearchController extends Controller
             $query->where("music_age", $music_age);
         }
         
+        // 「投稿が新しい順」が選択されていれば
+        if($order == "created_at")
+        {
+            $query->orderBy("created_at", "desc");
+            // $songs = $query->orderBy("created_at", "desc")->paginate(5);
+        }elseif($order == "favorites_ranking")
+        // 「お気に入りが多い順」が選択されていれば、
+        {
+            // $songs = $query->withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(5);
+            $query->withCount("favorite_users")->orderBy("favorite_users_count", "desc");
+        }elseif($order == "comments_ranking")
+        // 「コメントが多い順」が選択されていれば、
+        {
+            $query->withCount("comments")->orderBy("comments_count", "desc");
+        }
+        
         // ページネーション
-        $songs = $query->orderBy("created_at", "desc")->paginate(5);
+        // $songs = $query->orderBy("created_at", "desc")->paginate(5);
+        $songs = $query->paginate(5);
         
         
         $favorite_music_age = \Auth::user()->favorite_music_age;
@@ -59,6 +77,7 @@ class SearchController extends Controller
         "song_name" => $song_name,
         "artist_name" => $artist_name,
         "music_age" => $music_age,
+        "order" => $order,
         "songs" => $songs,
         "recommended_songs" => $recommended_songs
         ];

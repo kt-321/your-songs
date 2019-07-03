@@ -1,7 +1,7 @@
 <ul class="song-cards list-unstyled">
     @foreach($songs as $song)
-        <li class="song-card mb-4 pb-3 px-2 border">
-            
+        <li class="song-card px-2 py-3 mb-5 border">
+            <!--曲タイトル-->
             <h3 class="song-name p-3 mb-4 text-center" style="word-wrap: break-word;"><i class="fas fa-music mr-3"></i>{!! nl2br(e($song->song_name)) !!}</h3>
             
             <div class="row m-0">
@@ -59,7 +59,7 @@
                 @if(Auth::id() == $song->user_id)
                 <span class="badge badge-success ml-1">自分の投稿</span>
                 @else
-                <h4>投稿者情報</h4>
+                <h4 class="user-info">投稿者情報</h4>
                 <div class="media">
                     <div class="media-left ml-3 mr-3">
                         <figure>
@@ -78,10 +78,16 @@
                     
                     <div class="media-body">
                         <ul class="list-unstyled px-3">
-                            @if($song->user->gender == 1)
-                            <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->age)) !!}代男性</li>
+                            @if($song->user->age)
+                            <p class="mb-0">{!! nl2br(e($song->user->age)) !!}代</p>
                             @else
-                            <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->age)) !!}代女性</li>
+                            <p class="mb-0"></p>
+                            @endif
+                            
+                            @if($song->user->gender == 1)
+                            <li class="mb-1" style="word-wrap: break-word;">男性</li>
+                            @elseif($song->user->gender ==2)
+                            <li class="mb-1" style="word-wrap: break-word;">女性</li>
                             @endif
                             
                             @if($song->user->favorite_artist)

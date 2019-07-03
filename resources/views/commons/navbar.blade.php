@@ -25,9 +25,9 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-trophy mr-1"></i>ランキング</a>
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li class="dropdown-item"><a href="{{ url("/favorites-ranking/all") }}"><i class="far fa-star mr-1"></i>お気に入り数順</a></li>
+                        <li class="dropdown-item"><a href="{{ url("favorites-ranking") }}"><i class="far fa-star mr-1"></i>お気に入り数順</a></li>
                         <li class="dropdown-divider"></li>
-                        <li class="dropdown-item"><a href="{{ url("/comments-ranking/all") }}"><i class="far fa-comments mr-1"></i>コメント数順</a></li>
+                        <li class="dropdown-item"><a href="{{ url("comments-ranking") }}"><i class="far fa-comments mr-1"></i>コメント数順</a></li>
                     </ul>
                 </li>  
                 

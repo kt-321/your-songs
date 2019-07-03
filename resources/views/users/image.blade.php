@@ -13,7 +13,7 @@
         @if(Auth::id() == $user->id)
         <div class="mt-2">
             <a href="{{ route("users.userImages", ["id" => $user->id]) }}" class="btn btn-primary btn-modify-profile">アイコンを変更</a>
-            <h1 class="text-center">{{ $user->name }}</h1>
+            <h2 class="text-center">{{ $user->name }}</h2>
         </div>
         @endif
     </figcaption>

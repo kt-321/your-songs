@@ -1,6 +1,6 @@
     <div class="form-group">
         <i class="fas fa-music mr-1"></i>
-        {!! Form::label("song_name", "曲名") !!}
+        {!! Form::label("song_name", "タイトル") !!}
         <span class="badge badge-pill badge-danger">必須</span>
         {!! Form::text("song_name", old("song_name"), ["class" => "form-control"]) !!}
     </div>
@@ -14,7 +14,7 @@
     
     <div class="form-group">
         <i class="fas fa-history mr-1"></i>
-        {!! Form::label("music_age", "曲の年代") !!}
+        {!! Form::label("music_age", "年代") !!}
         <span class="badge badge-pill badge-danger">必須</span>
            {{ Form::select("music_age", [1970 => "1970年代", 1980 => "1980年代", 1990 => "1990年代", 2000 => "2000年代", 2010 => "2010年代"],old("music_age"), ["class" => "form-control", "placeholder" => "－"]) }}
     </div>     

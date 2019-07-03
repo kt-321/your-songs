@@ -3,9 +3,8 @@
 @section("content")
     <!--曲情報-->
     <section class="song-details mb-5">
-        <h1 class="text-center" style="word-wrap: break-word;"><i class="fas fa-music mr-3"></i>{{ $song->song_name }}</h1>
-        <div class="row">
-            <!--<div class="col-sm-5 text-center">-->
+        <h3 class="text-center mb-3" style="word-wrap: break-word;"><i class="fas fa-music mr-3"></i>{{ $song->song_name }}</h3>
+        <div class="row mb-3">
             <div class="col-md-5 text-center">
                 <!--曲画像-->
                 <figure>
@@ -26,13 +25,12 @@
                 </figure>
             </div>
         
-            <!--<div class="col-sm-7">-->
             <div class="col-md-7">
                 <ul class="list-unstyled px-3">
-                    <li class="mb-0" style="word-wrap: break-word;"><i class="fas fa-guitar mr-1"></i>アーティスト：{!! nl2br(e($song->artist_name)) !!}</li>
-                    <li class="mb-0" style="word-wrap: break-word;"><i class="fas fa-history mr-1"></i>曲の年代：{!! nl2br(e($song->music_age)) !!}年代</li>
-                    <li class="mb-1" style="word-wrap: break-word;">
-                        <div>
+                    <li class="mb-2" style="word-wrap: break-word;"><i class="fas fa-guitar mr-1"></i>アーティスト：{!! nl2br(e($song->artist_name)) !!}</li>
+                    <li class="mb-2" style="word-wrap: break-word;"><i class="fas fa-history mr-1"></i>曲の年代：{!! nl2br(e($song->music_age)) !!}年代</li>
+                    <li class="mb-2" style="word-wrap: break-word;">
+                        <div class="mb-1">
                             <i class="far fa-comment-dots mr-1"></i>説明
                         </div>
                         
@@ -43,7 +41,7 @@
                     
                     @if($song->video_url)
                     <li class="mb-0 text-center" style="word-wrap: break-word;">
-                        <div class="text-left"><i class="fab fa-youtube mr-1"></i>映像</div>
+                        <div class="text-left mb-1"><i class="fab fa-youtube mr-1"></i>映像</div>
                         <iframe class="song-video" width="560" height="315" src="https://www.youtube.com/embed/{!! nl2br(e($song->video_url)) !!}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>           
                     </li>
                     @else
@@ -57,7 +55,7 @@
                     <span class="badge badge-success ml-1">自分の投稿</span>
                     
                     @else
-                    <h3>投稿者情報</h3>
+                    <h4 class="user-info">投稿者情報</h4>
                     <div class="media">
                         <div class="media-left ml-3 mr-3">
                             <figure>
@@ -136,7 +134,6 @@
                 <ul class="list-unstyled">
                 @foreach($comments as $comment)
                     <li class = "mb-2">
-                        <!--<div class="comment-display row ml-5">-->
                         <div class="d-flex">
                                 <figure class="ml-3 mr-4 my-auto">
                                     @if($comment->user->image_url)
@@ -148,7 +145,7 @@
                                     @endif 
                                     <figcaption class="text-center m-0">
                                         <a style="font-size: 15px;" href="{{ route("users.show", ["id" => $comment->user->id]) }}">{{ $comment->user->name }}</a>
-                                    </figcaption>z
+                                    </figcaption>
                                 </figure>
                                 
                                 <div class="balloon1-left ml-3 my-auto">
