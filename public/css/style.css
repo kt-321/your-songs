@@ -1,3 +1,8 @@
+.navbar{
+  background: #003366;
+}
+
+
 body{
     background-color: #eeeeee;    
 }
@@ -161,13 +166,13 @@ footer {
   padding: 0;
 }
 
-h1 {
+h1.page-title {
   position: relative;
   margin: 0 100px 20px;
   padding-bottom: 10px;
 }
 
-h1:after {
+h1.page-title:after {
   content: "";
   position: absolute;
   left: 0;

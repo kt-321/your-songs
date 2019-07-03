@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<!--<nav class="navbar navbar-expand-sm navbar-dark bg-dark">-->
+<nav class="navbar navbar-expand-sm navbar-dark">
     @if (Auth::check())
     <a class="navbar-brand" href="/home">YourSongs</a>
     @else

@@ -9,16 +9,8 @@ use App\Song;
 
 class UsersController extends Controller
 {
-    // public function index()
     public function index(Request $request)
     {
-        // $users = User::orderBy("id", "desc")->paginate(10);
-        
-        // return view("users.index", [
-        //     "users" => $users,    
-        // ]);
-        
-        
         // 値を取得
         $name = $request->input("name");
         $age = $request->input("age");
@@ -27,12 +19,7 @@ class UsersController extends Controller
         // 検索QUERY
         $query = User::query();
         
-        // if(!empty($keyword))
-        // {
-        //     $query->where("song_name", "like", "%".$keyword. "%")->orwhere("artist_name", "like", "%".$keyword. "%");
-        // }
-        
-        // もし「ユーザー名」があれば
+        // もし「名前」があれば
         if(!empty($name))
         {
             $query->where("name", "like", "%".$name. "%");
@@ -52,15 +39,25 @@ class UsersController extends Controller
         
         // ページネーション
         $users = $query->orderBy("created_at", "desc")->paginate(10);
+        
+        $favorite_music_age = \Auth::user()->favorite_music_age;
+        $favorite_artist = \Auth::user()->favorite_artist;
+        
+        // 「好きな曲の年代がログイン中ユーザーのそれと一致」または「好きなアーティストがログイン中ユーザーのそれと部分一致」
+        // であるユーザーをログイン中ユーザーへの「音楽の趣味が合いそうなユーザー」とする。
+        $recommended_users = User::where("favorite_music_age", $favorite_music_age)
+        ->orWhere("favorite_artist", "like", "%".$favorite_artist. "%")
+        ->inRandomOrder()
+        ->limit(12)
+        ->get();
     
-         $data = [
+        $data = [
         "name" => $name,
         "age" => $age,
         "gender" => $gender,
         "users" => $users,
+        "recommended_users" => $recommended_users,
         ];
-        
-        // $data += $this->counts($user);
         
         return view("users.index", $data);
     }

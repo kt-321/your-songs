@@ -13,14 +13,14 @@
          @include("commons.navbar")
         
         <header>
-            <button type="button" onclick=history.back()>戻る</button> 
+            <!--<button type="button" onclick=history.back()>戻る</button> -->
         </header>
         
         <div class="container p-4">
             @include("commons.error_messages")
             
             <!--ページタイトル-->
-            <h1 class="text-center"><i class="fas fa-music mr-3"></i>曲を検索</h1>
+            <h1 class="mb-4 text-center"><i class="fas fa-music mr-3"></i>曲を検索</h1>
             
             <!--検索フォーム-->
             <form class="px-3">
@@ -70,7 +70,7 @@
                 <div class="form-group">
                     <div class="row m-0">
                         <div class="col-sm-3 my-auto">
-                            <label class="form-label m-0"><i class="fas fa-history mr-1"></i>並び替え</label>
+                            <label class="form-label m-0"><i class="fas fa-sort-amount-down mr-1"></i>並び替え</label>
                         </div>
                         
                         <div class="col-sm-4">
@@ -256,7 +256,7 @@
                 
                 <!--おすすめ曲-->
                 <!--@if(count($recommended_songs) > 0)-->
-                <div id="example" class="mb-5">
+                <div id="recommended-songs" class="mb-5">
                     <span class="badge badge-pill badge-success mb-2">あなたへのおすすめ曲</span>
                     <carousel :per-page-custom="[[0, 1], [768, 2], [992, 3]]" :autoplay="true" :loop="true" :speed=3000 :navigation-enabled="true" :pagination-enabled="false">
                         @foreach($recommended_songs as $recommended_song)
@@ -264,9 +264,9 @@
                             <a href="{{ url("songs/{$recommended_song->id}") }}" class="text-dark">
                                 <figure>
                                     @if($recommended_song->image_url)
-                                        <img src="{{ $recommended_song->image_url }}" style="width:100px; height:100px;" class="img-thumbnail">
+                                        <img src="{{ $recommended_song->image_url }}" style="width:75px; height:75px;" class="img-thumbnail">
                                     @else
-                                        <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/song.jpeg" style="width:100px; height:100px;" class="img-thumbnail">
+                                        <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/song.jpeg" style="width:75px; height:75px;" class="img-thumbnail">
                                     @endif
                                 
                                     <figcaption>

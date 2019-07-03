@@ -11,13 +11,13 @@
     <body>
         @include("commons.navbar")
         <header>
-            <button type="button" onclick=history.back()>戻る</button> 
+            <!--<button type="button" onclick=history.back()>戻る</button> -->
         </header>
          
         <div class="container p-4">
             @include("commons.error_messages")
             
-            <h1 class="mb-4 text-center"><i class="far fa-lightbulb mr-1"></i>新しく投稿された曲</h1>
+            <h1 class="page-title mb-4 text-center"><i class="far fa-lightbulb mr-1"></i>新しく投稿された曲</h1>
             
             <form class="px-3">
                 <div class="form-group">
