@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdateUserRequest;
 
 use App\User;
 use App\Song;
@@ -62,9 +63,8 @@ class UsersController extends Controller
         return view("users.index", $data);
     }
     
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::find($id);
         $songs = $user->songs()->orderBy("created_at", "desc")->paginate(10);
         
         $data = [
@@ -77,27 +77,13 @@ class UsersController extends Controller
         return view("users.show", $data);
     }
     
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
-        
         return view("users.edit", ["user" => $user]);
     }
     
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, User $user)
     {   
-        $request->validate([
-            "name" => "required|string|max:15",
-            "email" => "required|string|email|max:30|unique:users,email,$id",
-            "age" => "nullable|integer",
-            "gender" => "nullable|string",
-            "favorite_music_age" => "nullable|integer",
-            "favorite_artist" => "nullable|string|max:20",
-            "comment" => "nullable|string|max:150"
-        ]);
-        
-        $user = User::find($id);
-        
         $user->name = $request->name;
         $user->email = $request->email;
         $user->age = $request->age;
@@ -108,7 +94,7 @@ class UsersController extends Controller
         
         $user->save();
         
-        return redirect()->route("users.show", ["id" => $user->id]);
+        return redirect("users/".$user->id);
     }
     
     public function timeline()

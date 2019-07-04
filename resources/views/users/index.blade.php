@@ -216,7 +216,7 @@
                 <!--@endif-->
         </div>
                 
-                <footer class="bg-dark mt-5">
+                <footer class="mt-5">
                     <small>&copy; 2019 YourSongs</small>
                 </footer>
                 

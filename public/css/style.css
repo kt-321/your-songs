@@ -2,9 +2,33 @@
   background: #003366;
 }
 
-
 body{
     background-color: #eeeeee;    
+}
+
+footer{
+  background: #003366;
+}
+
+.dropdown-menu{
+  background: #003366;
+  border: white;
+}
+
+.dropdown-menu a{
+  color: rgba(240,240,240,.9);
+}
+
+/*.dropdown-menu a:hover{*/
+/*  color: red;*/
+/*}*/
+
+/*.dropdown-item{*/
+/*  color: white;*/
+/*}*/
+
+.dropdown-item:hover{
+  background-color: #003366;
 }
 
 .container{
@@ -81,8 +105,6 @@ footer {
   background-color: #fff;
   color: black;
 }
-
-
 
 /*コメント*/
 .balloon1-left {
