@@ -12,7 +12,7 @@
         @include("commons.navbar")
         
         <header>
-            <button type="button" onclick=history.back()>戻る</button> 
+            <!--<button type="button" onclick=history.back()>戻る</button> -->
         </header>
         
         <div class="container p-4">
@@ -33,18 +33,23 @@
                     
                     <ul class="status-list text-center px-3 py-3" style="list-style: none; display: table; margin: auto;">
                         <li style="padding: 0 10px; display: table-cell;">
+                            <div class="status-label">性別</div>
                             @if($user->gender == 1)
-                            <div class="status-label">性別</div>
                             <div class="status-value">男性 </div>
-                            @else
-                            <div class="status-label">性別</div>
+                            @elseif($user->gender == 2)
                             <div class="status-value">女性</div>
+                            @else
+                            <div class="status-value">？</div>
                             @endif
                         </li>
                         
                         <li class="pl-8 ml-8"style="border-left: solid 1px #333; padding: 0 10px; display: table-cell;">
                             <div class="status-label">年齢</div>
+                            @if($user->age)
                             <div class="status-value">{{ $user->age }}代</div>
+                            @else
+                            <div>？</div>
+                            @endif
                         </li>
                         
                         @if($user->favorite_music_age)

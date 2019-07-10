@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+    <div class="row m-0">
+        <div class="col-md-8 offset-md-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
+                <div class="panel-heading mb-4">
+                    <h1 class="mb-4 text-center"><i class="fas fa-cog mr-1"></i>パスワードの再設定</h1>
+                </div>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -17,24 +18,18 @@
                     <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} text-center">
+                            <label for="email">登録したメールアドレスを入力してください。</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-8 offset-md-2">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div class="text-center">
                                 <button type="submit" class="btn btn-primary">
-                                    Send Password Reset Link
+                                    メールを送る
                                 </button>
                             </div>
                         </div>
@@ -43,5 +38,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection

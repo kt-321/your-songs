@@ -24,6 +24,15 @@
 // // Route::get("password/reset", "Auth\ResetPasswordController@showResetForm")->name("password.reset");
 // Route::post("password/reset", "Auth\ResetPasswordController@reset");
 
+// Route::get('password/email','Auth\PasswordController@getEmail');
+// Route::post('password/email', 'Auth\PasswordController@postEmail');
+
+Route::get("password/reset", "Auth\ForgotPasswordController@showLinkRequestForm")->name("password.request");
+Route::post("password/email", "Auth\ForgotPasswordController@sendResetLinkEmail")->name("password.email");
+
+Route::get("password/reset/{token}", "Auth\ResetPasswordController@showResetForm")->name("password.reset");
+Route::post("password/reset", "Auth\ResetPasswordController@reset")->name("password.update");
+
 // 未ログイン時
 Route::group(["middleware" => "guest"], function(){
     // 未ログイン時のトップページ
@@ -48,8 +57,7 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
     // ログアウト
     Route::get("logout", "Auth\LoginController@logout")->name("logout.get");
     
-    // Route::get('password/email','Auth\PasswordController@getEmail');
-    // Route::post('password/email', 'Auth\PasswordController@postEmail');
+   
     
     Route::resource("users", "UsersController", ["only" => ["index", "show", "edit", "update"]]);
     

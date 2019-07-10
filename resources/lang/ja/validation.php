@@ -109,6 +109,8 @@ return [
         "name" => "名前",
         "email" => "メールアドレス",
         "password" => "パスワード",
+        
+        "image_url" => "画像",
         // "age" => "年齢",
         // "gender" => "性別",
         // "favorite_music_age" => "好きな音楽の年代",
@@ -118,7 +120,6 @@ return [
         // "artist_name" => "アーティスト名",
         // "music_age" => "曲の年代",
         // "description" => "曲の説明",
-        // "image_url" => "画像",
         // "video_url" => "映像",
     ],
 ];

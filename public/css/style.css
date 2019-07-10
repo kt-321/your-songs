@@ -10,22 +10,22 @@ footer{
   background: #003366;
 }
 
+.circle{
+  border: thin solid rgba(0,153,255,.8);
+}
+
 .dropdown-menu{
   background: #003366;
-  border: white;
+  border: thin solid rgba(0,153,255,.8);
 }
 
 .dropdown-menu a{
   color: rgba(240,240,240,.9);
 }
 
-/*.dropdown-menu a:hover{*/
-/*  color: red;*/
-/*}*/
-
-/*.dropdown-item{*/
-/*  color: white;*/
-/*}*/
+.dropdown-divider{
+  border-top: thin solid rgba(0,153,255,.8);
+}
 
 .dropdown-item:hover{
   background-color: #003366;
@@ -64,6 +64,31 @@ footer{
 .favorite-orange{
     color: #fecb81;
 }
+
+.circle1{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: thin solid rgba(0,153,255,.8);
+}
+
+.circle2{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: thin solid rgba(0,153,255,.8);
+}
+
+.circle4{
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: thin solid rgba(0,153,255,.8);
+}
+
+/*.circle{*/
+/*  border: thin solid rgba(0,153,255,.8);*/
+/*}*/
 
 footer {
     background-color: #000080;
@@ -225,14 +250,13 @@ h1.page-title:after {
     border-left: solid 5px #ffaf58;/*左線（実線 太さ 色）
 }*/
 
-h3{
+h3.song-name{
     padding: 0.5em;/*文字周りの余白*/
     color: #494949;/*文字色*/
     background: #fffaf4;/*背景色*/
     border-left: solid 5px #ffaf58;/*左線（実線 太さ 色）*/
 }
 
-/*h4#user-info{*/
 h4.user-info{
   padding: 0.25em 0.5em;/*上下 左右の余白*/
   color: #494949;/*文字色*/
@@ -423,7 +447,6 @@ h4#profile{
       padding: 0;
     }
 }
-
 
 
 /*　画面サイズが1024px以上のとき　*/

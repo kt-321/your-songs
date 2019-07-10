@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @section("content")
-    <div class="text-center">
+    <div class="text-center mb-4">
         <h1><i class="fas fa-sign-in-alt mr-2"></i>ログイン</h1>
     </div>
    
@@ -22,7 +22,8 @@
                 {!! Form::submit('ログイン', ['class' => 'btn btn-primary btn-block']) !!}
             {!! Form::close() !!}
             
-            <p class="mt-2">未登録の方は <a href="{{ route("signup.get") }}">こちら</a>から新規登録できます。</p>
+            <p class="mt-2 mb-0"><a href="{{ url("signup") }}">新規登録</a></p>
+            <p class="mt-2 mb-0"><a href="{{ url("password/reset") }}">パスワードを忘れた場合</a></p>
         </div>
     </div>
 @endsection

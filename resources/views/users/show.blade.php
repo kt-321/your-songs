@@ -72,7 +72,7 @@
     </div>     
     
     <!--フォローボタンまたはフォロー解除ボタン-->
-    <div class="buttons-folloe-unfollow mb-3 text-center">
+    <div class="buttons-follow-unfollow mb-3 text-center">
         @include("user_follow.follow_button", ["user" => $user])
     </div>
    

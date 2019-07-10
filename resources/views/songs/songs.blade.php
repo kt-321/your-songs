@@ -64,11 +64,13 @@
                     <div class="media-left ml-3 mr-3">
                         <figure>
                             @if($song->user->image_url)
-                                <img src="{{ $song->user->image_url }}" style="width: 50px; height: 50px" alt="画像"> 
+                                <img src="{{ $song->user->image_url }}" alt="画像" class="circle2"> 
                             @elseif($song->user->gender == 1)
-                                <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="画像" style="width: 50px; height: 50px">
+                                <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="画像" class="circle2">
+                            @elseif($song->user->gender == 2)
+                                <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="画像" class="circle2"> 
                             @else
-                                <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="画像" style="width: 50px; height: 50px">
+                                <img src="https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/qustion-mark.jpeg" alt="画像" class="circle2">
                             @endif
                             <figcaption class="text-center m-0">
                                 <a href="{{ route("users.show", ["id" => $song->user->id]) }}">{{ $song->user->name }}</a>
@@ -133,7 +135,7 @@
                     <a href="{{ route("songs.edit", ["id" => $song->id]) }}" class="btn btn-light mr-3 px-2 py-1">編集</a>
                 
                     {!! Form::open(["route" => ["songs.destroy", "$song->id"], "method" => "delete" ]) !!}
-                        {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm px-2 py-1"]) !!}
+                        {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm px-2 py-1", "onClick"=>"delete_alert();return false;"]) !!}
                     {!! Form::close() !!}
                 @endif
             </div>

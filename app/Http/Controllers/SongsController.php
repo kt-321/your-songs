@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateSongRequest;
+use App\Http\Requests\UpdateSongRequest;
 
 use Illuminate\Support\Facades\Storage;
 
 use App\User;
-
 use App\Song;
 
 class SongsController extends Controller
@@ -43,17 +44,9 @@ class SongsController extends Controller
         return view("songs.create", ["user" => $user]);
     }
     
-    public function store(Request $request)
+    public function store(CreateSongRequest $request)
     {   
         $user = \Auth::user();
-        
-        $this->validate($request,[
-            "song_name" => "required|max:15",
-            "artist_name" => "required|max:15",
-            "music_age" => "required|integer",
-            "description" => "nullable|max:200",
-            "video_url" => "nullable|string|max:200",
-        ]);
         
         $request->user()->songs()->create([
             "song_name" => $request->song_name,
@@ -63,12 +56,11 @@ class SongsController extends Controller
             "video_url" => $request->video_url,
         ]);
         
-        return redirect()->route("users.show", ['id' => $user->id]);
+        return redirect("users/".$user->id);
     }
     
-    public function show($id)
+    public function show(Song $song)
     {
-        $song = Song::find($id);
         $comments = $song->comments()->orderBy("created_at", "desc")->paginate(10);
         $user = \Auth::user();
         
@@ -79,18 +71,16 @@ class SongsController extends Controller
         ]);
     }
     
-    public function edit($id)
+    public function edit(Song $song)
     {
-        $song = Song::find($id);
-        
-        return view("songs.edit",[
+       return view("songs.edit",[
             "song" => $song,
         ]);
     }
     
-    public function update(Request $request, $id)
+    public function update(UpdateSongRequest $request, Song $song)
     {
-        $song = Song::find($id);
+        // $song = Song::find($id);
         
         $song->song_name = $request->song_name;
         $song->artist_name = $request->artist_name;
@@ -100,19 +90,18 @@ class SongsController extends Controller
         
         $song->save();
         
-        return redirect()->route('songs.show', ['id' => $song->id]);
+        return redirect("songs/".$song->id);
     }
     
-    public function destroy($id)
+    public function destroy(Song $song)
     {  
-        $user = User::find(auth()->id());
-        $song = Song::find($id);
+        $user = \Auth::user();
         
-        if(\Auth::id() === $song->user_id){
+        if($user->id=== $song->user_id){
             $song->delete();
         }
         
-        return redirect()->route('users.show', ['id' => $user->id]);
+        return redirect("users/". $user->id);
     }
     
     public function favoritesRanking(Request $request)
@@ -131,7 +120,6 @@ class SongsController extends Controller
         
         // ページネーション
         // $songs = $query->orderBy("created_at", "desc")->paginate(5);
-        
         // $songs = Song::withCount("favorite_users")->where("music_age", $id)->orderBy("favorite_users_count", "desc")->paginate(20);
         $songs = $query->withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(5);
         

@@ -98,13 +98,13 @@
                             <div class="media-left my-auto">
                                 <figure class="text-center m-0">
                                     @if($user->image_url)
-                                        <img src="{{ $user->image_url }}" alt="アイコン" class="img-thumbnail" style="width: 50px; height: 50px"> 
+                                        <img src="{{ $user->image_url }}" alt="アイコン" class="circle2"> 
                                     @elseif($user->gender == 1)
-                                        <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="アイコン" class="img-thumbnail" style="width: 50px; height: 50px">
+                                        <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="アイコン" class="circle2">
                                     @elseif($user->gender == 2)
-                                        <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="アイコン" class="img-thumbnail" style="width: 50px; height: 50px">
+                                        <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="アイコン" class="circle2">
                                     @else    
-                                        <img src="https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/qustion-mark.jpeg" alt="アイコン" class="img-thumbnail" style="width: 50px; height: 50px;">
+                                        <img src="https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/qustion-mark.jpeg" alt="アイコン" class="circle2">
                                     @endif
                                     <figcaption class="text-center m-0">
                                         <a href="{{ route("users.show", ["id" => $user->id]) }}">{{ $user->name }}</a>
@@ -174,13 +174,13 @@
                             <a href="{{ url("songs/{$recommended_user->id}") }}" class="text-dark">
                             <figure class="text-center pt-2 m-0">
                                 @if($recommended_user->image_url)
-                                    <img src="{{ $recommended_user->image_url }}" alt="アイコン" class="img-thumbnail" style="width: 75px; height: 75px"> 
+                                    <img src="{{ $recommended_user->image_url }}" alt="アイコン" class="circle4"> 
                                 @elseif($recommended_user->gender == 1)
-                                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="アイコン" class="img-thumbnail" style="width: 75px; height: 75px">
+                                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="アイコン" class="circle4">
                                 @elseif($recommended_user->gender == 2)
-                                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="アイコン" class="img-thumbnail" style="width: 75px; height: 75px">
+                                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="アイコン" class="circle4">
                                 @else    
-                                    <img src="https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/qustion-mark.jpeg" alt="アイコン" class="img-thumbnail" style="width: 75px; height: 75px;">
+                                    <img src="https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/qustion-mark.jpeg" alt="アイコン" class="circle4">
                                 @endif
                                 <figcaption class="text-center m-0">
                                     <a href="{{ route("users.show", ["id" => $recommended_user->id]) }}">{{ $recommended_user->name }}</a>

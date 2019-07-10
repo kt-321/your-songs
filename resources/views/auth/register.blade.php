@@ -1,7 +1,9 @@
 @extends("layouts.app")
 
 @section("content")
-    <h1 class="text-center mb-4"><i class="fas fa-user-plus mr-2"></i>新規登録</h1>
+    <div class="text-center mb-4">
+        <h1><i class="fas fa-user-plus mr-2"></i>新規登録</h1>
+    </div>
     
     <div class="row">
         <div class="col-sm-6 offset-sm-3">
