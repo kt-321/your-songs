@@ -130,7 +130,7 @@
                 <!--管理者としてログインしている場合に限りアカウントを削除できる-->
                 @if(Auth::user()->role == 5 && Auth::id() !== $song->user->id)
                     <div class="buttons-delete-user mb-3 text-center">
-                        <a class="btn btn-danger" href="/delete/{{ $song->id}}">この曲を削除</a>
+                        <a class="btn btn-danger" href="/delete/{{ $song->id}}" >この曲を削除</a>
                     </div>
                 @endif
             </section>
@@ -178,7 +178,7 @@
                                         <li class="mr-3">
                                             @if(Auth::id() == $comment->user_id)
                                             {!! Form::open(["route" => ["comments.destroy", $comment->id], "method" => "delete"]) !!}
-                                                {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm"]) !!}
+                                                {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm", "onClick"=>"delete_alert();return false;"]) !!}
                                             {!! Form::close() !!}
                                             @endif
                                         </li>
