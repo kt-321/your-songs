@@ -18,7 +18,7 @@
         <div class="container p-4">
             @include("commons.error_messages")
 
-            <h1 class="text-center mb-4">『{{ $song->song_name }}』の曲情報編集ページ</h1>
+            <h1 class="text-center mb-4 page-title">『{{ $song->song_name }}』の編集</h1>
             
             <div class="row">
                 <div class="edit-form col-sm-6 offset-sm-3">

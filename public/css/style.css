@@ -2,12 +2,56 @@
   background: #003366;
 }
 
+ul.pagination li{
+  font-size: 10px;
+}
+
+ul.nav-tabs li{
+  font-size:5px;
+  writing-mode: vertical-rl;
+}
+
+ul.nav-tabs span{
+  writing-mode: horizontal-tb;
+}
+
 body{
     background-color: #eeeeee;    
 }
 
 footer{
   background: #003366;
+}
+
+.btn-unfollow{
+  padding: 3px 2px;
+}
+
+.btn-follow{
+  padding: 3px 2px;
+}
+
+.btn-profile{
+  padding: 3px 2px;
+}
+
+.btn-facebook{
+  background-color: #0000FF;
+  color: white;
+}
+.btn-facebook:hover{
+  background-color: #5D99FF;
+  color: white;
+}
+
+.btn-github{
+  background-color: #555555;
+  color : white;
+}
+
+.btn-github:hover{
+  background-color: #999999;
+  color : white;
 }
 
 .circle{
@@ -86,9 +130,6 @@ footer{
   border: thin solid rgba(0,153,255,.8);
 }
 
-/*.circle{*/
-/*  border: thin solid rgba(0,153,255,.8);*/
-/*}*/
 
 footer {
     background-color: #000080;
@@ -105,8 +146,6 @@ footer {
 }
 
 .btn-favorite{
-    /*background-color: #ffd700;*/
-    /*border: 1px solid #000099;*/
     border: 2px solid #ffd700;
     font-weight: bold;
 }
@@ -132,26 +171,55 @@ footer {
 }
 
 /*コメント*/
-.balloon1-left {
-  position: relative;
-  display: inline-block;
-  margin: 1.5em 0 1.5em 15px;
-  padding: 7px 10px;
-  min-width: 100px;
-  max-width: 200px;
-  color: #555;
-  font-size: 16px;
-  background: #e0edff;
+.balloon1-left{
+    position:relative;
+    /*width:500px;*/
+    min-width: 100px;
+    max-width: 200px;
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:left;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
 }
 
-.balloon1-left:before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -30px;
-  margin-top: -15px;
-  border: 15px solid transparent;
-  border-right: 15px solid #e0edff;
+.balloon1-left:after,.balloon1-left:before{
+    border: solid transparent;
+    content:'';
+    height:0;
+    width:0;
+    pointer-events:none;
+    position:absolute;
+    right:100%;
+    top:50%;
+}
+
+.balloon1-left:after{
+    border-color: rgba(255, 255, 255, 0);
+    border-top-width:10px;
+    border-bottom-width:10px;
+    border-left-width:10px;
+    border-right-width:10px;
+    margin-top: -10px;
+    border-right-color:#FFFFFF;
+}
+
+.balloon1-left:before{
+    border-color: rgba(74, 202, 255, 0);
+    border-top-width:12px;
+    border-bottom-width:12px;
+    border-left-width:12px;
+    border-right-width:12px;
+    margin-top: -12px;
+    margin-right: 2px;
+    border-right-color:#4ACAFF;
 }
 
 .balloon1-left p {
@@ -159,115 +227,182 @@ footer {
   padding: 0;
 }
 
-/*自己紹介*/
-.balloon2 {
-  position: relative;
-  display: inline-block;
-  margin: 1.5em 0 1.5em 15px;
-  padding: 7px 10px;
-  min-width: 150px;
-  max-width: 300px;
-  color: #555;
-  font-size: 16px;
-  background: #e0edff;
+.text-area{
+  word-wrap: break-word;
 }
 
-.balloon2 p {
+.self-introduction1{
+    position:relative;
+    /*width:500px;*/
+    min-width: 100px;
+    max-width: 200px;
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:center;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+}
+
+.self-introduction1 p{
   margin: 0;
   padding: 0;
 }
 
 /*曲の説明*/
-.balloon3 {
-  position: relative;
-  display: inline-block;
-  margin: 1.5em 0 1.5em 15px;
-  padding: 7px 10px;
-  min-width: 150px;
-  max-width: 250px;
-  color: #555;
-  font-size: 16px;
-  background: #e0edff;
+ .balloon3{
+    position:relative;
+    /*width:500px;*/
+    min-width: 150px;
+    max-width: 250px;
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:left;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    }
+    
+  .balloon3 p{
+    margin: 0;
+    padding: 0;
+  }
+
+.balloon4{
+    position:relative;
+    /*width:500px;*/
+    min-width: 150px;
+    max-width: 300px;
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:left;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    }
+    
+  .balloon4 p{
+      margin: 0;
+      padding: 0;
+    }
+    
+  .song-card{
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    border:2px solid #FF6699;
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    }
+    
+  .song-card p{
+      margin: 0;
+      padding: 0;
+    }
+    
+  .user-card{
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    border:1px solid #9966FF;
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    }
+    
+  .user-card p{
+      margin: 0;
+      padding: 0;
+    }
+  
+  .user-information1{
+    background:#FFFFFF;
+    padding:10px 6px;
+    text-align:left;
+    border:1px solid #9966FF;
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    }
+    
+    .user-information1 p{
+      margin: 0;
+      padding: 0;
+    }
+    
+  .user-information{
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    border:1px solid #9966FF;
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    }
+    
+  .user-information p{
+      margin: 0;
+      padding: 0;
+    }
+
+
+.page-title {
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ccc;
 }
 
-.balloon3 p {
-  margin: 0;
-  padding: 0;
-}
 
-/*曲詳細画面での曲の説明*/
-.balloon4 {
-  position: relative;
-  display: inline-block;
-  margin: 1.5em 0 1.5em 15px;
-  padding: 7px 10px;
-  min-width: 150px;
-  max-width: 300px;
-  color: #555;
-  font-size: 16px;
-  background: #e0edff;
-}
-
-.balloon4 p {
-  margin: 0;
-  padding: 0;
-}
-
-h1.page-title {
-  position: relative;
-  margin: 0 100px 20px;
-  padding-bottom: 10px;
-}
-
-h1.page-title:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 7px;
-  background: -webkit-repeating-linear-gradient(-45deg, #6ad1c8, #6ad1c8 2px, #fff 2px, #fff 4px);
-  background: repeating-linear-gradient(-45deg, #6ad1c8, #6ad1c8 2px, #fff 2px, #fff 4px);
-}
-
-/*h1:before {*/
-/*  font-family: "Font Awesome 5 Free";*/
-/*  content: "\f303";*/
-/*  position: absolute;*/
-/*  padding: 0em;*/
-/*  color: white;*/
-/*  font-weight: normal;*/
-/*  left: -1.35em;*/
-/*  top: 50%;*/
-/*  -webkit-transform: translateY(-50%);*/
-/*  transform: translateY(-50%);*/
-/*}*/
-
-/*h3{
-    padding: 0.5em;/*文字周りの余白
-    color: #494949;/*文字色
-    background: #fffaf4;/*背景色
-    border-left: solid 5px #ffaf58;/*左線（実線 太さ 色）
-}*/
-
-h3.song-name{
+.song-name{
     padding: 0.5em;/*文字周りの余白*/
     color: #494949;/*文字色*/
     background: #fffaf4;/*背景色*/
     border-left: solid 5px #ffaf58;/*左線（実線 太さ 色）*/
 }
 
-h4.user-info{
+.user-information-title{
   padding: 0.25em 0.5em;/*上下 左右の余白*/
   color: #494949;/*文字色*/
   background: transparent;/*背景透明に*/
   border-left: solid 5px #7db4e6;/*左線*/
 }
 
-h4#profile{
-}
- /*　画面サイズが480pxから768pxのとき　*/
-@media screen and (min-width:480px) { 
+/*画面サイズが480pxから768pxのとき*/
+@media screen and (min-width:480px){ 
+    a.nav-link{
+      font-size:12px;
+    }
+    
+    ul.pagination li{
+    font-size: 10px;
+    }
+    
+    ul.nav-tabs li{
+      font-size:8px;
+      writing-mode: horizontal-tb;
+    }
+    
+    ul.nav-tabs span{
+      writing-mode: horizontal-tb;
+    }
    
     .song-video { 
         width: 200px;
@@ -275,174 +410,282 @@ h4#profile{
     }
     
     /*コメント*/
-     .balloon1-left {
-        position: relative;
-        display: inline-block;
-        margin: 1.5em 0 1.5em 15px;
-        padding: 7px 10px;
-        min-width: 120px;
-        max-width: 300px;
-        color: #555;
-        font-size: 16px;
-        background: #e0edff;
-    }    
-    
-    .balloon1-left:before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: -30px;
-        margin-top: -15px;
-        border: 15px solid transparent;
-        border-right: 15px solid #e0edff;
+    .balloon1-left{
+    position:relative;
+    display: inline-block;
+    min-width: 200px;
+    max-width: 300px;
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:left;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
     }
-         
-    .balloon1-left p {
-        margin: 0;
-        padding: 0;
+    
+    .balloon1-left:after,.balloon1-left:before{
+    border: solid transparent;
+    content:'';
+    height:0;
+    width:0;
+    pointer-events:none;
+    position:absolute;
+    right:100%;
+    top:50%;
+    }
+
+    .balloon1-left:after{
+    border-color: rgba(255, 255, 255, 0);
+    border-top-width:10px;
+    border-bottom-width:10px;
+    border-left-width:10px;
+    border-right-width:10px;
+    margin-top: -10px;
+    border-right-color:#FFFFFF;
+    }
+
+    .balloon1-left:before{
+    border-color: rgba(74, 202, 255, 0);
+    border-top-width:12px;
+    border-bottom-width:12px;
+    border-left-width:12px;
+    border-right-width:12px;
+    margin-top: -12px;
+    margin-right: 2px;
+    border-right-color:#4ACAFF;
     }
     
     /*自己紹介*/
-    .balloon2 {
-      position: relative;
-      display: inline-block;
-      margin: 1.5em 0 1.5em 15px;
-      padding: 7px 10px;
-      min-width: 150px;
-      max-width: 400px;
-      color: #555;
-      font-size: 16px;
-      background: #e0edff;
+    .self-introduction1{
+    position:relative;
+    /*width:500px;*/
+    min-width: 200px;
+    max-width: 300px;
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:center;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
     }
     
-    .balloon2 p {
+    .self-introduction1 p{
       margin: 0;
       padding: 0;
     }
     
     /*曲の説明*/
-    .balloon3 {
-      position: relative;
-      display: inline-block;
-      margin: 1.5em 0 1.5em 15px;
-      padding: 7px 10px;
-      min-width: 150px;
-      max-width: 400px;
-      color: #555;
-      font-size: 16px;
-      background: #e0edff;
+    .balloon3{
+    position:relative;
+    /*width:500px;*/
+    min-width: 150px;
+    max-width: 400px;
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:left;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
     }
     
-    .balloon3 p {
+  .balloon3 p{
       margin: 0;
       padding: 0;
     }
     
     /*曲詳細画面での曲の説明*/
-    .balloon4 {
-      position: relative;
-      display: inline-block;
-      margin: 1.5em 0 1.5em 15px;
-      padding: 7px 10px;
-      min-width: 150px;
-      max-width: 400px;
-      color: #555;
-      font-size: 16px;
-      background: #e0edff;
+    .balloon4{
+    position:relative;
+    /*width:500px;*/
+    min-width: 150px;
+    max-width: 400px;
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:left;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
     }
     
-    .balloon4 p {
+  .balloon4 p{
       margin: 0;
       padding: 0;
     }
 }
 
 
-/*　画面サイズが768pxから1024pxのとき　*/
-@media screen and (min-width:768px) and ( max-width:1024px) {
+/*　画面サイズが768pxから1024pxのとき*/
+@media screen and (min-width:768px) and (max-width:1024px) {
+    a.nav-link{
+      font-size:14px;
+    }
+  
+    ul.pagination li{
+    font-size: 15px;
+    }
+    
     .song-video {
         width: 300px;
         height: 200px;
     }
     
-    /*コメント*/
-    .balloon1-left {
-        position: relative;
-        display: inline-block;
-        margin: 1.5em 0 1.5em 15px;
-        padding: 7px 10px;
-        min-width: 120px;
-        max-width: 500px;
-        color: #555;
-        font-size: 16px;
-        background: #e0edff;
-    }    
-    
-    .balloon1-left:before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: -30px;
-        margin-top: -15px;
-        border: 15px solid transparent;
-        border-right: 15px solid #e0edff;
+    ul.nav-tabs li{
+      font-size:12px;
+      writing-mode: horizontal-tb;
     }
-         
-    .balloon1-left p {
-        margin: 0;
-        padding: 0;
+    
+    ul.nav-tabs span{
+      writing-mode: horizontal-tb;
+    }
+   
+    
+    /*コメント*/
+    .balloon1-left{
+    position:relative;
+    display: inline-block;
+    /*width:500px;*/
+    min-width: 200px;
+    max-width: 400px;
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:left;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    }
+    
+    .balloon1-left:after,.balloon1-left:before{
+    border: solid transparent;
+    content:'';
+    height:0;
+    width:0;
+    pointer-events:none;
+    position:absolute;
+    right:100%;
+    top:50%;
+    }
+
+    .balloon1-left:after{
+    border-color: rgba(255, 255, 255, 0);
+    border-top-width:10px;
+    border-bottom-width:10px;
+    border-left-width:10px;
+    border-right-width:10px;
+    margin-top: -10px;
+    border-right-color:#FFFFFF;
+    }
+
+    .balloon1-left:before{
+    border-color: rgba(74, 202, 255, 0);
+    border-top-width:12px;
+    border-bottom-width:12px;
+    border-left-width:12px;
+    border-right-width:12px;
+    margin-top: -12px;
+    margin-right: 2px;
+    border-right-color:#4ACAFF;
     }
     
     /*自己紹介*/
-    .balloon2 {
-      position: relative;
-      display: inline-block;
-      margin: 1.5em 0 1.5em 15px;
-      padding: 7px 10px;
-      min-width: 150px;
-      max-width: 500px;
-      color: #555;
-      font-size: 16px;
-      background: #e0edff;
+    .self-introduction1{
+    position:relative;
+    /*width:500px;*/
+    min-width: 300px;
+    max-width: 400px;
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:center;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
     }
     
-    .balloon2 p {
+    .self-introduction1 p{
       margin: 0;
       padding: 0;
     }
     
     /*曲の説明*/
-    .balloon3 {
-      position: relative;
-      display: inline-block;
-      margin: 1.5em 0 1.5em 15px;
-      padding: 7px 10px;
-      min-width: 150px;
-      max-width: 400px;
-      color: #555;
-      font-size: 16px;
-      background: #e0edff;
+ .balloon3{
+    position:relative;
+    /*width:500px;*/
+    min-width: 150px;
+    max-width: 400px;
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:left;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
     }
     
-    .balloon3 p {
+    .balloon3 p{
       margin: 0;
       padding: 0;
     }
     
     /*曲詳細画面での曲の説明*/
-    .balloon4 {
-      position: relative;
-      display: inline-block;
-      margin: 1.5em 0 1.5em 15px;
-      padding: 7px 10px;
-      min-width: 150px;
-      max-width: 370px;
-      color: #555;
-      font-size: 16px;
-      background: #e0edff;
+    .balloon4{
+    position:relative;
+    /*width:500px;*/
+    min-width: 150px;
+    max-width: 370px;
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:left;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
     }
     
-    .balloon4 p {
+  .balloon4 p{
       margin: 0;
       padding: 0;
     }
@@ -451,93 +694,190 @@ h4#profile{
 
 /*　画面サイズが1024px以上のとき　*/
 @media screen and (min-width:1024px) {
+    a.nav-link{
+      font-size:16px;
+    }
+    
+    ul.pagination li{
+    font-size: 18px;
+    }
     
     .song-video{
         width: 400px;
         height: 300px;
     }
     
-    /*コメント*/
-    .balloon1-left {
-        position: relative;
-        display: inline-block;
-        margin: 1.5em 0 1.5em 15px;
-        padding: 7px 10px;
-        min-width: 120px;
-        max-width: 600px;
-        color: #555;
-        font-size: 16px;
-        background: #e0edff;
-    }    
-    
-    .balloon1-left:before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: -30px;
-        margin-top: -15px;
-        border: 15px solid transparent;
-        border-right: 15px solid #e0edff;
+    ul.nav-tabs li{
+      font-size:16px;
+      writing-mode: horizontal-tb;
     }
-         
-    .balloon1-left p {
-        margin: 0;
-        padding: 0;
+    
+    ul.nav-tabs span{
+      writing-mode: horizontal-tb;
+    }
+   
+    
+    /*コメント*/
+    .balloon1-left{
+    position:relative;
+    display: inline-block;
+    /*width:500px;*/
+    min-width: 200px;
+    max-width: 500px;
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:left;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    }
+   
+    .balloon1-left:after,.balloon1-left:before{
+    border: solid transparent;
+    content:'';
+    height:0;
+    width:0;
+    pointer-events:none;
+    position:absolute;
+    right:100%;
+    top:50%;
+    }
+   
+    .balloon1-left:after{
+    border-color: rgba(255, 255, 255, 0);
+    border-top-width:10px;
+    border-bottom-width:10px;
+    border-left-width:10px;
+    border-right-width:10px;
+    margin-top: -10px;
+    border-right-color:#FFFFFF;
+    }
+    
+    .balloon1-left:before{
+    border-color: rgba(74, 202, 255, 0);
+    border-top-width:12px;
+    border-bottom-width:12px;
+    border-left-width:12px;
+    border-right-width:12px;
+    margin-top: -12px;
+    margin-right: 2px;
+    border-right-color:#4ACAFF;
     }
     
     /*自己紹介*/
-    .balloon2 {
-      position: relative;
-      display: inline-block;
-      margin: 1.5em 0 1.5em 15px;
-      padding: 7px 10px;
-      min-width: 150px;
-      max-width: 600px;
-      color: #555;
-      font-size: 16px;
-      background: #e0edff;
+    /*.balloon2 {*/
+    /*  position: relative;*/
+    /*  display: inline-block;*/
+    /*  margin: 1.5em 0 1.5em 15px;*/
+    /*  padding: 7px 10px;*/
+    /*  min-width: 150px;*/
+    /*  max-width: 600px;*/
+    /*  color: #555;*/
+    /*  font-size: 16px;*/
+    /*  background: #e0edff;*/
+    /*}*/
+    
+    /*.balloon2 p {*/
+    /*  margin: 0;*/
+    /*  padding: 0;*/
+    /*}*/
+    
+    .self-introduction1{
+    position:relative;
+    /*width:500px;*/
+    min-width: 400px;
+    max-width: 500px;
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:center;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
     }
     
-    .balloon2 p {
+    .self-introduction1 p{
       margin: 0;
       padding: 0;
     }
     
     /*曲の説明*/
-    .balloon3 {
-      position: relative;
-      display: inline-block;
-      margin: 1.5em 0 1.5em 15px;
-      padding: 7px 10px;
-      min-width: 150px;
-      max-width: 550px;
-      color: #555;
-      font-size: 16px;
-      background: #e0edff;
+    /*.balloon3 {*/
+    /*  position: relative;*/
+    /*  display: inline-block;*/
+    /*  margin: 1.5em 0 1.5em 15px;*/
+    /*  padding: 7px 10px;*/
+    /*  min-width: 150px;*/
+    /*  max-width: 550px;*/
+    /*  color: #555;*/
+    /*  font-size: 16px;*/
+    /*  background: #e0edff;*/
+    /*}*/
+    
+    /*.balloon3 p {*/
+    /*  margin: 0;*/
+    /*  padding: 0;*/
+    /*}*/
+    
+    .balloon3{
+    position:relative;
+    /*width:500px;*/
+    min-width: 150px;
+    max-width: 550px;
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:left;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
     }
     
-    .balloon3 p {
+    .balloon3 p{
       margin: 0;
       padding: 0;
     }
     
     /*曲詳細画面での曲の説明*/
-    .balloon4 {
-      position: relative;
-      display: inline-block;
-      margin: 1.5em 0 1.5em 15px;
-      padding: 7px 10px;
-      min-width: 150px;
-      max-width: 500px;
-      color: #555;
-      font-size: 16px;
-      background: #e0edff;
+    .balloon4{
+    position:relative;
+    /*width:500px;*/
+    min-width: 150px;
+    max-width: 500px;
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:left;
+    border:2px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
     }
     
-    .balloon4 p {
+  .balloon4 p{
       margin: 0;
       padding: 0;
-    } 
+    }
 }
 
 

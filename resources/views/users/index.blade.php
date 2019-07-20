@@ -19,7 +19,7 @@
         <div class="container p-4">
             @include("commons.error_messages")
             
-            <h1 class="mb-4 text-center"><i class="fas fa-user mr-1"></i>ユーザーを検索</h1>
+            <h1 class="mb-4 text-center page-title"><i class="fas fa-user mr-1"></i>ユーザーを検索</h1>
             
             <!--検索フォーム-->
             <form class="px-3">
@@ -93,7 +93,7 @@
             @if(count($users))
                 <ul class="list-unstyled">
                 @foreach ($users as $user)
-                    <li class="mx-0 mb-3 p-2 border row">
+                    <li class="user-card mx-0 mb-3 p-2 row">
                         <div class="col-sm-4 media">
                             <div class="media-left my-auto">
                                 <figure class="text-center m-0">
@@ -126,7 +126,7 @@
                                 @endif
                                 
                                 @if($user->favorite_music_age)
-                                <p class="mb-0">{!! nl2br(e($user->favorite_music_age)) !!}年代の音楽が好き</p>
+                                <p class="mb-0">{!! nl2br(e($user->favorite_music_age)) !!}年代の音楽</p>
                                 @endif
                                
                                 @if($user->favorite_artist)

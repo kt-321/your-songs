@@ -18,7 +18,7 @@
         <div class="container p-4">
             @include("commons.error_messages")
             
-            <h1 class="text-center mb-4"><i class="fas fa-user-edit mr-2"></i>プロフィールの編集</h1>
+            <h1 class="text-center mb-4 page-title"><i class="fas fa-user-edit mr-2"></i>プロフィールの編集</h1>
             
             <div class="row">
                 <div class="col-sm-6 offset-sm-3">
@@ -60,7 +60,7 @@
                         <div class="form-group">
                             <i class="fas fa-user mr-1"></i><i class="far fa-comment-dots mr-1"></i>
                             {!! Form::label("comment", "自己紹介") !!}
-                            {!! Form::textarea("comment", old("comment"), ["class" => "form-control"]) !!}
+                            {!! Form::textarea("comment", old("comment"), ["class" => "form-control", "rows" => "5"]) !!}
                         </div>
                     
                         {!! Form::submit("更新", ["class" => "btn btn-primary d-block m-auto"]) !!}

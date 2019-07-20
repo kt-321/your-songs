@@ -18,9 +18,9 @@
             @include("commons.error_messages")
             
             @if(Auth::id() == $user->id)
-            <h1 class="mb-4 text-center"><i class="fas fa-user-circle mr-1"></i>マイページ</h1>
+            <h1 class="mb-4 text-center page-title"><i class="fas fa-user-circle mr-1"></i>マイページ</h1>
             @else
-            <h1 class="mb-4 text-center"><i class="fas fa-user-circle mr-1"></i>{{ $user->name }}</h1>
+            <h1 class="mb-4 text-center page-title"><i class="fas fa-user-circle mr-1"></i>{{ $user->name }}</h1>
             @endif
     
             <div class="user-profile mb-5">

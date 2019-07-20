@@ -47,6 +47,9 @@ Route::group(["middleware" => "guest"], function(){
     Route::post("login", "Auth\LoginController@login")->name("login.post");
     
     Route::get("about", "WelcomeController@about")->name("about");
+    
+    Route::get('login/{provider}', 'Auth\SocialAccountController@redirectToProvider');
+    Route::get('login/{provider}/callback', 'Auth\SocialAccountController@handleProviderCallback');
 });
 
 // ログインしている全ユーザー
@@ -82,15 +85,18 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
         
     });
     
-    Route::resource("songs", "SongsController", ["only" => ["create", "store", "show", "edit", "update", "destroy"]]);
+    // 曲の一覧表示・登録画面表示・登録処理・取得表示・更新画面表示・更新処理・削除処理
+    Route::resource("songs", "SongsController");
    
-    Route::get("favorites-ranking", "SongsController@favoritesRanking")->name("songs.favoritesRanking");
+    // Route::get("favorites-ranking", "SongsController@favoritesRanking")->name("songs.favoritesRanking");
     
-    Route::get("comments-ranking", "SongsController@commentsRanking")->name("songs.commentsRanking");
+    // Route::get("comments-ranking", "SongsController@commentsRanking")->name("songs.commentsRanking");
     
     Route::resource("comments", "CommentsController", ["only" =>["store", "destroy"]]);
     
     Route::get("search", "SearchController@index")->name("search.index");
+    
+    Route::get("youtube", "SongsController@youtube")->name("songs.youtube");
 });
 
 // 管理者権限機能

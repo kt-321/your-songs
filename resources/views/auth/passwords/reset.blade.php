@@ -17,7 +17,7 @@
             <div class="col-md-10 offset-md-1">
                 <div class="panel panel-default">
                     <div class="panel-heading mb-4">
-                        <h1 class="text-center"><i class="fas fa-cog mr-1"></i>パスワードの再設定</h1>
+                        <h1 class="text-center page-title"><i class="fas fa-cog mr-1"></i>パスワードの再設定</h1>
                     </div>
     
                     <div class="panel-body">

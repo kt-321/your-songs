@@ -34,7 +34,7 @@
                         @endif
                         
                         @if($user->favorite_music_age)
-                        <p class="mb-0">{!! nl2br(e($user->favorite_music_age)) !!}年代の音楽が好き</p>
+                        <p class="mb-0">{!! nl2br(e($user->favorite_music_age)) !!}年代の音楽</p>
                         @endif
                        
                         @if($user->favorite_artist)

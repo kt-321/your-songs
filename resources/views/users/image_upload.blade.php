@@ -17,6 +17,8 @@
         
         <div class="container p-4">
             @include("commons.error_messages")
+            
+            <h1 class="mb-4 text-center page-title"><i class="fas fa-portrait mr-1"></i>アイコンの変更</h1>
 
             <figure class="user-image text-center mb-5">
                 @if($user->image_url) 

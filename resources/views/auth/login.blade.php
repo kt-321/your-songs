@@ -2,7 +2,7 @@
 
 @section("content")
     <div class="text-center mb-4">
-        <h1><i class="fas fa-sign-in-alt mr-2"></i>ログイン</h1>
+        <h1 class="page-title"><i class="fas fa-sign-in-alt mr-2"></i>ログイン</h1>
     </div>
    
     <div class="row"> 
@@ -19,8 +19,12 @@
                     {!! Form::password("password", ["class" => "form-control"]) !!}
                 </div>
                 
-                {!! Form::submit('ログイン', ['class' => 'btn btn-primary btn-block']) !!}
+                {!! Form::submit('ログイン', ['class' => 'btn-login btn btn-primary btn-block']) !!}
             {!! Form::close() !!}
+            
+            <a href="/login/facebook" class="btn-facebook btn btn-block mt-4"><i class="fab fa-facebook-square mr-1"></i>Facebookアカウントでログイン</a>
+            <a href="/login/github" class="btn-github btn btn-default btn-block"><i class="fab fa-github mr-1"></i>Githubアカウントでログイン</a>
+            <a href="/login/twitter" class="btn-twitter btn btn-block"><i class="fab fa-twitter-square mr-1"></i>Twitterアカウントでログイン</a>
             
             <p class="mt-2 mb-0"><a href="{{ url("signup") }}">新規登録</a></p>
             <p class="mt-2 mb-0"><a href="{{ url("password/reset") }}">パスワードを忘れた場合</a></p>

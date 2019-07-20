@@ -22,7 +22,7 @@
     <div class="form-group">
         <i class="far fa-comments mr-1"></i>
         {!! Form::label("description", "曲の説明") !!}
-            {!! Form::textarea("description", old("description"), ["class" => "form-control", "rows" => "2"]) !!}
+            {!! Form::textarea("description", old("description"), ["class" => "form-control", "rows" => "5"]) !!}
     </div>
     
     <div class="form-group">   

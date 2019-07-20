@@ -14,36 +14,16 @@ new Vue({
   }
 });
 
-// $(function(){
-//   $(".btn-dell").click(function(){
-//   if(confirm("本当に削除しますか？")){
-//   //そのままsubmit（削除）
-//   }else{
-//   //cancel
-//   return false;
-//   }
-//   });
-//   });
-
-// document.getElementById("btn-dell").onclick = function() {
-//   if(confirm("本当に削除しますか？")){
-//   //そのままsubmit（削除）
-//   }else{
-//   //cancel
-//   return false;
-//   }
-// };
-
-// document.getElementById("btn-dell").onclick = function() {
-//   if(!window.confirm('本当に削除しますか？')){
-//       window.alert('キャンセルされました'); 
-//       return false;
-//   }
-//   document.deleteform.submit();
-// };
-
 function delete_alert(){
   if(!window.confirm('本当に削除しますか？')){
+      window.alert('キャンセルされました'); 
+      return false;
+  }
+  document.deleteform.submit();
+};
+
+function force_delete_alert(){
+  if(!window.confirm('本当に完全に削除しますか？')){
       window.alert('キャンセルされました'); 
       return false;
   }

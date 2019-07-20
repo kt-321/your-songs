@@ -17,7 +17,9 @@
         
         <div class="container p-4">
             @include("commons.error_messages")
-
+            
+            <h1 class="mb-4 text-center page-title"><i class="far fa-image mr-1"></i>曲の画像を変更</h1>
+            
     <!--曲画像-->
         <figure class="song-image text-center mb-5">
             @if($song->image_url)
@@ -25,7 +27,7 @@
             @else
                 <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/song.jpeg" style="width:150px; height:150px;" class="img-thumbnail">
             @endif
-        
+            
             <figcaption>
                 <!--ログイン時、曲画像のアップロード-->
                 <h2 class="song-name"><i class="fas fa-music mr-3"></i>{{ $song->song_name }}</h2>
@@ -42,7 +44,8 @@
         </figure>
 
     <div class="text-center">
-        <a href="{{ route("users.show", ["id" => $song->user->id]) }}" class="btn btn-secondary btn-modify-profile">マイページに戻る</a>
+        <!--<a href="{{ route("users.show", ["id" => $song->user->id]) }}" class="btn btn-secondary btn-modify-profile">マイページに戻る</a>-->
+        <a href="{{ route("songs.show", ["id" => $song->id]) }}" class="btn btn-secondary">曲の詳細画面に戻る</a>
     </div>
     
 </div>

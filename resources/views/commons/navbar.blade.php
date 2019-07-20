@@ -21,10 +21,10 @@
                     </li>
                     @endif
                     
-                    <li class="nav-item"><a href="{{ url("/home") }}" class="nav-link"><i class="far fa-lightbulb mr-1"></i>新しく投稿された曲</a></li>
+                    <li class="nav-item"><a href="{{ url("songs") }}" class="nav-link"><i class="far fa-clock mr-1"></i>タイムライン</a></li>
                     
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-trophy mr-1"></i>ランキング</a>
+                        <!--<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-trophy mr-1"></i>ランキング</a>-->
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li class="dropdown-item"><a href="{{ url("favorites-ranking") }}"><i class="far fa-star mr-1"></i>お気に入り数順</a></li>
                             <li class="dropdown-divider"></li>

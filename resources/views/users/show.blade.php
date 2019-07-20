@@ -2,9 +2,9 @@
 
 @section("content")
     @if(Auth::id() == $user->id)
-    <h1 class="mb-4 text-center"><i class="fas fa-user-circle mr-1"></i>マイページ</h1>
+    <h1 class="mb-4 text-center page-title"><i class="fas fa-user-circle mr-1"></i>マイページ</h1>
     @else
-    <h1 class="mb-4 text-center"><i class="fas fa-user-circle mr-1"></i>{{ $user->name }}</h1>
+    <h1 class="mb-4 text-center page-title"><i class="fas fa-user-circle mr-1"></i>{{ $user->name }}</h1>
     @endif
     
     <div class="user-profile mb-5">
@@ -55,8 +55,12 @@
                 <ul class="status-list p-3" style="list-style: none; text-align: center; display: table; margin: auto;">
                     <li style="padding: 0 8px; display: table-cell;">
                         <div class="status-label mb-1"><i class="fas fa-user mr-1"></i><i class="far fa-comment-dots mr-1"></i>自己紹介</div>
-                        <div class="status-value balloon2 mx-0 my-auto">
-                            <p style="word-wrap: break-word;">{{ $user->comment }}</p>
+                        <!--<div class="status-value balloon2 mx-0 my-auto">-->
+                        <!--<div class="status-value self-introduction1">-->
+                        <!--    <p style="word-wrap: break-word;">{{ $user->comment }}</p>-->
+                        <!--</div>-->
+                        <div class="status-value self-introduction1">
+                            <p class="text-area">{{ $user->comment }}</p>
                         </div>
                     </li>    
                 </ul>

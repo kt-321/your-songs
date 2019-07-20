@@ -13,28 +13,21 @@ use App\Song;
 
 class SongsController extends Controller
 {
-    public function index(Request $request)
+    // public function index(Request $request)
+    public function index()
     {  
-        // 値を取得
-        $music_age = $request->input("music_age");
         
-        // 検索QUERY
-        $query = Song::query();
-        
-        // もし「年代」が選択されていれば
-        if(!empty($music_age))
-        {
-            $query->where("music_age", $music_age);
+        $data = [];
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $songs = $user->feed_songs()->orderBy("created_at", "desc")->paginate(5);
+
+            $data = [
+                "user" => $user,
+                "songs" => $songs,
+            ];
+            $data += $this->counts($user);
         }
-        
-        // ページネーション
-        $songs = $query->orderBy("created_at", "desc")->paginate(5);
-        
-        $data = [
-        "music_age" => $music_age,
-        "songs" => $songs,
-        ];
-        
         return view("songs.index", $data);
     }
     
@@ -104,60 +97,60 @@ class SongsController extends Controller
         return redirect("users/". $user->id);
     }
     
-    public function favoritesRanking(Request $request)
-    {    
-        // 値を取得
-        $music_age = $request->input("music_age");
+    // public function favoritesRanking(Request $request)
+    // {    
+    //     // 値を取得
+    //     $music_age = $request->input("music_age");
         
-        // 検索QUERY
-        $query = Song::query();
+    //     // 検索QUERY
+    //     $query = Song::query();
         
-        // もし「年代」が選択されていれば
-        if(!empty($music_age))
-        {
-            $query->where("music_age", $music_age);
-        }
+    //     // もし「年代」が選択されていれば
+    //     if(!empty($music_age))
+    //     {
+    //         $query->where("music_age", $music_age);
+    //     }
         
-        // ページネーション
-        // $songs = $query->orderBy("created_at", "desc")->paginate(5);
-        // $songs = Song::withCount("favorite_users")->where("music_age", $id)->orderBy("favorite_users_count", "desc")->paginate(20);
-        $songs = $query->withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(5);
+    //     // ページネーション
+    //     // $songs = $query->orderBy("created_at", "desc")->paginate(5);
+    //     // $songs = Song::withCount("favorite_users")->where("music_age", $id)->orderBy("favorite_users_count", "desc")->paginate(20);
+    //     $songs = $query->withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(5);
         
-        $data = [
-        "music_age" => $music_age,
-        "songs" => $songs,
-        ];
+    //     $data = [
+    //     "music_age" => $music_age,
+    //     "songs" => $songs,
+    //     ];
         
-        return view("songs.favorites_ranking", $data);
-    }
+    //     return view("songs.favorites_ranking", $data);
+    // }
     
-    public function commentsRanking(Request $request)
-    {   
-        // 値を取得
-        $music_age = $request->input("music_age");
+    // public function commentsRanking(Request $request)
+    // {   
+    //     // 値を取得
+    //     $music_age = $request->input("music_age");
         
-        // 検索QUERY
-        $query = Song::query();
+    //     // 検索QUERY
+    //     $query = Song::query();
         
-        // もし「年代」が選択されていれば
-        if(!empty($music_age))
-        {
-            $query->where("music_age", $music_age);
-        }
+    //     // もし「年代」が選択されていれば
+    //     if(!empty($music_age))
+    //     {
+    //         $query->where("music_age", $music_age);
+    //     }
         
-        // ページネーション
-        // $songs = $query->orderBy("created_at", "desc")->paginate(5);
+    //     // ページネーション
+    //     // $songs = $query->orderBy("created_at", "desc")->paginate(5);
         
-        // $songs = Song::withCount("favorite_users")->where("music_age", $id)->orderBy("favorite_users_count", "desc")->paginate(20);
-        $songs = $query->withCount("comments")->orderBy("comments_count", "desc")->paginate(5);
+    //     // $songs = Song::withCount("favorite_users")->where("music_age", $id)->orderBy("favorite_users_count", "desc")->paginate(20);
+    //     $songs = $query->withCount("comments")->orderBy("comments_count", "desc")->paginate(5);
         
-        $data = [
-        "music_age" => $music_age,
-        "songs" => $songs,
-        ];
+    //     $data = [
+    //     "music_age" => $music_age,
+    //     "songs" => $songs,
+    //     ];
         
-        return view("songs.comments_ranking", $data);
-    }
+    //     return view("songs.comments_ranking", $data);
+    // }
     
     public function indexForAdmin()
     {   
@@ -186,5 +179,19 @@ class SongsController extends Controller
     {
         Song::onlyTrashed()->find($id)->forceDelete();
         return redirect()->route("songs.indexForAdmin");
+    }
+    
+  
+  
+  
+  
+  
+  
+    public function youtube()
+    {
+        
+    return view ("songs.youtube");
+        
+        
     }
 }

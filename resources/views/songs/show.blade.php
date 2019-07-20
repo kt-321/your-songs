@@ -16,8 +16,8 @@
             
             <!--曲情報-->
             <section class="song-details mb-5">
-                <h3 class="text-center mb-3" style="word-wrap: break-word;"><i class="fas fa-music mr-3"></i>{{ $song->song_name }}</h3>
-                <div class="row mb-3">
+                <h3 class="song-name text-center mb-3" style="word-wrap: break-word;"><i class="fas fa-music mr-3"></i>{{ $song->song_name }}</h3>
+                <div class="row mx-0 mb-3">
                     <div class="col-md-5 text-center">
                         <!--曲画像-->
                         <figure>
@@ -42,15 +42,17 @@
                         <ul class="list-unstyled px-3">
                             <li class="mb-2" style="word-wrap: break-word;"><i class="fas fa-guitar mr-1"></i>アーティスト：{!! nl2br(e($song->artist_name)) !!}</li>
                             <li class="mb-2" style="word-wrap: break-word;"><i class="fas fa-history mr-1"></i>曲の年代：{!! nl2br(e($song->music_age)) !!}年代</li>
+                            @if($song->description)
                             <li class="mb-2" style="word-wrap: break-word;">
                                 <div class="mb-1">
                                     <i class="far fa-comment-dots mr-1"></i>説明
                                 </div>
                                 
-                                <div class="status-value balloon4 mx-auto my-auto">
+                                <div class="status-value balloon4">
                                     <p style="word-wrap: break-word;">{!! nl2br(e($song->description)) !!}</p>
                                 </div>
                             </li>
+                            @endif
                             
                             @if($song->video_url)
                             <li class="mb-0 text-center" style="word-wrap: break-word;">
@@ -65,47 +67,50 @@
                          <!--投稿者が自分でないときに限り投稿者情報を表示-->
                         <div class="about-user ml-2">
                             @if(Auth::id() == $song->user_id)
-                            <span class="badge badge-success ml-1">自分の投稿</span>
-                            
+                            <div class="col-sm-6">
+                                <span class="badge badge-success ml-1">自分の投稿</span>
+                            </div>
                             @else
-                            <h4 class="user-info">投稿者情報</h4>
-                            <div class="media">
-                                <div class="media-left ml-3 mr-3">
-                                    <figure>
-                                        @if($song->user->image_url)
-                                            <img src="{{ $song->user->image_url }}" alt="アイコン" class="circle2"> 
-                                        @elseif($song->user->gender == 1)
-                                            <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="アイコン" class="circle2">
-                                        @elseif($song->user->gender == 2)
-                                            <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="アイコン" class="circle2">
-                                        @else
-                                            <img src="https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/qustion-mark.jpeg" alt="アイコン" class="circle2">
-                                        @endif
-                                        <figcaption class="text-center m-0">
-                                            <a href="{{ route("users.show", ["id" => $song->user->id]) }}">{{ $song->user->name }}</a>
-                                        </figcaption>
-                                    </figure>
-                                </div>
-                                
-                                <div class="media-body">
-                                    <ul class="list-unstyled px-3">
-                                        @if($song->user->gender == 1)
-                                        <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->age)) !!}代男性</li>
-                                        @else
-                                        <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->age)) !!}代女性</li>
-                                        @endif
-                                        <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->favorite_music_age)) !!}年代の音楽が好き</li>
-                                        
-                                        @if($song->user->favorite_artist)
-                                        <li class="mb-1" style="word-wrap: break-word;">好きなミュージシャン：{!! nl2br(e($song->user->favorite_artist)) !!}</li>
-                                        @endif
-                                    </ul>
-                                    
-                                    <div style="display:inline-block">
-                                        @include("user_follow.follow_button", ["user" => $song->user])
+                            <div class="user-information1">
+                                <h4 class="user-information-title">投稿者情報</h4>
+                                <div class="media">
+                                    <div class="media-left ml-3 mr-3">
+                                        <figure>
+                                            @if($song->user->image_url)
+                                                <img src="{{ $song->user->image_url }}" alt="アイコン" class="circle2"> 
+                                            @elseif($song->user->gender == 1)
+                                                <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="アイコン" class="circle2">
+                                            @elseif($song->user->gender == 2)
+                                                <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="アイコン" class="circle2">
+                                            @else
+                                                <img src="https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/qustion-mark.jpeg" alt="アイコン" class="circle2">
+                                            @endif
+                                            <figcaption class="text-center m-0">
+                                                <a href="{{ route("users.show", ["id" => $song->user->id]) }}">{{ $song->user->name }}</a>
+                                            </figcaption>
+                                        </figure>
                                     </div>
                                     
-                                    <a class="btn btn-success btn-sm" href="{{ route("users.show", ["id" => $song->user->id]) }}">プロフィール</a>
+                                    <div class="media-body">
+                                        <ul class="list-unstyled px-3">
+                                            @if($song->user->gender == 1)
+                                            <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->age)) !!}代男性</li>
+                                            @else
+                                            <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->age)) !!}代女性</li>
+                                            @endif
+                                            <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->favorite_music_age)) !!}年代の音楽が好き</li>
+                                            
+                                            @if($song->user->favorite_artist)
+                                            <li class="mb-1" style="word-wrap: break-word;">好きなミュージシャン：{!! nl2br(e($song->user->favorite_artist)) !!}</li>
+                                            @endif
+                                        </ul>
+                                        
+                                        <div style="display:inline-block">
+                                            @include("user_follow.follow_button", ["user" => $song->user])
+                                        </div>
+                                        
+                                        <a class="btn btn-success btn-sm btn-profile" href="{{ route("users.show", ["id" => $song->user->id]) }}">プロフィール</a>
+                                    </div>
                                 </div>
                             </div>
                             @endif
@@ -137,10 +142,9 @@
                   
             <section class="comment">
                 <div class="comment-index mb-5">
-                    <h2 class="mb-3">コメント一覧</h2>
                     
                     @if(count($song->comments) > 0)
-                    <p class="comment-counts">コメント {{ count($song->comments) }} 件</p>
+                    <p class="comment-counts"><i class="far fa-comments mr-2"></i>コメント（{{ count($song->comments) }}）</p>
                     @else
                     <p>コメントはまだありません。</p>
                     @endif
@@ -148,7 +152,7 @@
                     <div class="comment-display">
                         <ul class="list-unstyled">
                         @foreach($comments as $comment)
-                            <li class = "mb-2">
+                            <li class = "py-2 border-top">
                                 <div class="d-flex">
                                         <figure class="ml-3 mr-4 my-auto">
                                             @if($comment->user->image_url)
@@ -193,16 +197,21 @@
                 </div>
             
                 <div class="comment-post-form">        
-                    <h2 class="mb-3">コメントを投稿する</h2>
+                    <h4 class="mb-3 text-center">コメントを投稿する</h2>
                     
                     <div class="comment-form">   
                             {!! Form::open(["route" => ["comments.store", $song->id]]) !!}
                                 {!! Form::hidden("song_id", $song->id) !!}
                                 {!! Form::hidden("user_id", $user->id) !!}
                                 
-                                <div class="row">
-                                    {!! Form::label("body", "コメント", ["class" => "col-form-label col-sm-2"]) !!}
-                                    {!! Form::textarea("body", old("body"), ["class" => "form-control col-sm-10", "rows" => "3"]) !!}
+                                <!--<div class="row">-->
+                                <!--    {!! Form::label("body", "コメント", ["class" => "col-form-label col-sm-2"]) !!}-->
+                                <!--    {!! Form::textarea("body", old("body"), ["class" => "form-control col-sm-10", "rows" => "3"]) !!}-->
+                                <!--</div>-->
+                                
+                                <div class="row m-0">
+                                    <!--{!! Form::label("body", "コメントを投稿する", ["class" => "col-form-label"]) !!}-->
+                                    {!! Form::textarea("body", old("body"), ["class" => "form-control col-sm-8 offset-sm-2", "rows" => "3"]) !!}
                                 </div>
                                 
                                 <div class="text-center m-3">
