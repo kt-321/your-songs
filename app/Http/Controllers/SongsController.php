@@ -12,11 +12,15 @@ use App\User;
 use App\Song;
 
 class SongsController extends Controller
-{
-    // public function index(Request $request)
+{   
+    /**
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    
     public function index()
     {  
-        
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
@@ -73,8 +77,6 @@ class SongsController extends Controller
     
     public function update(UpdateSongRequest $request, Song $song)
     {
-        // $song = Song::find($id);
-        
         $song->song_name = $request->song_name;
         $song->artist_name = $request->artist_name;
         $song->music_age = $request->music_age;
@@ -90,7 +92,7 @@ class SongsController extends Controller
     {  
         $user = \Auth::user();
         
-        if($user->id=== $song->user_id){
+        if($user->id === $song->user_id){
             $song->delete();
         }
         

@@ -29,7 +29,7 @@
                             
                             <figcaption>
                                 <!--ログイン時、曲画像のアップロード-->
-                                @if(Auth::id() == $song->user_id)
+                                @if(Auth::id() === $song->user_id)
                                 <div class="mt-2">
                                     <a href="{{ route("songs.songImages", ["id" => $song->id]) }}" class="btn btn-primary btn-modify-profile">画像を変更</a>
                                 </div>
@@ -66,7 +66,7 @@
                         
                          <!--投稿者が自分でないときに限り投稿者情報を表示-->
                         <div class="about-user ml-2">
-                            @if(Auth::id() == $song->user_id)
+                            @if(Auth::id() === $song->user_id)
                             <div class="col-sm-6">
                                 <span class="badge badge-success ml-1">自分の投稿</span>
                             </div>
@@ -180,7 +180,7 @@
                                             <span class="text-muted" style="font-size:13px">  投稿  {{ $comment->created_at }}</span>
                                         </li>
                                         <li class="mr-3">
-                                            @if(Auth::id() == $comment->user_id)
+                                            @if(Auth::id() === $comment->user_id)
                                             {!! Form::open(["route" => ["comments.destroy", $comment->id], "method" => "delete"]) !!}
                                                 {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm", "onClick"=>"delete_alert();return false;"]) !!}
                                             {!! Form::close() !!}
@@ -204,14 +204,10 @@
                                 {!! Form::hidden("song_id", $song->id) !!}
                                 {!! Form::hidden("user_id", $user->id) !!}
                                 
-                                <!--<div class="row">-->
-                                <!--    {!! Form::label("body", "コメント", ["class" => "col-form-label col-sm-2"]) !!}-->
-                                <!--    {!! Form::textarea("body", old("body"), ["class" => "form-control col-sm-10", "rows" => "3"]) !!}-->
-                                <!--</div>-->
                                 
                                 <div class="row m-0">
                                     <!--{!! Form::label("body", "コメントを投稿する", ["class" => "col-form-label"]) !!}-->
-                                    {!! Form::textarea("body", old("body"), ["class" => "form-control col-sm-8 offset-sm-2", "rows" => "3"]) !!}
+                                    {!! Form::textarea("body", old("body"), ["class" => "form-control col-sm-8 offset-sm-2", "rows" => "7"]) !!}
                                 </div>
                                 
                                 <div class="text-center m-3">
