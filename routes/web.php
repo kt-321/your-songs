@@ -48,8 +48,8 @@ Route::group(["middleware" => "guest"], function(){
     
     Route::get("about", "WelcomeController@about")->name("about");
     
-    Route::get('login/{provider}', 'Auth\SocialAccountController@redirectToProvider');
-    Route::get('login/{provider}/callback', 'Auth\SocialAccountController@handleProviderCallback');
+    Route::get('login/{provider}', 'Auth\SocialAccountController@redirectToProvider')->name("socialOAuth");
+    Route::get('login/{provider}/callback', 'Auth\SocialAccountController@handleProviderCallback')->name("oauthCallback");
     
     Route::get("password/reset", "Auth\ForgotPasswordController@showLinkRequestForm")->name("password.request");
     Route::post("password/email", "Auth\ForgotPasswordController@sendResetLinkEmail")->name("password.email");

@@ -20,7 +20,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         "name" => $faker->name,
         "email" => $faker->unique()->safeEmail,
         // "password" => "$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm", // secret
-        "password" => $password ?: $password = bcrypt("secret"),
+        "password" => $password ?: $password = bcrypt("test1234"),
         "remember_token" => str_random(10),
         "age" => $faker->randomElement([10, 20, 30, 40, 50, 60, 70]),
         "gender" => $faker->randomElement([1, 2]),
