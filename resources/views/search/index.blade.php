@@ -122,7 +122,7 @@
                                 
                                     <figcaption>
                                         <!--ログイン時、曲画像のアップロード-->
-                                        @if(Auth::id() == $song->user_id)
+                                        @if(Auth::id() === $song->user_id)
                                         <div class="mt-2">
                                             <a href="{{ route("songs.songImages", ["id" => $song->id]) }}" class="btn btn-primary btn-modify-profile">画像を変更</a>
                                         </div>
@@ -168,7 +168,7 @@
                                 <span class="badge badge-success ml-1">自分の投稿</span>
                             </div>
                             @else
-                            <div class="col-sm-6 py-2 user-information2">
+                            <div class="col-md-6 py-2 user-information2">
                                 <h4 class="user-information-title">投稿者情報</h4>
                                 <div class="media">
                                     <div class="media-left ml-3 mr-3">
