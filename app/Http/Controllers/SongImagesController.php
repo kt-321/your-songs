@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UploadSongImageRequest;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -19,7 +20,7 @@ class SongImagesController extends Controller
         return view("songs.image_upload", ["song" => $song]);
     }
     
-     public function upload(Request $request)
+     public function upload(UploadSongImageRequest $request)
     {
         $file = $request->file("file");
         
