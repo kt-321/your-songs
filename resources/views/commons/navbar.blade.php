@@ -6,7 +6,7 @@
         <a class="navbar-brand" href="/">YourSongs</a>
         @endif
         
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav_bar">
             <span class="navbar-toggler-icon"></span>
         </button>
         
