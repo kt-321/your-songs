@@ -91,73 +91,63 @@
             
             <!--該当するユーザーの一覧-->
             @if(count($users))
-                <ul class="list-unstyled">
+            <div id="list" class="list row">
                 @foreach ($users as $user)
-                    <li class="user-card mx-0 mb-3 p-2 row">
-                        <div class="col-sm-4 media">
-                            <div class="media-left my-auto">
-                                <figure class="text-center m-0">
-                                    @if($user->image_url)
-                                        <img src="{{ $user->image_url }}" alt="アイコン" class="circle2"> 
-                                    @elseif($user->gender == 1)
-                                        <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="アイコン" class="circle2">
-                                    @elseif($user->gender == 2)
-                                        <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="アイコン" class="circle2">
-                                    @else    
-                                        <img src="https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/qustion-mark.jpeg" alt="アイコン" class="circle2">
-                                    @endif
-                                    <figcaption class="text-center m-0">
-                                        <a href="{{ route("users.show", ["id" => $user->id]) }}">{{ $user->name }}</a>
-                                    </figcaption>
-                                </figure>
-                            </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="user-card card img-thumbnail text-center">
+                            @if($user->image_url)
+                                <img src="{{ $user->image_url }}" alt="アイコン" class="circle3 mx-auto"> 
+                            @elseif($user->gender == 1)
+                                <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="アイコン" class="circle3 mx-auto">
+                            @elseif($user->gender == 2)
+                                <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="アイコン" class="circle3 mx-auto">
+                            @else    
+                                <img src="https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/qustion-mark.jpeg" alt="アイコン" class="circle3 mx-auto">
+                            @endif
+                            <a href="{{ route("users.show", ["id" => $user->id]) }}">{{ $user->name }}</a>
+                        <div class="card-body px-2 py-1">
+                            @if($user->age)
+                            <p class="mb-0">{!! nl2br(e($user->age)) !!}代</p>
+                            @else
+                            <p class="mb-0"></p>
+                            @endif
                             
-                            <div class="media-body ml-3 my-auto">
-                                @if($user->age)
-                                <p class="mb-0">{!! nl2br(e($user->age)) !!}代</p>
-                                @else
-                                <p class="mb-0"></p>
-                                @endif
-                                
-                                @if($user->gender == 1)
-                                <p class="mb-0">男性 </p>
-                                @elseif($user->gender == 2)
-                                <p class="mb-0">女性 </p>
-                                @endif
-                                
-                                @if($user->favorite_music_age)
-                                <p class="mb-0">{!! nl2br(e($user->favorite_music_age)) !!}年代の音楽</p>
-                                @endif
-                               
-                                @if($user->favorite_artist)
-                                <p class="mb-0">好きなミュージシャン：{!! nl2br(e($user->favorite_artist)) !!}</p>
-                                @endif
-                            </div>
-                        </div>
-                        
-                        <!--フォロー・アンフォローボタンとプロフィールを見るボタン-->
-                        <div class="col-sm-3 my-auto">
+                            @if($user->gender == 1)
+                            <p class="mb-0">男性 </p>
+                            @elseif($user->gender == 2)
+                            <p class="mb-0">女性 </p>
+                            @endif
+                            
+                            @if($user->favorite_music_age)
+                            <p class="mb-0"><i class="far fa-clock mr-1"></i>{!! nl2br(e($user->favorite_music_age)) !!}年代</p>
+                            @endif
+                           
+                            @if($user->favorite_artist)
+                            <p class="mb-0"><i class="fas fa-microphone mr-1"></i>{!! nl2br(e($user->favorite_artist)) !!}</p>
+                            @endif
                             
                             <!--自己紹介-->
-                            <div class ="balloon1-left" style="word-wrap: break-word;">
+                            <div class ="self-introduction2" style="word-wrap: break-word;">
                                 @if($user->comment)
                                 <p class="mb-0">{{ $user->comment }}</p>
                                 @else
-                                <p>．．．</p>
+                                <p>（コメントなし）</p>
                                 @endif
                             </div>
                             
                             
-                            <div>
+                        </div>
+                        <!--フォロー・アンフォローボタンとプロフィールを見るボタン-->
+                            <div class="buttons">
                                 <div style="display:inline-block">
                                     @include("user_follow.follow_button", ["user" => $user])
                                 </div>
                                 <a class="btn btn-success btn-sm" href="{{ route("users.show", ["id" => $user->id]) }}">プロフィール</a>
                             </div>
-                        </div>
-                    </li>
+                    </div>
+                </div>
                 @endforeach
-                </ul>
+            </div>
             @endif
             
             <div class="paginate text-center mt-3">

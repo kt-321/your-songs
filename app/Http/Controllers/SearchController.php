@@ -66,13 +66,22 @@ class SearchController extends Controller
         
         // 「曲の年代がユーザーの好きな音楽の年代と一致」または「アーティスト名がユーザーの好きなアーティスト名と部分一致」
         // である曲をユーザーへのおすすめ曲とする。
-        $recommended_songs = Song::where("music_age", $favorite_music_age)
-        ->orWhere("artist_name", "like", "%".$favorite_artist. "%")
+        // $recommended_songs = Song::where("music_age", $favorite_music_age)
+        // ->orWhere("artist_name", "like", "%".$favorite_artist. "%")
+        // ->inRandomOrder()
+        // ->limit(12)
+        // ->get();
+        
+        $recommended_songs = Song::where("user_id","<>", \Auth::id())
+        ->where(function($query)use($favorite_music_age, $favorite_artist){
+            $query->where("music_age", $favorite_music_age)
+            ->orWhere("artist_name", "like", "%".$favorite_artist. "%");
+        })
         ->inRandomOrder()
         ->limit(12)
         ->get();
         
-        
+    
         $data = [
         "song_name" => $song_name,
         "artist_name" => $artist_name,

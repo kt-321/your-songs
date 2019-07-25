@@ -46,8 +46,22 @@ class UsersController extends Controller
         
         // 「好きな曲の年代がログイン中ユーザーのそれと一致」または「好きなアーティストがログイン中ユーザーのそれと部分一致」
         // であるユーザーをログイン中ユーザーへの「音楽の趣味が合いそうなユーザー」とする。
-        $recommended_users = User::where("favorite_music_age", $favorite_music_age)
-        ->orWhere("favorite_artist", "like", "%".$favorite_artist. "%")
+        // $recommended_users = User::where("favorite_music_age", $favorite_music_age)
+        // ->orWhere("favorite_artist", "like", "%".$favorite_artist. "%")
+        // ->inRandomOrder()
+        // ->limit(12)
+        // ->get();
+        
+        // // 検索QUERY
+        // $query2 = User::query();
+        
+       
+        
+        $recommended_users = User::where("id","<>",\Auth::id())
+        ->where(function($query)use($favorite_music_age, $favorite_artist){
+            $query->where("favorite_music_age", $favorite_music_age)
+            ->orWhere("favorite_artist", "like", "%".$favorite_artist. "%");
+        })
         ->inRandomOrder()
         ->limit(12)
         ->get();

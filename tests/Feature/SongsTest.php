@@ -17,7 +17,7 @@ class UsersTest extends TestCase
      *
      * @return void
      */
-     
+    
     use RefreshDatabase;
     use WithoutMiddleware;
     
