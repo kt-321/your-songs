@@ -39,7 +39,7 @@ class UsersController extends Controller
         }
         
         // ページネーション
-        $users = $query->orderBy("created_at", "desc")->paginate(10);
+        $users = $query->orderBy("created_at", "desc")->paginate(6);
         
         $favorite_music_age = \Auth::user()->favorite_music_age;
         $favorite_artist = \Auth::user()->favorite_artist;
