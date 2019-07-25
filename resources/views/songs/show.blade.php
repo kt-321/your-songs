@@ -207,7 +207,7 @@
                                 
                                 <div class="row m-0">
                                     <!--{!! Form::label("body", "コメントを投稿する", ["class" => "col-form-label"]) !!}-->
-                                    {!! Form::textarea("body", old("body"), ["class" => "form-control col-sm-8 offset-sm-2", "rows" => "7"]) !!}
+                                    {!! Form::textarea("body", old("body"), ["class" => "form-control col-sm-8 offset-sm-2", "rows" => "4"]) !!}
                                 </div>
                                 
                                 <div class="text-center m-3">
