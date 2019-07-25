@@ -48,7 +48,6 @@ class SearchController extends Controller
         }elseif($order == "favorites_ranking")
         // 「お気に入りが多い順」が選択されていれば、
         {
-            // $songs = $query->withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(5);
             $query->withCount("favorite_users")->orderBy("favorite_users_count", "desc");
         }elseif($order == "comments_ranking")
         // 「コメントが多い順」が選択されていれば、
@@ -57,20 +56,11 @@ class SearchController extends Controller
         }
         
         // ページネーション
-        // $songs = $query->orderBy("created_at", "desc")->paginate(5);
         $songs = $query->paginate(5);
         
         
         $favorite_music_age = \Auth::user()->favorite_music_age;
         $favorite_artist = \Auth::user()->favorite_artist;
-        
-        // 「曲の年代がユーザーの好きな音楽の年代と一致」または「アーティスト名がユーザーの好きなアーティスト名と部分一致」
-        // である曲をユーザーへのおすすめ曲とする。
-        // $recommended_songs = Song::where("music_age", $favorite_music_age)
-        // ->orWhere("artist_name", "like", "%".$favorite_artist. "%")
-        // ->inRandomOrder()
-        // ->limit(12)
-        // ->get();
         
         $recommended_songs = Song::where("user_id","<>", \Auth::id())
         ->where(function($query)use($favorite_music_age, $favorite_artist){
