@@ -21,7 +21,7 @@
     
     <div class="form-group">
         <i class="far fa-comments mr-1"></i>
-        {!! Form::label("description", "曲の説明") !!}
+        {!! Form::label("description", "曲の説明（200字以内）") !!}
             {!! Form::textarea("description", old("description"), ["class" => "form-control", "rows" => "5"]) !!}
     </div>
     

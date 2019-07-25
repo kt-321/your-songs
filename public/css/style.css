@@ -341,7 +341,7 @@ footer {
     background:#FFFFFF;
     padding:10px;
     margin:3px;
-    border:2px solid #FF6699;
+    border:2px solid #FFCC66;
     border-radius:10px;
     -webkit-border-radius:10px;
     -moz-border-radius:10px;
@@ -375,7 +375,7 @@ footer {
     background:#FFFFFF;
     padding:10px 6px;
     text-align:left;
-    border:1px solid #9966FF;
+    border:0.5px solid #9966FF;
     border-radius:10px;
     -webkit-border-radius:10px;
     -moz-border-radius:10px;
@@ -386,17 +386,17 @@ footer {
       padding: 0;
     }
     
-  .user-information{
+  .user-information2{
     background:#FFFFFF;
     padding:10px;
     margin:3px;
-    border:1px solid #9966FF;
+    border:0.5px solid #9966FF;
     border-radius:10px;
     -webkit-border-radius:10px;
     -moz-border-radius:10px;
     }
     
-  .user-information p{
+  .user-information2 p{
       margin: 0;
       padding: 0;
     }

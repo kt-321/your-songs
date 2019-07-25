@@ -59,7 +59,7 @@
                                         
                         <div class="form-group">
                             <i class="fas fa-user mr-1"></i><i class="far fa-comment-dots mr-1"></i>
-                            {!! Form::label("comment", "自己紹介") !!}
+                            {!! Form::label("comment", "自己紹介 （150字以内）") !!}
                             {!! Form::textarea("comment", old("comment"), ["class" => "form-control", "rows" => "5"]) !!}
                         </div>
                     
