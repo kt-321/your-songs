@@ -81,7 +81,7 @@
             
             <!--ページネーション-->
                 <div class="paginate text-center mt-3">
-                    {{ $songs->appends(["song_name"=>$song_name,"artist_name"=>$artist_name, "music_age"=>$music_age])->render("pagination::bootstrap-4") }}
+                    {{ $songs->appends(["song_name"=>$song_name, "artist_name"=>$artist_name, "music_age"=>$music_age])->render("pagination::bootstrap-4") }}
                 </div>
             
             <!--該当する曲の一覧-->
@@ -201,7 +201,7 @@
                                 </div>
                             </div>
                             @endif
-                        
+                        </div>
                         
                         <div style="width:180px; margin-left:auto;">
                             <ul class="list-unstyled">

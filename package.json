@@ -19,6 +19,7 @@
     "vue": "^2.5.7"
   },
   "dependencies": {
-    "vue-scrollto": "^2.15.0"
+    "vue-scrollto": "^2.15.0",
+    "vuejs-paginate": "^2.1.0"
   }
 }
