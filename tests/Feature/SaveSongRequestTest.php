@@ -32,17 +32,17 @@ class SaveSongRequestTest extends TestCase
      
     
     
-    // public function test_user_can_see_song_post_page()
-    // {   
-    //     $this->withoutExceptionHandling();
+    public function test_user_can_see_song_post_page()
+    {   
+        $this->withoutExceptionHandling();
         
-    //     // ユーザーを1人作成
-    //     $user = factory(User::class)->create();
+        // ユーザーを1人作成
+        $user = factory(User::class)->create();
         
-    //     //曲の投稿画面を表示する
-    //     $response = $this->actingAs($user)->get("songs/create");
-    //     $response->assertStatus(200);
-    // }
+        //曲の投稿画面を表示する
+        $response = $this->actingAs($user)->get(route("songs.create"));
+        $response->assertStatus(200);
+    }
     
     public function test_request_should_pass_when_data_is_provided()
     {
