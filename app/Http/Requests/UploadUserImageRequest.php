@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCommentRequest extends FormRequest
+class UploadUserImageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,14 @@ class CreateCommentRequest extends FormRequest
     public function rules()
     {
         return [
-            "user_id" => "required",
-            "song_id" => "required",
-            "body" => "required|max:400",
+            "file" => "required",
         ];
     }
     
     public function attributes()
     {
         return [
-            'body' => "コメント本文",
+            'file' => "画像ファイルの選択",
         ];
     }
 }

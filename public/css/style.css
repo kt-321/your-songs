@@ -54,9 +54,7 @@ footer{
   color : white;
 }
 
-.circle{
-  border: thin solid rgba(0,153,255,.8);
-}
+
 
 .dropdown-menu{
   background: #003366;
@@ -109,6 +107,10 @@ footer{
     color: #fecb81;
 }
 
+.circle{
+  border: thin solid rgba(0,153,255,.8);
+}
+
 .circle1{
   width: 150px;
   height: 150px;
@@ -119,6 +121,13 @@ footer{
 .circle2{
   width: 50px;
   height: 50px;
+  border-radius: 50%;
+  border: thin solid rgba(0,153,255,.8);
+}
+
+.circle3{
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   border: thin solid rgba(0,153,255,.8);
 }
@@ -255,6 +264,30 @@ footer {
   padding: 0;
 }
 
+.self-introduction2{
+    position:relative;
+    /*width:500px;*/
+    /*min-width: 30px;*/
+    /*max-width: 500px;*/
+    /*height:80px;*/
+    background:#FFFFFF;
+    padding:10px;
+    margin:3px;
+    text-align:center;
+    border:1px solid #4ACAFF;
+    color:#000000;
+    /*font-size:30px;*/
+    /*font-weight:bold;*/
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+}
+
+.self-introduction2 p{
+  margin: 0;
+  padding: 0;
+}
+
 /*曲の説明*/
  .balloon3{
     position:relative;
@@ -308,7 +341,7 @@ footer {
     background:#FFFFFF;
     padding:10px;
     margin:3px;
-    border:2px solid #FF6699;
+    border:2px solid #FFCC66;
     border-radius:10px;
     -webkit-border-radius:10px;
     -moz-border-radius:10px;
@@ -320,25 +353,29 @@ footer {
     }
     
   .user-card{
-    background:#FFFFFF;
-    padding:10px;
-    margin:3px;
-    border:1px solid #9966FF;
-    border-radius:10px;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
-    }
+  background:#FFFFFF;
+  padding:10px;
+  margin:5px 0 8px 0;
+  border:0.5px solid #9966FF;
+  border-radius:10px;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  min-height: 350px;
+  }
     
   .user-card p{
       margin: 0;
       padding: 0;
+      font-size:15px;
     }
+  
+  
   
   .user-information1{
     background:#FFFFFF;
     padding:10px 6px;
     text-align:left;
-    border:1px solid #9966FF;
+    border:0.5px solid #9966FF;
     border-radius:10px;
     -webkit-border-radius:10px;
     -moz-border-radius:10px;
@@ -349,17 +386,17 @@ footer {
       padding: 0;
     }
     
-  .user-information{
+  .user-information2{
     background:#FFFFFF;
     padding:10px;
     margin:3px;
-    border:1px solid #9966FF;
+    border:0.5px solid #9966FF;
     border-radius:10px;
     -webkit-border-radius:10px;
     -moz-border-radius:10px;
     }
     
-  .user-information p{
+  .user-information2 p{
       margin: 0;
       padding: 0;
     }

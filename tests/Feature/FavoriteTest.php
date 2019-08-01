@@ -30,19 +30,19 @@ class FavoriteTest extends TestCase
         $song = factory(Song::class)->create();
         
         //曲をお気に入り登録する
-        $response = $this->actingAs($user)->from('songs/{$song->id}')->post("songs/{$song->id}/favorite");
+        // $response = $this->actingAs($user)->from('songs/{$song->id}')->post("songs/{$song->id}/favorite");
+        $response = $this->actingAs($user)->from(route('songs.show', ["id" => $song->id]))->post(route("favorites.favorite", ["id" => $song->id]));
         
         // 同じ画面にリダイレクト
         $response->assertStatus(302);
-        $response->assertRedirect("songs/{$song->id}");
+        // $response->assertRedirect("songs/{$song->id}");
+        $response->assertRedirect(route("songs.show", ["id" => $song->id]));
         
-        //曲をお気に入りから外す
-        $response = $this->actingAs($user)->from('songs/{$song->id}')->delete("songs/{$song->id}/unfavorite");
-        
-        // 同じ画面にリダイレクト
-        $response->assertStatus(302);
-        $response->assertRedirect("songs/{$song->id}");
-        
+        // データベース確認にお気に入りとして保存されていることを確認
+        $this->assertDatabaseHas('favorites', [
+            "user_id" => $user->id,
+            "song_id" => $song->id,
+        ]);
     }
     
     public function test_user_can_remove_song_from_favorites()
@@ -54,14 +54,19 @@ class FavoriteTest extends TestCase
         $song = factory(Song::class)->create();
         
         //曲をお気に入り登録する
-        $response = $this->actingAs($user)->from('songs/{$song->id}')->post("songs/{$song->id}/favorite");
+        $response = $this->actingAs($user)->from(route('songs.show', ["id" => $song->id]))->post(route("favorites.favorite", ["id" => $song->id]));
         
         //曲をお気に入りから外す
-        $response = $this->actingAs($user)->from('songs/{$song->id}')->delete("songs/{$song->id}/unfavorite");
+        $response = $this->actingAs($user)->from(route('songs.show', ["id" => $song->id]))->delete(route("favorites.unfavorite", ["id" => $song->id]));
         
         // 同じ画面にリダイレクト
         $response->assertStatus(302);
-        $response->assertRedirect("songs/{$song->id}");
+        $response->assertRedirect(route("songs.show", ["id" => $song->id]));
         
+        // データベース確認にお気に入りとして保存されていないことを確認
+        $this->assertDatabaseMissing('comments', [
+            "user_id" => $user->id,
+            "song_id" => $song->id,
+        ]);
     }
 }
