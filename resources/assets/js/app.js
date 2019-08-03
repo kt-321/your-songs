@@ -9,6 +9,14 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+// import Vue from 'vue'
+var VueScrollTo = require('vue-scrollto');
+Vue.use(VueScrollTo)
+
+var VueCarousel = require('vue-carousel');
+Vue.use(VueCarousel)
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -18,5 +26,29 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    components: {
+    carousel: VueCarousel.Carousel,
+    slide: VueCarousel.Slide
+     },
+    data: {
+        toBottom: '#bottom',
+        toTop: '#top'
+  }
 });
+
+function delete_alert(){
+  if(!window.confirm('本当に削除しますか？')){
+      window.alert('キャンセルされました'); 
+      return false;
+  }
+  document.deleteform.submit();
+};
+
+function force_delete_alert(){
+  if(!window.confirm('本当に完全に削除しますか？')){
+      window.alert('キャンセルされました'); 
+      return false;
+  }
+  document.deleteform.submit();
+};
