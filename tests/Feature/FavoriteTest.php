@@ -38,7 +38,7 @@ class FavoriteTest extends TestCase
         // $response->assertRedirect("songs/{$song->id}");
         $response->assertRedirect(route("songs.show", ["id" => $song->id]));
         
-        // データベース確認にお気に入りとして保存されていることを確認
+        // データベースにお気に入りとして保存されていることを確認
         $this->assertDatabaseHas('favorites', [
             "user_id" => $user->id,
             "song_id" => $song->id,

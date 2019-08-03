@@ -26,7 +26,7 @@ class SearchForSongsTest extends TestCase
         $user = factory(User::class)->create();
         
         // 曲の検索画面を表示
-        $response = $this->actingAs($user)->get("search");
+        $response = $this->actingAs($user)->get(route("search.index"));
         $response->assertStatus(200);
     }
     
@@ -42,19 +42,15 @@ class SearchForSongsTest extends TestCase
             "music_age" => 1970,
         ]);
         
-        // 曲の検索画面を表示
-        $response = $this->actingAs($user)->get("search");
-        $response->assertStatus(200);
-        
-        // 曲名で検索し、投稿が新しい順で並び替える   
-        $response = $this->actingAs($user)->from("search")->get("search",[
+        // 曲を曲名で検索し、投稿が新しい順で並び替える   
+        $response = $this->actingAs($user)->get(route("search.index"),[
             "song_name" => "AAA",
             "order" => "created_at",
         ]);
         
-        // 同じ画面で検索結果を表示する
+        // 曲の検索画面で検索結果を表示する
         $response->assertStatus(302);
-        $response->assertRedirect("search");
+        $response->assertRedirect(route("search.index"));
         
         // $response = $this->actingAs($user)
         //     ->postJson(route("search.index"), [
@@ -82,18 +78,18 @@ class SearchForSongsTest extends TestCase
         ]);
         
         // 曲の検索画面を表示
-        $response = $this->actingAs($user)->get("search");
+        $response = $this->actingAs($user)->get(route("search.index"));
         $response->assertStatus(200);
         
-        // 曲名で検索し、投稿が新しい順で並び替える   
-        $response = $this->actingAs($user)->from("search")->get("search",[
+        // 曲をアーティスト名で検索し、お気に入り数が多い順で並び替える   
+        $response = $this->actingAs($user)->get(route("search.index"), [
             "artist_name" => "BBB",
             "order" => "favorites_ranking",
         ]);
         
-        // 同じ画面で検索結果を表示する
+        // 曲の検索画面で検索結果を表示する
         $response->assertStatus(302);
-        $response->assertRedirect("search");
+        $response->assertRedirect(route("search.index"));
     }
     
     public function test_user_can_search_for_songs_by_music_age_ordered_by_comments_ranking()
@@ -109,17 +105,17 @@ class SearchForSongsTest extends TestCase
         ]);
         
         // 曲の検索画面を表示
-        $response = $this->actingAs($user)->get("search");
+        $response = $this->actingAs($user)->get(route("search.index"));
         $response->assertStatus(200);
         
-        // 曲名で検索し、投稿が新しい順で並び替える   
-        $response = $this->actingAs($user)->from("search")->get("search",[
+        // 曲を音楽の年代で検索し、コメント数が多い順で並び替える   
+        $response = $this->actingAs($user)->get(route("search.index"), [
             "music_age" => 1970,
             "order" => "comments_ranking",
         ]);
         
-        // 同じ画面で検索結果を表示する
+        // 曲の検索画面で検索結果を表示する
         $response->assertStatus(302);
-        $response->assertRedirect("search");
+        $response->assertRedirect(route("search.index"));
     }
 }

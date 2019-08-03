@@ -29,7 +29,9 @@ class UploadImageTest extends TestCase
         $user = factory(User::class)->create();
         
         // ユーザー画像のアップロード画面に移動する
-        $response = $this->actingAs($user)->get("users/{$user->id}/images");
+        $response = $this->actingAs($user)->get(route("users.userImages"), [
+            "id" => $user->id
+        ]);
         $response->assertStatus(200);
     }
     
@@ -56,8 +58,8 @@ class UploadImageTest extends TestCase
         // S3にアップロードされたかはS3のバケットを確認しました。
         Storage::disk('avatars')->assertExists($uploadedFile->getFilename());
         
-        // 画像アップロード後にマイページに戻る
-        $response->assertRedirect("/users/{$user->id}");
+        // ユーザー画像をアップロード後にマイページに戻る
+        $response->assertRedirect(route("users.show", ["id" => $user->id]));
 
     }
     
@@ -69,8 +71,8 @@ class UploadImageTest extends TestCase
         // 曲を1つ作成
         $song = factory(Song::class)->create();
         
-        // 曲画像のアップロード画面に移動する
-        $response = $this->actingAs($user)->get("songs/{$song->id}/images");
+        // 曲画像アップロード画面に移動する
+        $response = $this->actingAs($user)->get(route("songs.songImages"), ["id" => $song->id]);
         $response->assertStatus(200);
     }
     
@@ -97,8 +99,8 @@ class UploadImageTest extends TestCase
         // S3にアップロードされたかはS3のバケットを確認しました。
         Storage::disk('avatars')->assertExists($uploadedFile->getFilename());
         
-        // 画像アップロード後にマイページに戻る
-        $response->assertRedirect("/songs/{$song->id}");
+        // 画像アップロード後に曲詳細画面に戻る
+        $response->assertRedirect(route("songs.show", ["id" => $song->id]));
 
     }
 }
