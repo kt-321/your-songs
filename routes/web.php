@@ -40,7 +40,7 @@ Route::group(["middleware" => "guest"], function(){
 // ログインしている全ユーザー
 Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
     // ログイン時のトップページ
-    Route::get("/home", "SongsController@index")->name("songs.index");
+    Route::get("/home", "SongsController@index")->name("home");
     
     // ログアウト
     Route::get("logout", "Auth\LoginController@logout")->name("logout.get");
