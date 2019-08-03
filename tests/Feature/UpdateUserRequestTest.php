@@ -33,8 +33,8 @@ class UpdateUserRequestTest extends TestCase
             "comment" => "dddddd"
         ]);
         
-        //プロフィールの編集画面を表示する
-        $response = $this->actingAs($user)->get("/users/{$user->id}/edit");
+        //プロフィール編集画面を表示する
+        $response = $this->actingAs($user)->get(route("users.edit"), ["id" => $user->id]);
         $response->assertStatus(200);
     }
     
@@ -52,7 +52,7 @@ class UpdateUserRequestTest extends TestCase
         ]);
          
         // プロフィールを更新する   
-        $response = $this->actingAs($user)->put("users/{$user->id}",[
+        $response = $this->actingAs($user)->put(route("users.update"), [
             "name" => "EEE",
             "email" => "FFF@gmail.com",
             "age" => 30,
@@ -62,9 +62,9 @@ class UpdateUserRequestTest extends TestCase
             "comment" => "hhhhhh"
         ]);
         
-        // プロフィール画面に戻る
+        // プロフィール編集画面に戻る
         $response->assertStatus(302);
-        $response->assertRedirect("/users/{$user->id}");
+        $response->assertRedirect(route("users.show", ["id" => $user->id]));
         
         // プロフィールが更新されていることを確認
         $this->assertDatabaseHas('users', [
@@ -91,8 +91,8 @@ class UpdateUserRequestTest extends TestCase
             "comment" => "dddddd"
         ]);
          
-        // プロフィールを更新する   
-        $response = $this->actingAs($user)->from("users/{$user->id}/edit")->put("users/{$user->id}",[
+        // ユーザー名を空白のままで、プロフィールの更新を試みる   
+        $response = $this->actingAs($user)->from(route("users.show", ["id" => $user->id]))->put(route("users.update"), [
             "name" => "",
             "email" => "FFF@gmail.com",
             "age" => 30,
@@ -103,18 +103,18 @@ class UpdateUserRequestTest extends TestCase
         ]);
         
         // プロフィール編集画面に戻る
-        $response->assertStatus(404);
-        $response->assertRedirect("users/{$user->id}/edit");
+        $response->assertStatus(302);
+        $response->assertRedirect(route("users.show", ["id" => $user->id]));
         
-        // プロフィールが更新されていないことを確認
-        $this->assertDatabaseHas('users', [
-            "name" => "AAA",
-            "email" => "BBB@gmail.com",
-            "age" => 20,
-            "gender" => 1,
-            "favorite_music_age" => 1970,
-            "favorite_artist" => "cccccc",
-            "comment" => "dddddd"
+        // プロフィールが更新されて保存されてないことを確認
+        $this->assertDatabaseMissing('users', [
+            "name" => "",
+            "email" => "FFF@gmail.com",
+            "age" => 30,
+            "gender" => 2,
+            "favorite_music_age" => 1980,
+            "favorite_artist" => "gggggg",
+            "comment" => "hhhhhh"
         ]);
     }
     
@@ -131,9 +131,10 @@ class UpdateUserRequestTest extends TestCase
             "comment" => "dddddd"
         ]);
          
-        // プロフィールを更新する   
-        $response = $this->actingAs($user)->from("users/{$user->id}/edit")->put("users/{$user->id}",[
+        // メールアドレスを空白のままでプロフィールの更新を試みる   
+        $response = $this->actingAs($user)->from(route("users.edit", ["id" => $user->id]))->put(route("users.update"), [
             "name" => "EEE",
+            "email" => "",
             "age" => 30,
             "gender" => 2,
             "favorite_music_age" => 1980,
@@ -141,19 +142,19 @@ class UpdateUserRequestTest extends TestCase
             "comment" => "hhhhhh"
         ]);
         
-        // プロフィールの更新に失敗し、プロフィール編集画面に戻る
-        $response->assertStatus(404);
-        $response->assertRedirect("users/{$user->id}/edit");
+        // プロフィール編集画面に戻る
+        $response->assertStatus(302);
+        $response->assertRedirect(route("users.edit", ["id" => $user->id]));
         
-        // プロフィールが更新されていないことを確認
-        $this->assertDatabaseHas('users', [
-            "name" => "AAA",
-            "email" => "BBB@gmail.com",
-            "age" => 20,
-            "gender" => 1,
-            "favorite_music_age" => 1970,
-            "favorite_artist" => "cccccc",
-            "comment" => "dddddd"
+        // プロフィールが更新されて保存されていないことを確認
+        $this->assertDatabaseMissing('users', [
+            "name" => "EEE",
+            "email" => "",
+            "age" => 30,
+            "gender" => 2,
+            "favorite_music_age" => 1980,
+            "favorite_artist" => "gggggg",
+            "comment" => "hhhhhh"
         ]);
     }
 }

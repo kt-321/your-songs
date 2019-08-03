@@ -22,29 +22,27 @@ class RegisterTest extends TestCase
     use WithoutMiddleware;
     
     public function test_user_can_see_signup_page()
-    {
-        //曲の投稿画面を表示する
-        $response = $this->get("songs/create");
+    {   
+        $this->withoutExceptionHandling();
+        
+        //ユーザー登録画面を表示する
+        $response = $this->get(route("signup.get"));
         $response->assertStatus(200);
     }
     
     public function test_request_should_pass_when_data_is_provided()
     {   
-        // ユーザー登録画面を表示
-        $response = $this->get("signup");
-        $response->assertStatus(200);
-        
         // ユーザー登録
-        $response = $this->post("signup",[
+        $response = $this->post(route("signup.post"),[
             "name" => "aaa",
             "email" => "bbb@gmail.com",
             "password" => "cccccc",
             "password_confirmation" => "cccccc"
         ]);
         
-        // ユーザー登録後、トップページにページ移動
+        // ユーザー登録成功後、トップページにページ移動
         $response->assertStatus(302);
-        $response->assertRedirect("/home");
+        $response->assertRedirect(route("home"));
         
         // データベースのusersテーブルに追加されていることを確認
         $this->assertDatabaseHas('users', [
@@ -56,12 +54,8 @@ class RegisterTest extends TestCase
     
     public function test_request_should_fail_when_no_name_is_provided()
     {   
-        // ユーザー登録画面を表示
-        $response = $this->get("signup");
-        $response->assertStatus(200);
-        
-        // ユーザー名を空白の状態でユーザー登録
-        $response = $this->from("signup")->post("signup",[
+        // ユーザー名を空白の状態でユーザー登録を試みる
+        $response = $this->from(route("signup.get"))->post(route("signup.post"),[
             "name" => "",
             "email" => "bbb@gmail.com",
             "password" => "cccccc",
@@ -69,19 +63,21 @@ class RegisterTest extends TestCase
         ]);
         
         // ユーザー登録に失敗し、同画面に戻る
-        $response->assertStatus(404);
-        $response->assertJsonValidationErrors("name");
-        $response->assertRedirect("signup");
+        $response->assertStatus(302);
+        $response->assertRedirect(route("signup.get"));
+        
+        // データベースのusersテーブルに追加されていないことを確認
+        $this->assertDatabaseMissing('users', [
+            "name" => "",
+            "email" => "bbb@gmail.com",
+            "password" => bcrypt("cccccc"),
+        ]);
     }
     
     public function test_request_should_fail_when_no_email_is_provided()
     {   
-        // ユーザー登録画面を表示
-        $response = $this->get("signup");
-        $response->assertStatus(200);
-        
-        // メールアドレスを空白の状態でユーザー登録
-        $response = $this->from("signup")->post("signup",[
+       // メールアドレスを空白の状態でユーザー登録を試みる
+        $response = $this->from(route("signup.get"))->post(route("signup.post"),[
             "name" => "aaa",
             "email" => "",
             "password" => "cccccc",
@@ -89,19 +85,21 @@ class RegisterTest extends TestCase
         ]);
         
         // ユーザー登録に失敗し、同画面に戻る
-        $response->assertStatus(404);
-        $response->assertJsonValidationErrors("email");
-        $response->assertRedirect("signup");
+        $response->assertStatus(302);
+        $response->assertRedirect(route("signup.get"));
+        
+        // データベースのusersテーブルに追加されていないことを確認
+        $this->assertDatabaseMissing('users', [
+            "name" => "aaa",
+            "email" => "",
+            "password" => bcrypt("cccccc"),
+        ]);
     }
     
     public function test_request_should_fail_when_no_password_is_provided()
     {   
-        // ユーザー登録画面を表示
-        $response = $this->get("signup");
-        $response->assertStatus(200);
-        
-        // ユーザー登録
-        $response = $this->post("signup",[
+        // パスワードを空白のままユーザー登録を試みる
+        $response = $this->from(route("signup.get"))->post(route("signup.post"),[
             "name" => "aaa",
             "email" => "bbb@gmail.com",
             "password" => "",
@@ -109,19 +107,21 @@ class RegisterTest extends TestCase
         ]);
         
         // ユーザー登録に失敗し、同画面に戻る
-        $response->assertStatus(404);
-        $response->assertJsonValidationErrors("email");
-        $response->assertRedirect("signup");
+        $response->assertStatus(302);
+        $response->assertRedirect(route("signup.get"));
+        
+        // データベースのusersテーブルに追加されていないことを確認
+        $this->assertDatabaseMissing('users', [
+            "name" => "aaa",
+            "email" => "bbb@gmail.com",
+            "password" => "",
+        ]);
     }
     
     public function test_request_should_fail_when_password_doesnot_match_password_confirmation()
     {   
-        // ユーザー登録画面を表示
-        $response = $this->get("signup");
-        $response->assertStatus(200);
-        
-        // ユーザー登録
-        $response = $this->post("signup",[
+        // パスワード記入欄の値とパスワード確認欄の値が異なるままユーザー登録を試みる
+        $response = $this->from(route("signup.get"))->post(route("signup.post"),[
             "name" => "aaa",
             "email" => "bbb@gmail.com",
             "password" => "cccccc",
@@ -129,8 +129,14 @@ class RegisterTest extends TestCase
         ]);
         
         // ユーザー登録に失敗し、同画面に戻る
-        $response->assertStatus(404);
-        $response->assertJsonValidationErrors("email");
-        $response->assertRedirect("signup");
+        $response->assertStatus(302);
+        $response->assertRedirect(route("signup.get"));
+        
+        // データベースのusersテーブルに追加されていないことを確認
+        $this->assertDatabaseMissing('users', [
+            "name" => "aaa",
+            "email" => "bbb@gmail.com",
+            "password" => bcrypt("cccccc"),
+        ]);
     }
 }

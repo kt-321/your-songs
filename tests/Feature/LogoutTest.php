@@ -29,15 +29,15 @@ class LogoutTest extends TestCase
         $this->actingAs($user);
         
         // 認証済み
-        $this->assertTrue(Auth::check());
+        $this->assertAuthenticated($guard = null);
         
         // ログアウトを実行
-        $response = $this->get("logout");
+        $response = $this->get(route("logout.get"));
         
         // 認証されていない
-        $this->assertFalse(Auth::check());
+        $this->assertGuest($guard = null);
         
         // トップページにリダイレクト
-        $response->assertRedirect("/");
+        $response->assertRedirect(route("welcome"));
     }
 }

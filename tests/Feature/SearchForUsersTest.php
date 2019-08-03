@@ -25,7 +25,7 @@ class SearchForSongsTest extends TestCase
         $user = factory(User::class)->create();
         
         // ユーザーの検索画面を表示
-        $response = $this->actingAs($user)->get("users");
+        $response = $this->actingAs($user)->get(route("users.index"));
         $response->assertStatus(200);
     }
     
@@ -42,19 +42,15 @@ class SearchForSongsTest extends TestCase
             "favorite_music_age" => 1970,
             "favorite_artist" => "BBB",
         ]);
-        
-        // ユーザーの検索画面を表示
-        $response = $this->actingAs($user)->get("users");
-        $response->assertStatus(200);
-        
-        // ユーザー名で検索
-        $response = $this->actingAs($user)->from("users")->get("users",[
+    
+        // ユーザーをユーザー名で検索
+        $response = $this->actingAs($user1)->get(route("users.index"), [
             "name" => "AAA"
         ]);
         
-        // 同じ画面で検索結果を表示する
+        // ユーザーの検索画面で検索結果を表示する
         $response->assertStatus(302);
-        $response->assertRedirect("users");
+        $response->assertRedirect(route("users.index"));
         
         
         // $response = $this->actingAs($user)
@@ -86,18 +82,14 @@ class SearchForSongsTest extends TestCase
             "favorite_artist" => "BBB",
         ]);
         
-        // ユーザーの検索画面を表示
-        $response = $this->actingAs($user)->get("users");
-        $response->assertStatus(200);
-        
-        // ユーザー名で検索
-        $response = $this->actingAs($user)->from("users")->get("users",[
+        // ユーザーを年齢で検索
+        $response = $this->actingAs($user1)->get(route("users.index"), [
             "age" => 10,
         ]);
         
-        // 同じ画面で検索結果を表示する
+        // ユーザーの検索画面で検索結果を表示する
         $response->assertStatus(302);
-        $response->assertRedirect("users");
+        $response->assertRedirect(route("users.index"));
     }
     
     public function test_user_can_search_for_users_by_gender()
@@ -114,18 +106,14 @@ class SearchForSongsTest extends TestCase
             "favorite_artist" => "BBB",
         ]);
         
-        // ユーザーの検索画面を表示
-        $response = $this->actingAs($user1)->get("users");
-        $response->assertStatus(200);
-        
-        // ユーザー名で検索
-        $response = $this->actingAs($user1)->from("users")->get("users",[
+        // ユーザーをユーザー名で検索
+        $response = $this->actingAs($user1)->get(route("users.index"), [
             "gender" => 1,
         ]);
         
-        // 同じ画面で検索結果を表示する
+        // ユーザーの検索画面で検索結果を表示する
         $response->assertStatus(302);
-        $response->assertRedirect("users");
+        $response->assertRedirect(route("users.index"));
     }
     
     public function test_user_can_search_for_users_by_favorite_music_age()
@@ -142,18 +130,14 @@ class SearchForSongsTest extends TestCase
             "favorite_artist" => "BBB",
         ]);
         
-        // ユーザーの検索画面を表示
-        $response = $this->actingAs($user1)->get("users");
-        $response->assertStatus(200);
-        
-        // 好きな音楽の年代で検索
-        $response = $this->actingAs($user1)->from("users")->get("users",[
+        // ユーザーを好きな音楽の年代で検索
+        $response = $this->actingAs($user1)->get(route("users.index"), [
             "favorite_music_age" => 1970,
         ]);
         
-        // 同じ画面で検索結果を表示する
+        // ユーザーの検索画面で検索結果を表示する
         $response->assertStatus(302);
-        $response->assertRedirect("users");
+        $response->assertRedirect(route("users.index"));
     }
     
     public function test_user_can_search_for_users_by_favorite_artist()
@@ -170,17 +154,13 @@ class SearchForSongsTest extends TestCase
             "favorite_artist" => "BBB",
         ]);
         
-        // ユーザーの検索画面を表示
-        $response = $this->actingAs($user1)->get("users");
-        $response->assertStatus(200);
-        
-        // 好きな音楽の年代で検索
-        $response = $this->actingAs($user1)->from("users")->get("users",[
+        // ユーザーを好きなアーティスト名で検索
+        $response = $this->actingAs($user1)->get(route("users.index"), [
             "favorite_artist" => "BBB",
         ]);
         
-        // 同じ画面で検索結果を表示する
+        // ユーザーの検索画面で検索結果を表示する
         $response->assertStatus(302);
-        $response->assertRedirect("users");
+        $response->assertRedirect(route("users.index"));
     }
 }

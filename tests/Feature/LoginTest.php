@@ -22,8 +22,10 @@ class LoginTest extends TestCase
     use WithoutMiddleware;
     
     public function test_user_can_view_login()
-    {
-        $response = $this->get("login");
+    {   
+        $this->withoutExceptionHandling();
+        
+        $response = $this->get(route("login"));
 
         $response->assertStatus(200);
     }
@@ -40,7 +42,7 @@ class LoginTest extends TestCase
         $this->assertGuest($guard = null);
         
         // ログイン実行
-        $response = $this->post("login", [
+        $response = $this->post(route("login.post"), [
             "email" => $user->email,
             "password" => "test1111"
         ]);
@@ -50,7 +52,7 @@ class LoginTest extends TestCase
         $this->assertAuthenticated($guard = null);
         
         // ログイン後にトップページにリダイレクトされる
-        $response->assertRedirect("/home");
+        $response->assertRedirect(route("home"));
     }
     
     public function test_invalid_user_cannot_login()
@@ -65,7 +67,7 @@ class LoginTest extends TestCase
         $this->assertGuest($guard = null);
         
         // 異なるパスワードでログイン実行
-        $response = $this->post("login", [
+        $response = $this->post(route("login.post"), [
             "email" => $user->email,
             "password" => "test2222"
         ]);
@@ -73,13 +75,6 @@ class LoginTest extends TestCase
         // 認証失敗
         // $this->assertFalse(Auth::check());
         $this->assertGuest($guard = null);
-        
-        // セッションにエラーを含むことを確認
-        $response->assertSessionHasErrors(["email"]);
-        
-        // エラーメッセージを確認
-        $this->assertEquals("メールアドレスあるいはパスワードが正しくありません。",
-        session("errors")->first("email"));
     }
     
 }

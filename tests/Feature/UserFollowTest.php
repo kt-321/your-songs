@@ -27,12 +27,18 @@ class UserFollowTest extends TestCase
         $user1 = factory(User::class)->create();
         $user2 = factory(User::class)->create();
            
-        // フォローする
-        $response = $this->actingAs($user1)->from('users/{$user2->id}')->post("users/{$user2->id}/follow");
+        // ユーザー1がユーザー2をフォローする
+        $response = $this->actingAs($user1)->from(route("users.show", ["id" => $user2->id]))->post(route("users.follow"), ["id" => $user2->id]);
            
         // 同じ画面にリダイレクト
         $response->assertStatus(302);
-        $response->assertRedirect("users/{$user2->id}");
+        $response->assertRedirect(route("users.show"), ["id" => $user2->id]);
+        
+        // データベースにフォロー・フォロワーの関係が保存されていることを確認
+        $this->assertDatabaseHas('user_follow', [
+            "user_id" => $user1->id,
+            "follow_id" => $user2->id,
+        ]);
     }
     
     public function test_user_can_unfollow()
@@ -41,42 +47,40 @@ class UserFollowTest extends TestCase
         $user1 = factory(User::class)->create();
         $user2 = factory(User::class)->create();
            
-        // フォローする
-        $response = $this->actingAs($user1)->from('users/{$user2->id}')->post("users/{$user2->id}/follow");
+        // ユーザー1がユーザー2をフォローする
+        $response = $this->actingAs($user1)->from(route("users.show", ["id" => $user2->id]))->post(route("users.follow"), ["id" => $user2->id]);
         
-        // フォローを外す
-        $response = $this->actingAs($user1)->from('users/{$user2->id}')->delete("users/{$user2->id}/unfollow");
+        // ユーザー1がユーザー2のフォローを外す
+        $response = $this->actingAs($user1)->from(route("users.show", ["id" => $user2->id]))->delete(route("users.unfollow"), ["id" => $user2->id]);
            
         // 同じ画面にリダイレクト
         $response->assertStatus(302);
-        $response->assertRedirect("users/{$user2->id}");
+        $response->assertRedirect(route("users.show"), ["id" => $user2->id]);
+        
+        // データベースからフォロー・フォロワーの関係のデータがなくなっていることを確認
+        $this->assertDatabaseMissing('user_follow', [
+            "user_id" => $user1->id,
+            "follow_id" => $user2->id,
+        ]);
     }
     
     public function test_user_can_see_followings()
     {
-        // ユーザーを2人作成
-        $user1 = factory(User::class)->create();
-        $user2 = factory(User::class)->create();
+        // ユーザーを1人作成
+        $user = factory(User::class)->create();
         
-        // ユーザー1がユーザー2をフォローする
-        $response = $this->actingAs($user1)->post("users/{$user2->id}/follow");
-        
-        // ユーザー1がフォローしているユーザー一覧を見る
-        $response = $this->actingAs($user1)->get("users/{$user1->id}/followings");  
+        // ユーザーがフォローしているユーザー一覧を見る
+        $response = $this->actingAs($user)->get(route("users.followings"), ["id" => $user->id]);  
         $response->assertStatus(200);
     }
     
     public function test_user_can_see_followers()
     {
-        // ユーザーを2人作成
-        $user1 = factory(User::class)->create();
-        $user2 = factory(User::class)->create();
+        // ユーザーを1人作成
+        $user = factory(User::class)->create();
         
-        // ユーザー1がユーザー2をフォローする
-        $response = $this->actingAs($user1)->post("users/{$user2->id}/follow");
-        
-        // ユーザー1をフォローしているユーザー一覧を見る
-        $response = $this->actingAs($user1)->get("users/{$user1->id}/followers");  
+        // ユーザーが自分をフォローしているユーザー一覧を見る
+        $response = $this->actingAs($user)->get(route("users.followers"), ["id" => $user->id]);  
         $response->assertStatus(200);
     }
 }

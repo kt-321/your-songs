@@ -86,4 +86,8 @@
             @include("songs.songs", ["songs" => $songs])
         @endif 
     </div>
+    
+    <div class="my-3 mr-3 text-right">
+        <a class="btn btn-light" href="#" v-scroll-to="toTop">ページのトップに戻る</a>
+    </div>
 @endsection

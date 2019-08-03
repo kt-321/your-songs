@@ -9,7 +9,6 @@
         <div class="col-sm-6 offset-sm-3">
             {!! Form::open(["route" => "signup.post"]) !!}
                 <div class="form-group">
-                    @csrf
                     <i class="fas fa-user-circle mr-1"></i>
                     {!! Form::label("name", "名前") !!}
                     <span class="badge badge-pill badge-danger mb-2">必須</span>
@@ -17,7 +16,6 @@
                 </div>
                                 
                 <div class="form-group">
-                    @csrf
                     <i class="far fa-envelope mr-1"></i>
                     {!! Form::label("email", "メールアドレス") !!}
                     <span class="badge badge-pill badge-danger mb-2">必須</span>
@@ -25,7 +23,6 @@
                 </div>
                             
                 <div class="form-group">
-                    @csrf
                     <i class="fas fa-unlock-alt mr-1"></i>
                     {!! Form::label("password", "パスワード") !!}
                     <span class="badge badge-pill badge-danger mb-2">必須</span>
@@ -33,7 +30,6 @@
                 </div>
                                 
                 <div class="form-group">
-                    @csrf
                     <i class="fas fa-unlock-alt mr-1"></i>
                     {!! Form::label("password_confirmation", "パスワード（確認）") !!}
                     <span class="badge badge-pill badge-danger mb-2">必須</span>
