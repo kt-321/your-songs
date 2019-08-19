@@ -30,6 +30,8 @@
             <!--    <example-component></example-component>-->
             <!--</div>-->
             
+            <!--<food-component/>-->
+            
             
             
             @yield("content")

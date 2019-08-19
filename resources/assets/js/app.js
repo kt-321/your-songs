@@ -16,6 +16,9 @@ Vue.use(VueScrollTo)
 var VueCarousel = require('vue-carousel');
 Vue.use(VueCarousel)
 
+var VueDraggable = require('vuedraggable');
+Vue.use(VueDraggable)
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -25,16 +28,26 @@ Vue.use(VueCarousel)
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
+Vue.component("food-component", require("./components/FoodComponent.vue").default);
+
+// Vue.component("recommended-songs-component", require("./components/RecommendedSongsComponent.vue").default);
+
+Vue.component("favorite-component", require("./components/FavoriteComponent.vue").default);
+
+
+
 const app = new Vue({
     el: '#app',
     components: {
     carousel: VueCarousel.Carousel,
-    slide: VueCarousel.Slide
+    slide: VueCarousel.Slide,
      },
     data: {
         toBottom: '#bottom',
-        toTop: '#top'
-  }
+        toTop: '#top',
+        
+    },
+    
 });
 
 function delete_alert(){
