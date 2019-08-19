@@ -77,7 +77,7 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
     
     Route::get("search", "SearchController@index")->name("search.index");
     
-    Route::get("youtube", "SongsController@youtube")->name("songs.youtube");
+    // Route::get("youtube", "SongsController@youtube")->name("songs.youtube");
 });
 
 // 管理者権限機能

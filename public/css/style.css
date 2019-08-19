@@ -441,6 +441,14 @@ footer {
   border-left: solid 5px #7db4e6;/*左線*/
 }
 
+
+
+.list{
+  cursor:pointer;
+  padding: 10px;
+  border: solid #ddd 1px;
+}
+
 /*画面サイズが480pxから768pxのとき*/
 @media screen and (min-width:480px){ 
     a.nav-link{

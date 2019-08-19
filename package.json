@@ -24,6 +24,7 @@
     "vue-carousel": "^0.18.0",
     "vue-scrollto": "^2.15.0",
     "vue-template-compiler": "^2.6.10",
+    "vuedraggable": "^2.23.0",
     "vuejs-paginate": "^2.1.0"
   },
   "dependencies": {}

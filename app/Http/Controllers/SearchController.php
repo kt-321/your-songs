@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use App\Song;
 use App\User;
 
+use JavaScript;
+
 class SearchController extends Controller
 {
     public function index(Request $request)
@@ -80,6 +82,11 @@ class SearchController extends Controller
         "songs" => $songs,
         "recommended_songs" => $recommended_songs
         ];
+        
+        // JavaScript::put([
+        // "recommended_songs" => $recommended_songs
+        // ]);
+
         
         return view("search.index", $data);
         
