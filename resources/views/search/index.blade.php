@@ -1,7 +1,6 @@
 @extends("layouts.app")
     @section("content")
-
-            
+    
             <!--ページタイトル-->
             <h1 class="mb-4 text-center page-title"><i class="fas fa-music mr-3"></i>曲を検索</h1>
             
@@ -251,6 +250,11 @@
                 <div class="my-3 mr-3 text-right">
                     <a class="btn btn-light" href="#" v-scroll-to="toTop">ページのトップに戻る</a>
                 </div>
+                
+                
+                <!--おすすめ曲をVueDraggableで-->
+                    <!--<recommended-songs-component :recommended-songs="{{ $recommended_songs }}"/>-->
+               
                
                 <!--おすすめ曲-->
                 <!--@if(count($recommended_songs) > 0)-->

@@ -46,7 +46,7 @@
                         @if($user->favorite_artist)
                         <li style="border-left: solid 1px #333; padding: 0 10px; display: table-cell;">
                             <div class="status-label">お気に入り</div>
-                            <div class="status-value">{{ $user->favorite_artist}}</div>
+                            <div class="status-value">{{ $user->favorite_artist }}</div>
                         </li>
                         @endif
                         
@@ -77,6 +77,14 @@
             <div class="buttons-under-profile mb-3 text-center">
                 @include("user_follow.follow_button", ["user" => $user])
             </div>
+            
+            
+            
+            <!--VueDraggableでお気に入り一覧を表示-->
+            <!--<favorite-component songs="{{ $songs }}"/>-->
+            <favorite-component songs="{{!! $songs->toJson() !!}}"/>
+            
+            
                
             <div>
                 @include("users.navtabs", ["user" => $user])

@@ -35,8 +35,8 @@
                                 <label for="email" class="col-md-4 offset-md-3 control-label"><i class="far fa-envelope mr-1"></i>登録済みのメールアドレス</label>
     
                                 <div class="col-md-6 offset-md-3">
-                                    <!--<input id="email" type="email" class="form-control" name="email" value="{{ $email or old("email") }}" required autofocus>-->
-                                    <input id="email" type="email" class="form-control" name="email" value="{{ old("email") }}" required autofocus>
+                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email', $email) }}" required autofocus>
+                                    <!--<input id="email" type="email" class="form-control" name="email" value="{{ old("email") }}" required autofocus>-->
     
                                     @if ($errors->has("email"))
                                         <span class="help-block">

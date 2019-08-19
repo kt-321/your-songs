@@ -11,7 +11,7 @@ use App\Song;
 class UsersController extends Controller
 {
     public function index(Request $request)
-    {
+    {   
         // 値を取得
         $name = $request->input("name");
         $age = $request->input("age");
@@ -166,6 +166,9 @@ class UsersController extends Controller
             "user" => $user,
             "songs" => $favorites,
         ];
+        
+        // return response()->json(["songs" => $favorites]);
+        
         
         $data +=$this->counts($user);
         

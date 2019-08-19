@@ -1,9 +1,9 @@
 <header class="mb-4">
     <nav class="navbar navbar-expand-sm navbar-dark">
         @if (Auth::check())
-        <a class="navbar-brand" href="/home">YourSongs</a>
+        <a class="navbar-brand" href="/home"><i class="fas fa-headphones-alt mr-1"></i>YourSongs</a>
         @else
-        <a class="navbar-brand" href="/">YourSongs</a>
+        <a class="navbar-brand" href="/"><i class="fas fa-headphones-alt mr-1"></i>YourSongs</a>
         @endif
         
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav_bar">
