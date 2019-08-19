@@ -1,3 +1,40 @@
+.container{
+    background-color: #ffffff;
+}
+
+.header-before-login{
+    position: relative;
+    height: 50vh;
+    background: url("https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/header-live.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+}
+
+.app-title{
+    position: absolute;
+    color: #fff;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 300px;
+    height: 100px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    text-shadow: black 1px 1px 0px, 
+                 black -1px 1px 0px, 
+                 black 1px -1px 0px, 
+                 black -1px -1px 0px
+}
+
+.app-description{
+  text-align: center;
+}
+
 .navbar{
   background: #003366;
 }
@@ -73,31 +110,6 @@ footer{
   background-color: #003366;
 }
 
-.container{
-    background-color: #ffffff;
-}
-
-.header-before-login{
-    position: relative;
-    height: 50vh;
-    background: url("https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/header-live.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 100%;
-}
-
-.caption{
-    position: absolute;
-    color: #fff;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    width: 200px;
-    height: 50px;
-}
 
 .my-orange {
     color: #fecb81;
@@ -177,6 +189,13 @@ footer {
   font-size: 15px;
   background-color: #fff;
   color: black;
+}
+
+/*ビュードラッガブルのテスト*/
+.Vue-draggable-test-list{
+  cursor:pointer;
+  padding: 10px;
+  border: solid #ddd 1px;
 }
 
 /*コメント*/

@@ -24,7 +24,8 @@ class ResetPasswordTest extends TestCase
     // パスワードリセットをリクエストする画面の閲覧可能
     public function test_user_can_view_reset_request()
     {
-     $response = $this->get(route("password.request"));
+     $user = factory(User::class)->create();
+     $response = $this->get(route("password.request", ["token" => $user->token]));
      $response->assertStatus(200);
     }
     
@@ -41,9 +42,6 @@ class ResetPasswordTest extends TestCase
      // 同画面にリダイレクト
      $response->assertStatus(302);
      $response->assertRedirect(route("password.request"));
-     // // 成功のメッセージ
-     // $response->assertSessionHas("status",
-     //     "パスワード再設定用メールを送信しました。");
      }
      
      
@@ -59,11 +57,10 @@ class ResetPasswordTest extends TestCase
      $response = $this->from(route("password.request"))->post(route("password.email"), [
          "email" => "nobody@example.com"
      ]);
+     
+     // パスワードのリクエストに失敗し、パスワードリクエスト画面に戻る
      $response->assertStatus(302);
      $response->assertRedirect(route("password.request"));
-    //  // 失敗のエラーメッセージ
-    //  $response->assertSessionHasErrors("email",
-    //      "このメールアドレスに一致するユーザーを見つけることが出来ませんでした。");
     }
     
     

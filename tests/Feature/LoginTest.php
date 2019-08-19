@@ -38,8 +38,7 @@ class LoginTest extends TestCase
         ]);
         
         // まだ認証されていない
-        // $this->assertFalse(Auth::check());
-        $this->assertGuest($guard = null);
+        $this->assertFalse(Auth::check());
         
         // ログイン実行
         $response = $this->post(route("login.post"), [
@@ -48,10 +47,10 @@ class LoginTest extends TestCase
         ]);
         
         // 認証されている
-        // $this->assertTrue(Auth::check());
-        $this->assertAuthenticated($guard = null);
+        $this->assertTrue(Auth::check());
         
         // ログイン後にトップページにリダイレクトされる
+        $response->assertStatus(302);
         $response->assertRedirect(route("home"));
     }
     
@@ -63,18 +62,20 @@ class LoginTest extends TestCase
         ]);
         
         // まだ認証されていない
-        // $this->assertFalse(Auth::check());
-        $this->assertGuest($guard = null);
+        $this->assertFalse(Auth::check());
         
         // 異なるパスワードでログイン実行
-        $response = $this->post(route("login.post"), [
+        $response = $this->from(route("login"))->post(route("login.post"), [
             "email" => $user->email,
             "password" => "test2222"
         ]);
         
         // 認証失敗
-        // $this->assertFalse(Auth::check());
-        $this->assertGuest($guard = null);
+        $this->assertFalse(Auth::check());
+        
+        // ログインページに戻る
+        $response->assertStatus(302);
+        $response->assertRedirect(route("login"));
     }
     
 }

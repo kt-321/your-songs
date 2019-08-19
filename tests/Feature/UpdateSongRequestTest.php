@@ -10,6 +10,8 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use App\User;
 use App\Song;
 
+use Auth;
+
 class UpdateSongRequestTest extends TestCase
 {
     /**
@@ -36,9 +38,7 @@ class UpdateSongRequestTest extends TestCase
         ]);
         
         //曲の編集画面を表示する
-        $response = $this->actingAs($user)->get(route("songs.edit"),[
-            "id" => $song->id,
-        ]);
+        $response = $this->actingAs($user)->get(route("songs.edit", ["id" => $song->id]));
         $response->assertStatus(200);
     }
     
@@ -55,7 +55,8 @@ class UpdateSongRequestTest extends TestCase
             "music_age" => 1970,
         ]);
         
-        $response = $this->actingAs($user)->put(route("songs.update"),[
+        //曲情報を更新する
+        $response = $this->actingAs($user)->put(route("songs.update", [$song]), [
             "song_name" => "CCC",
             "artist_name" => "DDD",
             "music_age" => 1980
@@ -65,7 +66,7 @@ class UpdateSongRequestTest extends TestCase
         // 曲詳細ページに戻る
         $response->assertStatus(302);
         // $response->assertRedirect("songs/{$song->id}");
-        $response->assertRedirect(route("songs.show", ["id" => $song->id]));
+        $response->assertRedirect(route("songs.show", [$song]));
         
         // 更新された曲がデータベースに保存されていることを確認する
         $this->assertDatabaseHas('songs', [
@@ -90,8 +91,7 @@ class UpdateSongRequestTest extends TestCase
         ]);
         
         // 曲名を空白のまま曲情報の更新を試みる
-        // $response = $this->actingAs($user)->put("songs/{$song->id}",[
-        $response = $this->actingAs($user)->put(route("songs.update"),[
+        $response = $this->actingAs($user)->from(route("songs.edit", [$song]))->put(route("songs.update", [$song]), [
             "song_name" => "",
             "artist_name" => "BBB",
             "music_age" => 1970
@@ -99,7 +99,7 @@ class UpdateSongRequestTest extends TestCase
             
         // 曲編集ページが表示される
         $response->assertStatus(302);
-        $response->assertRedirect(route("songs.edit"), ["id" => $song->id]);
+        $response->assertRedirect(route("songs.edit", [$song]));
         
         // 曲情報が更新されて保存されていないことを確認する
         $this->assertDatabaseMissing('songs', [
@@ -121,7 +121,7 @@ class UpdateSongRequestTest extends TestCase
         ]);
         
         // アーティスト名を空白のまま曲情報の更新を試みる
-        $response = $this->actingAs($user)->put(route("songs.update"),[
+        $response = $this->actingAs($user)->from(route("songs.edit", [$song]))->put(route("songs.update", [$song]), [
             "song_name" => "",
             "artist_name" => "BBB",
             "music_age" => 1970
@@ -129,7 +129,7 @@ class UpdateSongRequestTest extends TestCase
         
         // 曲編集ページに戻る
         $response->assertStatus(302);
-        $response->assertRedirect(route("songs.edit"), ["id" => $song->id]);
+        $response->assertRedirect(route("songs.edit", [$song]));
         
         // 曲情報が更新されて保存されていないことを確認する
         $this->assertDatabaseMissing('songs', [
@@ -151,18 +151,24 @@ class UpdateSongRequestTest extends TestCase
         ]);
         
         // 音楽の年代を空白のまま曲情報の更新を試みる
-        $response = $this->actingAs($user)->put(route("songs.update"),[
+        $response = $this->actingAs($user)->from(route("songs.edit", [$song]))->put(route("songs.update", [$song]), [
             "song_name" => "AAA",
             "artist_name" => "BBB",
             "music_age" => ""
         ]);
         
+        
+        $this->assertTrue(Auth::check());
+        
         // 曲編集ページに戻る
         $response->assertStatus(302);
-        $response->assertRedirect(route("songs.edit"), ["id" => $song->id]);
+        // $response->assertRedirect(route("songs.edit", ["id" => $song->id]));
+        $response->assertRedirect(route("songs.edit", [$song]));
         
+        
+    
         // 曲情報が更新されて保存されていないことを確認する
-        $this->assertDatabaseHas('songs', [
+        $this->assertDatabaseMissing('songs', [
             "user_id" => $user->id,
             "song_name" => "AAA",
             "artist_name" => "BBB",
