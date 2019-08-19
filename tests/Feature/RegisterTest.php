@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use App\User;
 
 use Auth;
+use Hash;
 
 class RegisterTest extends TestCase
 {
@@ -23,10 +24,13 @@ class RegisterTest extends TestCase
     
     public function test_user_can_see_signup_page()
     {   
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
         
         //ユーザー登録画面を表示する
         $response = $this->get(route("signup.get"));
+        
+        // dd($response);
+        
         $response->assertStatus(200);
     }
     
@@ -44,12 +48,20 @@ class RegisterTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect(route("home"));
         
-        // データベースのusersテーブルに追加されていることを確認
-        $this->assertDatabaseHas('users', [
-            "name" => "aaa",
-            "email" => "bbb@gmail.com",
-            "password" => bcrypt("cccccc"),
-        ]);
+        // メールはユニークなため利用
+        $user = User::where("email", "bbb@gmail.com")->first();
+        
+        $this->assertSame("aaa", $user->name);
+        
+        $this->assertTrue(Hash::check("cccccc", $user->password));
+        
+        
+        // // データベースのusersテーブルに追加されていることを確認
+        // $this->assertDatabaseHas('users', [
+        //     "name" => "aaa",
+        //     "email" => "bbb@gmail.com",
+        //     "password" => bcrypt("cccccc"),
+        // ]);
     }
     
     public function test_request_should_fail_when_no_name_is_provided()

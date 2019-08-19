@@ -43,7 +43,7 @@ class SearchForSongsTest extends TestCase
         ]);
         
         // 曲を曲名で検索し、投稿が新しい順で並び替える   
-        $response = $this->actingAs($user)->get(route("search.index"),[
+        $response = $this->actingAs($user)->get(route("search.index"), [
             "song_name" => "AAA",
             "order" => "created_at",
         ]);
@@ -51,6 +51,8 @@ class SearchForSongsTest extends TestCase
         // 曲の検索画面で検索結果を表示する
         $response->assertStatus(302);
         $response->assertRedirect(route("search.index"));
+        
+        // 指定した文字列が表示されているか
         
         // $response = $this->actingAs($user)
         //     ->postJson(route("search.index"), [
