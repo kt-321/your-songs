@@ -17,6 +17,7 @@
     　　<div class="container container-before-login p-4">      
             <div class="text-center">
                 <h2 class="welcome-message">Welcome to the YourSongs !!</h1>
+                <p>ログインボタンからテストログインすることもできます。</p>
                 <a href="{{ route("login") }}" class="btn btn-lg btn-primary"><i class="fas fa-sign-out-alt mr-1"></i>ログイン</a>
                 <a href="{{ route("signup.get") }}" class="btn btn-lg btn-success"><i class="fas fa-user-plus mr-1"></i>新規登録</a>
             </div>
