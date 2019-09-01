@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
+use Hash;
+
 use App\User;
 
 use Auth;
@@ -48,8 +50,11 @@ class RegisterTest extends TestCase
         $this->assertDatabaseHas('users', [
             "name" => "aaa",
             "email" => "bbb@gmail.com",
-            "password" => bcrypt("cccccc"),
+            // "password" => Hash::make("cccccc"),
         ]);
+        
+        $user = User::where('email', 'bbb@gmail.com')->first();
+        $this->assertTrue(Hash::check('cccccc', $user->password));
     }
     
     public function test_request_should_fail_when_no_name_is_provided()

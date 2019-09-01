@@ -29,9 +29,7 @@ class UploadImageTest extends TestCase
         $user = factory(User::class)->create();
         
         // ユーザー画像のアップロード画面に移動する
-        $response = $this->actingAs($user)->get(route("users.userImages"), [
-            "id" => $user->id
-        ]);
+        $response = $this->actingAs($user)->get(route("users.userImages", ["id" => $user->id]));
         $response->assertStatus(200);
     }
     

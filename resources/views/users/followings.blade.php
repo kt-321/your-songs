@@ -81,7 +81,10 @@
                
             <div>
                 @include("users.navtabs", ["user" => $user])
-                @include("users.users", ["users" => $users])
+                
+                クリック＆ドラッグでフォロー中であるユーザーの順番を入れ替えることが出来ます
+                <!--VueDraggableでフォロー中ユーザー一覧を表示-->
+                <followings-component :users="{{ $users }}"/>
             </div>
             
             <div class="my-3 mr-3 text-right">

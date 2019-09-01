@@ -15,7 +15,7 @@
             <ul class="navbar-nav">
                 <!--ログイン中のナビゲーションバー-->
                 @if (Auth::check())
-                    @if(Auth::user()->role == 5)
+                    @if(Auth::user()->role === 5)
                     <li class="nav-item">
                         <a href="{{ url("/index-for-admin") }}" class="nav-link"><i class="fas fa-trash-alt mr-1"></i>曲の管理</a>
                     </li>
@@ -57,6 +57,7 @@
                 
                 <!--ログアウト中のナビゲーションバー-->
                 @else
+                    <li class="nav-item"><a href="{{ route("search.index") }}" class="nav-link"><i class="fas fa-sign-in-alt mr-1"></i>曲の検索</a></li>
                     <li class="nav-item"><a href="{{ route("login") }}" class="nav-link"><i class="fas fa-sign-in-alt mr-1"></i>ログイン</a></li>
                     <li class="nav-item"><a href="{{ route("signup.get") }}" class="nav-link"><i class="fas fa-user-plus mr-1"></i>新規登録</a></li>
                     <li class="nav-item"><a href="{{ url("about") }}" class="nav-link">YourSongsとは</a></li>

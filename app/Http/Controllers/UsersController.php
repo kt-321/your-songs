@@ -130,7 +130,8 @@ class UsersController extends Controller
     public function followings($id)
     {
         $user = User::find($id);
-        $followings = $user->followings()->paginate(10);
+        // $followings = $user->followings()->paginate(10);
+        $followings = $user->followings()->get();
         
         $data = [
             "user" => $user,
@@ -160,7 +161,8 @@ class UsersController extends Controller
     public function favorites($id)
     {
         $user = User::find($id);
-        $favorites = $user->favorites()->paginate(10);
+        // $favorites = $user->favorites()->paginate(10);
+        $favorites = $user->favorites()->with("user")->get();
         
         $data = [
             "user" => $user,

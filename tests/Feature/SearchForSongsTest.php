@@ -49,20 +49,8 @@ class SearchForSongsTest extends TestCase
         ]);
         
         // 曲の検索画面で検索結果を表示する
-        $response->assertStatus(302);
-        $response->assertRedirect(route("search.index"));
+        $response->assertStatus(200);
         
-        // $response = $this->actingAs($user)
-        //     ->postJson(route("search.index"), [
-        //         "song_name" => "AAA",
-        //         "artist_name" => "",
-        //         "music_age" => 1970
-        //     ]);
-        
-        // $response->assertStatus(
-        //     Response::HTTP_UNPROCESSABLE_ENTITY
-        // );
-        // $response->assertJsonValidationErrors("artist_name");
     }
     
     public function test_user_can_search_for_songs_by_artist_name_ordered_by_favorites_ranking()
@@ -77,10 +65,6 @@ class SearchForSongsTest extends TestCase
             "music_age" => 1970,
         ]);
         
-        // 曲の検索画面を表示
-        $response = $this->actingAs($user)->get(route("search.index"));
-        $response->assertStatus(200);
-        
         // 曲をアーティスト名で検索し、お気に入り数が多い順で並び替える   
         $response = $this->actingAs($user)->get(route("search.index"), [
             "artist_name" => "BBB",
@@ -88,8 +72,7 @@ class SearchForSongsTest extends TestCase
         ]);
         
         // 曲の検索画面で検索結果を表示する
-        $response->assertStatus(302);
-        $response->assertRedirect(route("search.index"));
+        $response->assertStatus(200);
     }
     
     public function test_user_can_search_for_songs_by_music_age_ordered_by_comments_ranking()
@@ -104,9 +87,6 @@ class SearchForSongsTest extends TestCase
             "music_age" => 1970,
         ]);
         
-        // 曲の検索画面を表示
-        $response = $this->actingAs($user)->get(route("search.index"));
-        $response->assertStatus(200);
         
         // 曲を音楽の年代で検索し、コメント数が多い順で並び替える   
         $response = $this->actingAs($user)->get(route("search.index"), [
@@ -115,7 +95,6 @@ class SearchForSongsTest extends TestCase
         ]);
         
         // 曲の検索画面で検索結果を表示する
-        $response->assertStatus(302);
-        $response->assertRedirect(route("search.index"));
+        $response->assertStatus(200);
     }
 }

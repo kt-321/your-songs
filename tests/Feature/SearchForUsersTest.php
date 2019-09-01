@@ -49,8 +49,7 @@ class SearchForSongsTest extends TestCase
         ]);
         
         // ユーザーの検索画面で検索結果を表示する
-        $response->assertStatus(302);
-        $response->assertRedirect(route("users.index"));
+        $response->assertStatus(200);
         
         
         // $response = $this->actingAs($user)
@@ -88,8 +87,7 @@ class SearchForSongsTest extends TestCase
         ]);
         
         // ユーザーの検索画面で検索結果を表示する
-        $response->assertStatus(302);
-        $response->assertRedirect(route("users.index"));
+        $response->assertStatus(200);
     }
     
     public function test_user_can_search_for_users_by_gender()
@@ -112,8 +110,7 @@ class SearchForSongsTest extends TestCase
         ]);
         
         // ユーザーの検索画面で検索結果を表示する
-        $response->assertStatus(302);
-        $response->assertRedirect(route("users.index"));
+        $response->assertStatus(200);
     }
     
     public function test_user_can_search_for_users_by_favorite_music_age()
@@ -136,8 +133,7 @@ class SearchForSongsTest extends TestCase
         ]);
         
         // ユーザーの検索画面で検索結果を表示する
-        $response->assertStatus(302);
-        $response->assertRedirect(route("users.index"));
+        $response->assertStatus(200);
     }
     
     public function test_user_can_search_for_users_by_favorite_artist()
@@ -160,7 +156,6 @@ class SearchForSongsTest extends TestCase
         ]);
         
         // ユーザーの検索画面で検索結果を表示する
-        $response->assertStatus(302);
-        $response->assertRedirect(route("users.index"));
+        $response->assertStatus(200);
     }
 }

@@ -12,6 +12,11 @@
 */
 
 
+// // ログインしていない状態でも検索できる
+// Route::get("search", "SearchController@index")->name("search.index");
+
+
+
 // 未ログイン時
 Route::group(["middleware" => "guest"], function(){
     // 未ログイン時のトップページ
@@ -35,6 +40,9 @@ Route::group(["middleware" => "guest"], function(){
     
     Route::get("password/reset/{token}", "Auth\ResetPasswordController@showResetForm")->name("password.reset");
     Route::post("password/reset", "Auth\ResetPasswordController@reset")->name("password.update");
+    
+    // // 曲の検索
+    // Route::get("search", "SearchController@index")->name("search.index");
 });
 
 // ログインしている全ユーザー

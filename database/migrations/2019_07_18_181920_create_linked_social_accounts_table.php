@@ -13,12 +13,12 @@ class CreateLinkedSocialAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('linked_social_accounts', function (Blueprint $table) {
+        Schema::create("linked_social_accounts", function (Blueprint $table) {
 
-            $table->increments('id');
-            $table->bigInteger('user_id');           
-            $table->string('provider_name')->nullable();
-            $table->string('provider_id')->unique()->nullable();          
+            $table->increments("id");
+            $table->bigInteger("user_id");           
+            $table->string("provider_name")->nullable();
+            $table->string("provider_id")->unique()->nullable();          
             $table->timestamps();
 
         });
@@ -31,7 +31,7 @@ class CreateLinkedSocialAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('linked_social_accounts');
+        Schema::dropIfExists("linked_social_accounts");
     }
 
 }

@@ -183,7 +183,13 @@ class SongsController extends Controller
         return redirect()->route("songs.indexForAdmin");
     }
     
-  
+    public function updatethenumber($id)
+    {
+        // order_numberをアップデート
+        // →ルーティングにも記述
+    }
+    
+   
   
   
   

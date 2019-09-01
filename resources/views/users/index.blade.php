@@ -73,7 +73,7 @@
             
             <!--該当するユーザーの一覧-->
             @if(count($users))
-            <div id="list" class="list row">
+            <div id="list" class="user-list row">
                 @foreach ($users as $user)
                 <div class="col-md-6 col-lg-4">
                     <div class="user-card card img-thumbnail text-center">

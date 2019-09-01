@@ -121,9 +121,9 @@
                 
                 <!--管理者としてログインしている場合に限りアカウントを削除できる-->
                 @if(Auth::user()->role == 5 && Auth::id() !== $song->user->id)
-                    <div class="buttons-delete-user mb-3 text-center">
-                        <a class="btn btn-danger" href="/delete/{{ $song->id}}" >この曲を削除</a>
-                    </div>
+                <div class="buttons-delete-user mb-3 text-center">
+                    <a class="btn btn-danger" href="/delete/{{ $song->id}}" >この曲を削除</a>
+                </div>
                 @endif
             </section>
                   

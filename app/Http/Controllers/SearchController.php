@@ -58,7 +58,8 @@ class SearchController extends Controller
         }
         
         // ページネーション
-        $songs = $query->paginate(5);
+        $songs = $query->paginate(6);
+        
         
         
         $favorite_music_age = \Auth::user()->favorite_music_age;
@@ -73,7 +74,7 @@ class SearchController extends Controller
         ->limit(12)
         ->get();
         
-    
+        
         $data = [
         "song_name" => $song_name,
         "artist_name" => $artist_name,
@@ -83,12 +84,7 @@ class SearchController extends Controller
         "recommended_songs" => $recommended_songs
         ];
         
-        // JavaScript::put([
-        // "recommended_songs" => $recommended_songs
-        // ]);
-
-        
         return view("search.index", $data);
-        
+
     }
 }
