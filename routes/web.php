@@ -12,10 +12,9 @@
 */
 
 
-// // ログインしていない状態でも検索できる
-// Route::get("search", "SearchController@index")->name("search.index");
-
-
+// ログインしていない状態でも検索できる
+Route::get("search", "SearchController@index")->name("search.index");
+Route::resource("users", "UsersController", ["only" => ["index", "show"]]);
 
 // 未ログイン時
 Route::group(["middleware" => "guest"], function(){
@@ -55,7 +54,9 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
     
    
     
-    Route::resource("users", "UsersController", ["only" => ["index", "show", "edit", "update"]]);
+    // Route::resource("users", "UsersController", ["only" => ["index", "show", "edit", "update"]]);
+    // Route::resource("users", "UsersController", ["only" => ["show", "edit", "update"]]);
+    Route::resource("users", "UsersController", ["only" => ["edit", "update"]]);
     
     Route::group(["prefix" => "users/{id}"], function(){
         Route::post("follow", "UserFollowController@store")->name("user.follow");
@@ -83,7 +84,7 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
    
     Route::resource("comments", "CommentsController", ["only" =>["store", "destroy"]]);
     
-    Route::get("search", "SearchController@index")->name("search.index");
+    // Route::get("search", "SearchController@index")->name("search.index");
     
     // Route::get("youtube", "SongsController@youtube")->name("songs.youtube");
 });

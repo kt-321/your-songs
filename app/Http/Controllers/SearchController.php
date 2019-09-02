@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use App\Song;
 use App\User;
 
+use Auth;
+
 use JavaScript;
 
 class SearchController extends Controller
@@ -62,27 +64,41 @@ class SearchController extends Controller
         
         
         
-        $favorite_music_age = \Auth::user()->favorite_music_age;
-        $favorite_artist = \Auth::user()->favorite_artist;
+        if(Auth::check())
+        {
+            $favorite_music_age = \Auth::user()->favorite_music_age;
+            $favorite_artist = \Auth::user()->favorite_artist;
+            
+            $recommended_songs = Song::where("user_id","<>", \Auth::id())
+            ->where(function($query)use($favorite_music_age, $favorite_artist){
+                $query->where("music_age", $favorite_music_age)
+                ->orWhere("artist_name", "like", "%".$favorite_artist. "%");
+            })
+            ->inRandomOrder()
+            ->limit(12)
+            ->get();
         
-        $recommended_songs = Song::where("user_id","<>", \Auth::id())
-        ->where(function($query)use($favorite_music_age, $favorite_artist){
-            $query->where("music_age", $favorite_music_age)
-            ->orWhere("artist_name", "like", "%".$favorite_artist. "%");
-        })
-        ->inRandomOrder()
-        ->limit(12)
-        ->get();
         
+            $data = [
+            "song_name" => $song_name,
+            "artist_name" => $artist_name,
+            "music_age" => $music_age,
+            "order" => $order,
+            "songs" => $songs,
+            "recommended_songs" => $recommended_songs
+            ];
+        }
+        else
+        {
+            $data = [
+            "song_name" => $song_name,
+            "artist_name" => $artist_name,
+            "music_age" => $music_age,
+            "order" => $order,
+            "songs" => $songs,
+            ];
+        }
         
-        $data = [
-        "song_name" => $song_name,
-        "artist_name" => $artist_name,
-        "music_age" => $music_age,
-        "order" => $order,
-        "songs" => $songs,
-        "recommended_songs" => $recommended_songs
-        ];
         
         return view("search.index", $data);
 
