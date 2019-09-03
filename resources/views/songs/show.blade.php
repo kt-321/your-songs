@@ -120,11 +120,12 @@
                 </div>
                 
                 <!--管理者としてログインしている場合に限りアカウントを削除できる-->
-                @if(Auth::user()->role == 5 && Auth::id() !== $song->user->id)
-                <div class="buttons-delete-user mb-3 text-center">
-                    <a class="btn btn-danger" href="/delete/{{ $song->id}}" >この曲を削除</a>
-                </div>
+                @if(Auth::check() && Auth::user()->role == 5 && Auth::id() !== $song->user->id)
+                    <div class="buttons-delete-user mb-3 text-center">
+                        <a class="btn btn-danger" href="/delete/{{ $song->id}}" >この曲を削除</a>
+                    </div>
                 @endif
+                
             </section>
                   
             <section class="comment">
@@ -182,7 +183,8 @@
                     
                     {{ $comments->render("pagination::bootstrap-4") }}
                 </div>
-            
+                
+                @if(Auth::check())
                 <div class="comment-post-form">        
                     <h4 class="mb-3 text-center">コメントを投稿する</h2>
                     
@@ -203,6 +205,7 @@
                             {!! Form::close() !!}
                     </div>
                 </div>
+                @endif
             </section>
             
             <div class="my-3 mr-3 text-right">
