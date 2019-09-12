@@ -11,7 +11,7 @@
                                 @if($song->image_url)
                                     <img src="{{ $song->image_url }}" style="width:150px; height:150px;" class="img-thumbnail">
                                 @else
-                                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/song.jpeg" style="width:150px; height:150px;" class="img-thumbnail">
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/song.jpeg" style="width:150px; height:150px;" class="img-thumbnail">
                                 @endif
                             
                             <figcaption>
@@ -66,11 +66,11 @@
                                             @if($song->user->image_url)
                                                 <img src="{{ $song->user->image_url }}" alt="アイコン" class="circle2"> 
                                             @elseif($song->user->gender == 1)
-                                                <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="アイコン" class="circle2">
+                                                <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/man.jpeg" alt="アイコン" class="circle2">
                                             @elseif($song->user->gender == 2)
-                                                <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="アイコン" class="circle2">
+                                                <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/woman.jpeg" alt="アイコン" class="circle2">
                                             @else
-                                                <img src="https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/qustion-mark.jpeg" alt="アイコン" class="circle2">
+                                                <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/user.png" alt="アイコン" class="circle2">
                                             @endif
                                             <figcaption class="text-center m-0">
                                                 <a href="{{ route("users.show", ["id" => $song->user->id]) }}">{{ $song->user->name }}</a>
@@ -120,11 +120,12 @@
                 </div>
                 
                 <!--管理者としてログインしている場合に限りアカウントを削除できる-->
-                @if(Auth::user()->role == 5 && Auth::id() !== $song->user->id)
+                @if(Auth::check() && Auth::user()->role == 5 && Auth::id() !== $song->user->id)
                     <div class="buttons-delete-user mb-3 text-center">
                         <a class="btn btn-danger" href="/delete/{{ $song->id}}" >この曲を削除</a>
                     </div>
                 @endif
+                
             </section>
                   
             <section class="comment">
@@ -145,11 +146,11 @@
                                             @if($comment->user->image_url)
                                             <img src="{{ $comment->user->image_url }}" alt="画像" class="circle2"> 
                                             @elseif($comment->user->gender == 1)
-                                            <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="画像" class="circle2">
+                                            <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/man.jpeg" alt="画像" class="circle2">
                                             @elseif($comment->user->gender == 2)
-                                            <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="画像" class="circle2">
+                                            <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/woman.jpeg" alt="画像" class="circle2">
                                             @else
-                                            <img src="https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/qustion-mark.jpeg" alt="画像" class="circle2">
+                                            <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/user.png" alt="画像" class="circle2">
                                             @endif 
                                             <figcaption class="text-center m-0">
                                                 <a style="font-size: 15px;" href="{{ route("users.show", ["id" => $comment->user->id]) }}">{{ $comment->user->name }}</a>
@@ -182,7 +183,8 @@
                     
                     {{ $comments->render("pagination::bootstrap-4") }}
                 </div>
-            
+                
+                @if(Auth::check())
                 <div class="comment-post-form">        
                     <h4 class="mb-3 text-center">コメントを投稿する</h2>
                     
@@ -203,6 +205,7 @@
                             {!! Form::close() !!}
                     </div>
                 </div>
+                @endif
             </section>
             
             <div class="my-3 mr-3 text-right">

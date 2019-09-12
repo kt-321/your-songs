@@ -78,18 +78,15 @@
                 @include("user_follow.follow_button", ["user" => $user])
             </div>
             
+            @include("users.navtabs", ["user" => $user])
             
+            クリック＆ドラッグで曲の順番を入れ替えることが出来ます。
             
             <!--VueDraggableでお気に入り一覧を表示-->
-            <!--<favorite-component songs="{{ $songs }}"/>-->
-            <favorite-component songs="{{!! $songs->toJson() !!}}"/>
+            <!--<favorites-component :songs="{{ $songs }}"/>-->
+            <favorites-component :songs="{{ $songs }}"/>
             
             
-               
-            <div>
-                @include("users.navtabs", ["user" => $user])
-                @include("songs.songs", ["songs" => $songs])
-            </div>
             
             <div class="my-3 mr-3 text-right">
                 <a class="btn btn-light" href="#" v-scroll-to="toTop">ページのトップに戻る</a>

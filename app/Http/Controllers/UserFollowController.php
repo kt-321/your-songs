@@ -13,8 +13,25 @@ class UserFollowController extends Controller
     }
     
     public function destroy($id)
-    {
-        \Auth::user()->unfollow($id);
-        return back();
+    {   
+        $user=\Auth::user();
+        $user->unfollow($id);
+        $followings = $user->followings()->get();
+        
+        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && (strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')) {
+            // Ajaxである
+            return response()->json(
+                [
+                  "users" => $followings
+                ],
+                200,[],
+                JSON_UNESCAPED_UNICODE
+                );
+                
+        
+        }else{
+            // Ajaxではない
+            return back();
+        }
     }
 }

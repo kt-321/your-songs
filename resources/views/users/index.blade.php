@@ -72,67 +72,69 @@
             </div>
             
             <!--該当するユーザーの一覧-->
-            @if(count($users))
-            <div id="list" class="list row">
-                @foreach ($users as $user)
-                <div class="col-md-6 col-lg-4">
-                    <div class="user-card card img-thumbnail text-center">
-                            @if($user->image_url)
-                                <img src="{{ $user->image_url }}" alt="アイコン" class="circle3 mx-auto"> 
-                            @elseif($user->gender == 1)
-                                <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="アイコン" class="circle3 mx-auto">
-                            @elseif($user->gender == 2)
-                                <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="アイコン" class="circle3 mx-auto">
-                            @else    
-                                <img src="https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/qustion-mark.jpeg" alt="アイコン" class="circle3 mx-auto">
-                            @endif
-                            <a href="{{ route("users.show", ["id" => $user->id]) }}">{{ $user->name }}</a>
-                        <div class="card-body px-2 py-1">
-                            @if($user->age)
-                            <p class="mb-0">{!! nl2br(e($user->age)) !!}代</p>
-                            @else
-                            <p class="mb-0"></p>
-                            @endif
-                            
-                            @if($user->gender == 1)
-                            <p class="mb-0">男性 </p>
-                            @elseif($user->gender == 2)
-                            <p class="mb-0">女性 </p>
-                            @endif
-                            
-                            @if($user->favorite_music_age)
-                            <p class="mb-0"><i class="far fa-clock mr-1"></i>{!! nl2br(e($user->favorite_music_age)) !!}年代</p>
-                            @endif
-                           
-                            @if($user->favorite_artist)
-                            <p class="mb-0"><i class="fas fa-microphone mr-1"></i>{!! nl2br(e($user->favorite_artist)) !!}</p>
-                            @endif
-                            
-                            <!--自己紹介-->
-                            <div class ="self-introduction2" style="word-wrap: break-word;">
-                                @if($user->comment)
-                                <p class="mb-0">{{ $user->comment }}</p>
-                                @else
-                                <p>（コメントなし）</p>
+            <!--ログイン時-->
+            @if(Auth::check())
+                @if(count($users))
+                <div id="list" class="user-list row">
+                    @foreach ($users as $user)
+                    <div class="col-md-6 col-lg-4">
+                        <div class="user-card card img-thumbnail text-center">
+                                @if($user->image_url)
+                                    <img src="{{ $user->image_url }}" alt="アイコン" class="circle3 mx-auto"> 
+                                @elseif($user->gender == 1)
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/man.jpeg" alt="アイコン" class="circle3 mx-auto">
+                                @elseif($user->gender == 2)
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/woman.jpeg" alt="アイコン" class="circle3 mx-auto">
+                                @else    
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/user.png" alt="アイコン" class="circle3 mx-auto">
                                 @endif
-                            </div>
-                            
-                            
-                        </div>
-                        <!--フォロー・アンフォローボタンとプロフィールを見るボタン-->
-                            <div class="buttons">
-                                <div style="display:inline-block">
-                                    @include("user_follow.follow_button", ["user" => $user])
+                                <a href="{{ route("users.show", ["id" => $user->id]) }}">{{ $user->name }}</a>
+                            <div class="card-body px-2 py-1">
+                                @if($user->age)
+                                <p class="mb-0">{!! nl2br(e($user->age)) !!}代</p>
+                                @else
+                                <p class="mb-0"></p>
+                                @endif
+                                
+                                @if($user->gender == 1)
+                                <p class="mb-0">男性 </p>
+                                @elseif($user->gender == 2)
+                                <p class="mb-0">女性 </p>
+                                @endif
+                                
+                                @if($user->favorite_music_age)
+                                <p class="mb-0"><i class="far fa-clock mr-1"></i>{!! nl2br(e($user->favorite_music_age)) !!}年代</p>
+                                @endif
+                               
+                                @if($user->favorite_artist)
+                                <p class="mb-0"><i class="fas fa-microphone mr-1"></i>{!! nl2br(e($user->favorite_artist)) !!}</p>
+                                @endif
+                                
+                                <!--自己紹介-->
+                                <div class ="self-introduction2" style="word-wrap: break-word;">
+                                    @if($user->comment)
+                                    <p class="mb-0">{{ $user->comment }}</p>
+                                    @else
+                                    <p>（コメントなし）</p>
+                                    @endif
                                 </div>
-                                <a class="btn btn-success btn-sm" href="{{ route("users.show", ["id" => $user->id]) }}">プロフィール</a>
+                                
+                                
                             </div>
+                            <!--フォロー・アンフォローボタンとプロフィールを見るボタン-->
+                                <div class="buttons">
+                                    <div style="display:inline-block">
+                                        @include("user_follow.follow_button", ["user" => $user])
+                                    </div>
+                                    <a class="btn btn-success btn-sm" href="{{ route("users.show", ["id" => $user->id]) }}">プロフィール</a>
+                                </div>
+                        </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
-            </div>
-            @endif
-            
-            <div class="paginate text-center mt-3">
+                @endif
+                
+                <div class="paginate text-center mt-3">
                 {{ $users->appends(["name"=>$name, "age"=>$age, "gender"=>$gender])->render("pagination::bootstrap-4") }}
             </div>
             
@@ -140,8 +142,7 @@
                 <a class="btn btn-light" href="#" v-scroll-to="toTop">ページのトップに戻る</a>
             </div>
             
-             <!--おすすめのユーザー-->
-                <!--@if(count($recommended_users) > 0)-->
+            <!--おすすめのユーザー-->
                 <div id="recommended-users" class="mb-5">
                     <span class="badge badge-pill badge-success mb-2">あなたと音楽の趣味が合いそうなユーザー</span>
                     <carousel :per-page-custom="[[0, 1], [768, 2], [992, 3]]" :autoplay="true" :loop="true" :speed=3000 :navigation-enabled="true" :pagination-enabled="false">
@@ -152,11 +153,11 @@
                                 @if($recommended_user->image_url)
                                     <img src="{{ $recommended_user->image_url }}" alt="アイコン" class="circle4"> 
                                 @elseif($recommended_user->gender == 1)
-                                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="アイコン" class="circle4">
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/man.jpeg" alt="アイコン" class="circle4">
                                 @elseif($recommended_user->gender == 2)
-                                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="アイコン" class="circle4">
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/woman.jpeg" alt="アイコン" class="circle4">
                                 @else    
-                                    <img src="https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/qustion-mark.jpeg" alt="アイコン" class="circle4">
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/user.png" alt="アイコン" class="circle4">
                                 @endif
                                 <figcaption class="text-center m-0">
                                     <a href="{{ route("users.show", ["id" => $recommended_user->id]) }}">{{ $recommended_user->name }}</a>
@@ -189,5 +190,71 @@
                         @endforeach
                     </carousel>
                 </div>
-                <!--@endif-->
+            @else
+                @if(count($users))
+                <div id="list" class="user-list row">
+                    @foreach ($users as $user)
+                    <div class="col-md-6 col-lg-4">
+                        <div class="user-card card img-thumbnail text-center">
+                                @if($user->image_url)
+                                    <img src="{{ $user->image_url }}" alt="アイコン" class="circle3 mx-auto"> 
+                                @elseif($user->gender == 1)
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/man.jpeg" alt="アイコン" class="circle3 mx-auto">
+                                @elseif($user->gender == 2)
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/woman.jpeg" alt="アイコン" class="circle3 mx-auto">
+                                @else    
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/user.png" alt="アイコン" class="circle3 mx-auto">
+                                @endif
+                                <a href="{{ route("users.show", ["id" => $user->id]) }}">{{ $user->name }}</a>
+                            <div class="card-body px-2 py-1">
+                                @if($user->age)
+                                <p class="mb-0">{!! nl2br(e($user->age)) !!}代</p>
+                                @else
+                                <p class="mb-0"></p>
+                                @endif
+                                
+                                @if($user->gender == 1)
+                                <p class="mb-0">男性 </p>
+                                @elseif($user->gender == 2)
+                                <p class="mb-0">女性 </p>
+                                @endif
+                                
+                                @if($user->favorite_music_age)
+                                <p class="mb-0"><i class="far fa-clock mr-1"></i>{!! nl2br(e($user->favorite_music_age)) !!}年代</p>
+                                @endif
+                               
+                                @if($user->favorite_artist)
+                                <p class="mb-0"><i class="fas fa-microphone mr-1"></i>{!! nl2br(e($user->favorite_artist)) !!}</p>
+                                @endif
+                                
+                                <!--自己紹介-->
+                                <div class ="self-introduction2" style="word-wrap: break-word;">
+                                    @if($user->comment)
+                                    <p class="mb-0">{{ $user->comment }}</p>
+                                    @else
+                                    <p>（コメントなし）</p>
+                                    @endif
+                                </div>
+                                
+                            </div>
+                            <!--プロフィールを見るボタン-->
+                            <div class="button">
+                                <a class="btn btn-success btn-sm" href="{{ route("users.show", ["id" => $user->id]) }}">プロフィール</a>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                @endif
+                
+                <div class="paginate text-center mt-3">
+                    {{ $users->appends(["name"=>$name, "age"=>$age, "gender"=>$gender])->render("pagination::bootstrap-4") }}
+                </div>
+            
+                <div class="my-3 mr-3 text-right">
+                    <a class="btn btn-light" href="#" v-scroll-to="toTop">ページのトップに戻る</a>
+                </div>
+            @endif
+            
+            
        @endsection

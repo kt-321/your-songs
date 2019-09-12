@@ -25,7 +25,7 @@ class SocialAccountController extends Controller
         try {
             $user = \Socialite::with($provider)->user();
         } catch (\Exception $e) {
-            return redirect('/login');
+            return redirect("/login");
         }
 
         $authUser = $accountService->findOrCreate(
@@ -35,6 +35,6 @@ class SocialAccountController extends Controller
 
         auth()->login($authUser, true);
 
-        return redirect()->to('/home');
+        return redirect()->to("/home");
     }
 }

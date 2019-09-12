@@ -11,12 +11,12 @@
     <body>
         @include("commons.navbar")
         <header class="text-center header-before-login">
-            <h1 class="service-title caption">YourSongs</h1>
+            <h1 class="app-title">YourSongs</h1>
         </header>
         
-    　　<div class="container service-description p-4">
+    　　<div class="container app-description p-4">
             <div>
-                <p>「おすすめの曲」をシェアしよう</p>
+                <p>～「おすすめの曲」をシェアしよう～</p>
             </div>
             
             <div>
@@ -24,12 +24,16 @@
                 <p>さまざまな年代の名曲を知ることで、新たな音楽の発見につなげましょう。</p>
             </div>
     　　    
-    　　      <div class="text-center">
+    　　      <div>
                 <p>さっそくあなたも「YourSongs」を使ってみましょう。</p>
                 <p>まずはテストユーザーでログインすることができます。</p>
                 <a href="{{ route("login") }}" class="btn btn-lg btn-primary"><i class="fas fa-sign-out-alt mr-1"></i>ログイン</a>
                 <a href="{{ route("signup.get") }}" class="btn btn-lg btn-success"><i class="fas fa-user-plus mr-1"></i>新規登録</a>
             </div>
+            
+            <!--<div class="how-to-use">-->
+            <!--    例えば-->
+            <!--</div>-->
         </div>
             
         <footer class="mt-5">

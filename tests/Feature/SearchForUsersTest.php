@@ -44,13 +44,20 @@ class SearchForSongsTest extends TestCase
         ]);
     
         // ユーザーをユーザー名で検索
-        $response = $this->actingAs($user1)->get(route("users.index"), [
-            "name" => "AAA"
-        ]);
+        // $response = $this->actingAs($user1)->get(route("users.index"), [
+        //     "name" => "AAA"
+        // ]);
         
-        // ユーザーの検索画面で検索結果を表示する
-        $response->assertStatus(302);
-        $response->assertRedirect(route("users.index"));
+        // // ユーザーの検索画面で検索結果を表示する
+        // $response->assertStatus(200);
+        
+        // ユーザーの検索画面でユーザーをユーザー名「AAA」で検索し、ユーザーAAAが表示されていることを確認する
+        $this->actingAs($user1)->get(route("users.index"), [
+            "name" => "AAA"
+        ])->assertSee("AAA");
+        
+        // $this->route("users.index")
+        //      ->assertSee("AAA");
         
         
         // $response = $this->actingAs($user)
@@ -82,14 +89,10 @@ class SearchForSongsTest extends TestCase
             "favorite_artist" => "BBB",
         ]);
         
-        // ユーザーを年齢で検索
+        // ユーザーの検索画面でユーザーを年齢「10（代）」で検索し、ユーザーAAAが表示されていることを確認する
         $response = $this->actingAs($user1)->get(route("users.index"), [
             "age" => 10,
-        ]);
-        
-        // ユーザーの検索画面で検索結果を表示する
-        $response->assertStatus(302);
-        $response->assertRedirect(route("users.index"));
+        ])->assertSee("AAA");
     }
     
     public function test_user_can_search_for_users_by_gender()
@@ -106,14 +109,10 @@ class SearchForSongsTest extends TestCase
             "favorite_artist" => "BBB",
         ]);
         
-        // ユーザーをユーザー名で検索
+        // ユーザーの検索画面でユーザーを性別「1(男性)」で検索し、ユーザーAAAが表示されていることを確認する
         $response = $this->actingAs($user1)->get(route("users.index"), [
             "gender" => 1,
-        ]);
-        
-        // ユーザーの検索画面で検索結果を表示する
-        $response->assertStatus(302);
-        $response->assertRedirect(route("users.index"));
+        ])->assertSee("AAA");
     }
     
     public function test_user_can_search_for_users_by_favorite_music_age()
@@ -130,14 +129,10 @@ class SearchForSongsTest extends TestCase
             "favorite_artist" => "BBB",
         ]);
         
-        // ユーザーを好きな音楽の年代で検索
+        // ユーザーの検索画面でユーザーを好きな音楽の年代「1970（年代）」で検索し、ユーザーAAAが表示されていることを確認する
         $response = $this->actingAs($user1)->get(route("users.index"), [
             "favorite_music_age" => 1970,
-        ]);
-        
-        // ユーザーの検索画面で検索結果を表示する
-        $response->assertStatus(302);
-        $response->assertRedirect(route("users.index"));
+        ])->assertSee("AAA");
     }
     
     public function test_user_can_search_for_users_by_favorite_artist()
@@ -154,13 +149,11 @@ class SearchForSongsTest extends TestCase
             "favorite_artist" => "BBB",
         ]);
         
-        // ユーザーを好きなアーティスト名で検索
+        // ユーザーの検索画面でユーザーを好きなアーティスト「BBB」で検索し、ユーザーAAAが表示されていることを確認する
         $response = $this->actingAs($user1)->get(route("users.index"), [
             "favorite_artist" => "BBB",
-        ]);
+        ])->assertSee("AAA");
         
-        // ユーザーの検索画面で検索結果を表示する
-        $response->assertStatus(302);
-        $response->assertRedirect(route("users.index"));
+        
     }
 }

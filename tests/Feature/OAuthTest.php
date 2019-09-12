@@ -18,17 +18,17 @@ class OAuthTest extends TestCase
      
     public function test_user_can_see_OAuth_page()
     {
-        $this->providerName = 'github';
-        $this->get(route('socialOAuth', ['provider' => $this->providerName]))
+        $this->providerName = "github";
+        $this->get(route("socialOAuth", ["provider" => $this->providerName]))
             ->assertStatus(302);
     }
     
     public function test_user_can_signup_width_github_account()
     {
-        $this->providerName = 'github';
+        $this->providerName = "github";
          
         // URLをコール
-        $this->get(route('oauthCallback', ['provider' => $this->providerName]))
+        $this->get(route("oauthCallback", ["provider" => $this->providerName]))
             ->assertStatus(302);
     }
 }

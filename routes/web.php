@@ -12,6 +12,18 @@
 */
 
 
+// ログインしていない状態でも検索できる
+// Route::get("search", "SearchController@index")->name("search.index");
+// Route::resource("users", "UsersController", ["only" => ["index", "show"]]);
+
+Route::group(["prefix" => "users/{id}"], function(){
+    Route::get("followings", "UsersController@followings")->name("users.followings");
+    Route::get("followers", "UsersController@followers")->name("users.followers");
+    Route::get("favorites", "UsersController@favorites")->name("users.favorites");
+});
+
+// Route::resource("songs", "SongsController", ["only" => ["show"]]);
+
 // 未ログイン時
 Route::group(["middleware" => "guest"], function(){
     // 未ログイン時のトップページ
@@ -35,6 +47,9 @@ Route::group(["middleware" => "guest"], function(){
     
     Route::get("password/reset/{token}", "Auth\ResetPasswordController@showResetForm")->name("password.reset");
     Route::post("password/reset", "Auth\ResetPasswordController@reset")->name("password.update");
+    
+    // // 曲の検索
+    // Route::get("search", "SearchController@index")->name("search.index");
 });
 
 // ログインしている全ユーザー
@@ -47,15 +62,18 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
     
    
     
-    Route::resource("users", "UsersController", ["only" => ["index", "show", "edit", "update"]]);
+    // Route::resource("users", "UsersController", ["only" => ["index", "show", "edit", "update"]]);
+    // Route::resource("users", "UsersController", ["only" => ["show", "edit", "update"]]);
+    // Route::resource("users", "UsersController", ["only" => ["edit", "update"]]);
+    Route::resource("users", "UsersController");
     
     Route::group(["prefix" => "users/{id}"], function(){
         Route::post("follow", "UserFollowController@store")->name("user.follow");
         Route::delete("unfollow", "UserFollowController@destroy")->name("user.unfollow");
         Route::get("timeline", "UsersController@timeline")->name("users.timeline");
-        Route::get("followings", "UsersController@followings")->name("users.followings");
-        Route::get("followers", "UsersController@followers")->name("users.followers");
-        Route::get("favorites", "UsersController@favorites")->name("users.favorites");
+        // Route::get("followings", "UsersController@followings")->name("users.followings");
+        // Route::get("followers", "UsersController@followers")->name("users.followers");
+        // Route::get("favorites", "UsersController@favorites")->name("users.favorites");
        
         Route::get("images", "UserImagesController@uploadForm")->name("users.userImages");
         Route::post("images", "UserImagesController@upload")->name("users.userImagesUpload");
@@ -72,6 +90,8 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
     
     // 曲の一覧表示・登録画面表示・登録処理・取得表示・更新画面表示・更新処理・削除処理
     Route::resource("songs", "SongsController");
+    // Route::resource("songs", "SongsController", ["only" =>["index", "create", "store", "edit", "update", "destroy"]]);
+    // Route::resource("songs", "SongsController", ["except" =>["show"]]);
    
     Route::resource("comments", "CommentsController", ["only" =>["store", "destroy"]]);
     

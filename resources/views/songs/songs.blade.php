@@ -1,8 +1,9 @@
 {{ $songs->render("pagination::bootstrap-4") }}
 
-<ul class="song-cards list-unstyled">
+<div id="list" class="song-list row py-2 mb-5">
     @foreach($songs as $song)
-        <li class="song-card px-2 py-2 mb-5">
+    <div class="col-lg-6">
+        <div class="song-card card">
             <!--曲タイトル-->
             <h3 class="song-name p-3 mb-4 text-center" style="word-wrap: break-word;"><i class="fas fa-music mr-3"></i>{!! nl2br(e($song->song_name)) !!}</h3>
             
@@ -11,14 +12,14 @@
                     <!--曲画像-->
                     <figure>
                         @if($song->image_url)
-                            <img src="{{ $song->image_url }}" style="width:150px; height:150px;" class="img-thumbnail">
+                            <img src="{{ $song->image_url }}" style="width:100px; height:100px;" class="img-thumbnail">
                         @else
-                            <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/song.jpeg" style="width:150px; height:150px;" class="img-thumbnail">
+                            <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/song.jpeg" style="width:100px; height:100px;" class="img-thumbnail">
                         @endif
                     
                         <figcaption>
-                            <!--ログイン時、曲画像のアップロード-->
-                            @if(Auth::id() == $song->user_id)
+                            <!--自分が投稿した曲である場合、曲画像のアップロードボタンを表示-->
+                            @if(Auth::id() === $song->user_id)
                             <div class="mt-2">
                                 <a href="{{ route("songs.songImages", ["id" => $song->id]) }}" class="btn btn-primary btn-modify-profile">画像を変更</a>
                             </div>
@@ -32,7 +33,7 @@
                     <ul class="list-unstyled px-3">
                         <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-guitar mr-1"></i>アーティスト：{!! nl2br(e($song->artist_name)) !!}</li>
                         <li class="mb-1" style="word-wrap: break-word;"><i class="fas fa-history mr-1"></i>曲の年代：{!! nl2br(e($song->music_age)) !!}年代</li>
-                        <li class="mb-1" style="word-wrap: break-word;">
+                        <li class="mb-1 d-md-block d-none" style="word-wrap: break-word;">
                             @if($song->description)
                                 <div>
                                     <i class="far fa-comment-dots mr-1"></i>説明
@@ -51,6 +52,7 @@
                             @endif
                         </li>
                     </ul>
+                
                 </div>
             </div>
             
@@ -63,19 +65,19 @@
                     <span class="badge badge-success ml-1">自分の投稿</span>
                 </div>
                 @else
-                <div class="col-md-6 py-2 user-information2">
+                <div class="py-2 user-information2">
                     <h4 class="user-information-title">投稿者情報</h4>
                     <div class="media">
                         <div class="media-left ml-3 mr-3">
                             <figure>
                                 @if($song->user->image_url)
-                                    <img src="{{ $song->user->image_url }}" alt="画像" class="circle2"> 
+                                    <img src="{{ $song->user->image_url }}" alt="画像" class="circle2" > 
                                 @elseif($song->user->gender == 1)
-                                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="画像" class="circle2">
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/man.jpeg" alt="画像" class="circle2">
                                 @elseif($song->user->gender == 2)
-                                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="画像" class="circle2"> 
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/woman.jpeg" alt="画像" class="circle2">
                                 @else
-                                    <img src="https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/qustion-mark.jpeg" alt="画像" class="circle2">
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/user.png" alt="画像" class="circle2">
                                 @endif
                                 <figcaption class="text-center m-0">
                                     <a href="{{ route("users.show", ["id" => $song->user->id]) }}">{{ $song->user->name }}</a>
@@ -83,26 +85,24 @@
                             </figure>
                         </div>
                         
-                        <div class="media-body">
-                            <ul class="list-unstyled px-3">
+                        <div class="media-body" style="width: 20px">
+                            <ul class="list-unstyled pl-3">
                                 @if($song->user->age)
-                                <p class="mb-0">{!! nl2br(e($song->user->age)) !!}代</p>
-                                @else
-                                <p class="mb-0"></p>
+                                <li class="mb-1">{!! nl2br(e($song->user->age)) !!}代</li>
                                 @endif
                                 
                                 @if($song->user->gender == 1)
                                 <li class="mb-1" style="word-wrap: break-word;">男性</li>
-                                @elseif($song->user->gender ==2)
+                                @elseif($song->user->gender == 2)
                                 <li class="mb-1" style="word-wrap: break-word;">女性</li>
                                 @endif
                                 
-                                @if($song->user->favorite_artist)
-                                <li class="mb-1" style="word-wrap: break-word;">{!! nl2br(e($song->user->favorite_music_age)) !!}年代の音楽が好き</li>
+                                @if($song->user->favorite_music_age)
+                                <li class="mb-1 d-md-block d-none" style="word-wrap: break-word;">{!! nl2br(e($song->user->favorite_music_age)) !!}年代の音楽が好き</li>
                                 @endif
                                 
                                 @if($song->user->favorite_artist)
-                                <li class="mb-1" style="word-wrap: break-word;">好きなミュージシャン：{!! nl2br(e($song->user->favorite_artist)) !!}</li>
+                                <li class="mb-1 d-md-block d-none" style="word-wrap: break-word;">好きなミュージシャン：{!! nl2br(e($song->user->favorite_artist)) !!}</li>
                                 @endif
                             </ul>
                             
@@ -116,8 +116,6 @@
                 </div>
                 @endif
             </div>
-                
-          
             
             <div style="width:180px; margin-left:auto;">
                 <ul class="list-unstyled">
@@ -135,30 +133,31 @@
             <div class="d-flex ml-4 my-2">
                 @include("favorite.favorite_button", ["song" => $song])
                 
-                <a href="{{ route("songs.show", ["song" => $song]) }}" class="btn btn-light d-block p-1 ml-2"><i class="far fa-comments mr-2"></i>コメント（{{ count($song->comments) }}）</a>
+                <a href="{{ route("songs.show", ["song" => $song]) }}" class="btn btn-light d-block p-1 ml-2"><i class="far fa-comments mr-2"></i>コメント {{ count($song->comments) }} 件</a>
             </div>
             
-            <div class="ml-4 pr-2" style="display: flex; justify-content: flex-end;">
-                @if(Auth::id() === $song->user_id)
-                    <a href="{{ route("songs.edit", ["id" => $song->id]) }}" class="btn btn-light mr-3 px-2 py-1">編集</a>
-                
-                    {!! Form::open(["route" => ["songs.destroy", "$song->id"], "method" => "delete" ]) !!}
-                        {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm px-2 py-1", "onClick"=>"delete_alert();return false;"]) !!}
-                    {!! Form::close() !!}
-                @endif
-            </div>
-            
-            <!--管理者としてログインしている場合に限り曲を削除できる-->
-            @if(Auth::user()->role == 5 && Auth::id() !== $song->user->id)
-                <div class="buttons-delete-user mb-3 text-center" id="app">
-                    <!--<a class="btn btn-danger" href="/delete/{{ $song->id}}" @click="delete_alert();return false;">この曲を削除</a>-->
-                    <a class="btn btn-danger" href="/delete/{{ $song->id}}" @click="delete_alert();return false;">この曲を削除</a>
+            @if(Auth::check())
+                <div class="ml-4 pr-2" style="display: flex; justify-content: flex-end;">
+                    @if(Auth::id() === $song->user_id)
+                        <a href="{{ route("songs.edit", ["id" => $song->id]) }}" class="btn btn-light mr-3 px-2 py-1">編集</a>
+                    
+                        {!! Form::open(["route" => ["songs.destroy", "$song->id"], "method" => "delete" ]) !!}
+                            {!! Form::submit("削除", ["class" => "btn btn-danger btn-sm px-2 py-1", "onClick"=>"delete_alert();return false;"]) !!}
+                        {!! Form::close() !!}
+                    @endif
                 </div>
+                
+                <!--管理者としてログインしている場合に限り曲を削除できる-->
+                @if(Auth::user()->role == 5 && Auth::id() !== $song->user->id)
+                <div class="buttons-delete-user mb-3 text-center">
+                    <a class="btn btn-danger" href="/delete/{{ $song->id}}" onclick="delete_alert();return false;">この曲を削除</a>
+                </div>
+                @endif
             @endif
-        </li>
+        </div>
+    </div>
     @endforeach
-</ul>
+</div>
 
-
-    {{ $songs->render("pagination::bootstrap-4") }}
+{{ $songs->render("pagination::bootstrap-4") }}
 

@@ -34,7 +34,7 @@ class SaveSongRequestTest extends TestCase
     
     public function test_user_can_see_song_post_page()
     {   
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
         
         // ユーザーを1人作成
         $user = factory(User::class)->create();

@@ -32,7 +32,11 @@ Vue.component("food-component", require("./components/FoodComponent.vue").defaul
 
 // Vue.component("recommended-songs-component", require("./components/RecommendedSongsComponent.vue").default);
 
-Vue.component("favorite-component", require("./components/FavoriteComponent.vue").default);
+Vue.component("favorites-component", require("./components/FavoritesComponent.vue").default);
+
+Vue.component("followings-component", require("./components/FollowingsComponent.vue").default);
+
+Vue.component("recommends-component", require("./components/RecommendsComponent.vue").default);
 
 
 
@@ -49,6 +53,7 @@ const app = new Vue({
     },
     
 });
+
 
 function delete_alert(){
   if(!window.confirm('本当に削除しますか？')){

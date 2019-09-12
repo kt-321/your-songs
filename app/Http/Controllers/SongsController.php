@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Song;
 
+use Auth;
+
 class SongsController extends Controller
 {   
     /**
@@ -24,7 +26,7 @@ class SongsController extends Controller
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
-            $songs = $user->feed_songs()->orderBy("created_at", "desc")->paginate(5);
+            $songs = $user->feed_songs()->orderBy("created_at", "desc")->paginate(6);
 
             $data = [
                 "user" => $user,
@@ -70,13 +72,22 @@ class SongsController extends Controller
     
     public function edit(Song $song)
     {
+       
        return view("songs.edit",[
             "song" => $song,
         ]);
+        
+        
     }
     
     public function update(UpdateSongRequest $request, Song $song)
-    {
+    // public function update(UpdateSongRequest $request, $id)
+    {   
+        // $song = Song::find($id);
+        // dd($song);
+        // $user = Auth::user();
+        
+        // $song->user_id = $user->id;
         $song->song_name = $request->song_name;
         $song->artist_name = $request->artist_name;
         $song->music_age = $request->music_age;
@@ -84,6 +95,8 @@ class SongsController extends Controller
         $song->video_url = $request->video_url;
         
         $song->save();
+        
+        // dd($song);
         
         return redirect("songs/".$song->id);
     }
@@ -183,7 +196,13 @@ class SongsController extends Controller
         return redirect()->route("songs.indexForAdmin");
     }
     
-  
+    public function updatethenumber($id)
+    {
+        // order_numberをアップデート
+        // →ルーティングにも記述
+    }
+    
+   
   
   
   
