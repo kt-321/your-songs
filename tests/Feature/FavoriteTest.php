@@ -30,16 +30,14 @@ class FavoriteTest extends TestCase
         $song = factory(Song::class)->create();
         
         //曲をお気に入り登録する
-        // $response = $this->actingAs($user)->from('songs/{$song->id}')->post("songs/{$song->id}/favorite");
-        $response = $this->actingAs($user)->from(route('songs.show', ["id" => $song->id]))->post(route("favorites.favorite", ["id" => $song->id]));
+        $response = $this->actingAs($user)->from(route("songs.show", [$song]))->post(route("favorites.favorite", ["id" => $song->id]));
         
         // 同じ画面にリダイレクト
         $response->assertStatus(302);
-        // $response->assertRedirect("songs/{$song->id}");
-        $response->assertRedirect(route("songs.show", ["id" => $song->id]));
+        $response->assertRedirect(route("songs.show", [$song]));
         
         // データベースにお気に入りとして保存されていることを確認
-        $this->assertDatabaseHas('favorites', [
+        $this->assertDatabaseHas("favorites", [
             "user_id" => $user->id,
             "song_id" => $song->id,
         ]);
@@ -54,17 +52,17 @@ class FavoriteTest extends TestCase
         $song = factory(Song::class)->create();
         
         //曲をお気に入り登録する
-        $response = $this->actingAs($user)->from(route('songs.show', ["id" => $song->id]))->post(route("favorites.favorite", ["id" => $song->id]));
+        $response = $this->actingAs($user)->from(route("songs.show", [$song]))->post(route("favorites.favorite", ["id" => $song->id]));
         
         //曲をお気に入りから外す
-        $response = $this->actingAs($user)->from(route('songs.show', ["id" => $song->id]))->delete(route("favorites.unfavorite", ["id" => $song->id]));
+        $response = $this->actingAs($user)->from(route("songs.show", [$song]))->delete(route("favorites.unfavorite", ["id" => $song->id]));
         
         // 同じ画面にリダイレクト
         $response->assertStatus(302);
-        $response->assertRedirect(route("songs.show", ["id" => $song->id]));
+        $response->assertRedirect(route("songs.show", [$song]));
         
         // データベース確認にお気に入りとして保存されていないことを確認
-        $this->assertDatabaseMissing('comments', [
+        $this->assertDatabaseMissing("favorites", [
             "user_id" => $user->id,
             "song_id" => $song->id,
         ]);

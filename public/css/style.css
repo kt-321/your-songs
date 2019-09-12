@@ -453,6 +453,11 @@ footer {
   color: #f00;
 }
 
+.test-login{
+  background-color: #fafad2;
+  font-weight: bold;
+}
+
 /*画面サイズが480pxから768pxのとき*/
 @media screen and (min-width:480px){ 
     a.nav-link{

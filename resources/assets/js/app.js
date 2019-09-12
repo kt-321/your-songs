@@ -36,6 +36,8 @@ Vue.component("favorites-component", require("./components/FavoritesComponent.vu
 
 Vue.component("followings-component", require("./components/FollowingsComponent.vue").default);
 
+Vue.component("recommends-component", require("./components/RecommendsComponent.vue").default);
+
 
 
 const app = new Vue({
@@ -51,20 +53,6 @@ const app = new Vue({
     },
     
 });
-
-
-// // axios.delete("/user?ID=12345")
-// axios.delete("/songs/{$id}/unfavorite")
-// 　//thenで成功した場合
-//   .then(function (response) {
-//     console.log(response);
-//   })
-// 　　　　//chachでエラーの挙動を定義
-//   .catch(function (error) {
-//     console.log(error);
-//   });
-
-
 
 
 function delete_alert(){

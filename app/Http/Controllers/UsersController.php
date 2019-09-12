@@ -92,8 +92,12 @@ class UsersController extends Controller
     }
     
     public function show(User $user)
-    {
-        $songs = $user->songs()->orderBy("created_at", "desc")->paginate(10);
+    // public function show($id)
+    {   
+        // $user = User::find($id);
+        
+        // $songs = $user->songs()->orderBy("created_at", "desc")->paginate(10);
+        $songs = $user->songs()->orderBy("order_number", "desc")->orderBy("created_at", "desc")->get();
         
         $data = [
             "user" => $user,
@@ -176,7 +180,9 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         // $favorites = $user->favorites()->paginate(10);
-        $favorites = $user->favorites()->with("user")->get();
+        // $favorites = $user->favorites()->with("user")->get();
+        $favorites = $user->favorites()->orderby("order_number", "desc")->orderby("id", "desc")->with("user")->get();
+        // $favorites = $user->favorites()->orderby("created_at", "desc")->with("user")->get();
         
         $data = [
             "user" => $user,

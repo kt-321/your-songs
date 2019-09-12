@@ -25,7 +25,7 @@
             
         <div class="container app-description p-4 mt-5">
             <div>
-                <p>「おすすめの曲」をシェアしよう</p>
+                <p>~「おすすめの曲」をシェアしよう~</p>
             </div>
             
             <div>

@@ -13,8 +13,8 @@
 
 
 // ログインしていない状態でも検索できる
-Route::get("search", "SearchController@index")->name("search.index");
-Route::resource("users", "UsersController", ["only" => ["index", "show"]]);
+// Route::get("search", "SearchController@index")->name("search.index");
+// Route::resource("users", "UsersController", ["only" => ["index", "show"]]);
 
 Route::group(["prefix" => "users/{id}"], function(){
     Route::get("followings", "UsersController@followings")->name("users.followings");
@@ -22,7 +22,7 @@ Route::group(["prefix" => "users/{id}"], function(){
     Route::get("favorites", "UsersController@favorites")->name("users.favorites");
 });
 
-Route::resource("songs", "SongsController", ["only" => "show"]);
+// Route::resource("songs", "SongsController", ["only" => ["show"]]);
 
 // 未ログイン時
 Route::group(["middleware" => "guest"], function(){
@@ -64,7 +64,8 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
     
     // Route::resource("users", "UsersController", ["only" => ["index", "show", "edit", "update"]]);
     // Route::resource("users", "UsersController", ["only" => ["show", "edit", "update"]]);
-    Route::resource("users", "UsersController", ["only" => ["edit", "update"]]);
+    // Route::resource("users", "UsersController", ["only" => ["edit", "update"]]);
+    Route::resource("users", "UsersController");
     
     Route::group(["prefix" => "users/{id}"], function(){
         Route::post("follow", "UserFollowController@store")->name("user.follow");
@@ -88,12 +89,13 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
     });
     
     // 曲の一覧表示・登録画面表示・登録処理・取得表示・更新画面表示・更新処理・削除処理
-    // Route::resource("songs", "SongsController");
-    Route::resource("songs", "SongsController", ["only" =>["index", "create", "store", "edit", "update", "destroy"]]);
+    Route::resource("songs", "SongsController");
+    // Route::resource("songs", "SongsController", ["only" =>["index", "create", "store", "edit", "update", "destroy"]]);
+    // Route::resource("songs", "SongsController", ["except" =>["show"]]);
    
     Route::resource("comments", "CommentsController", ["only" =>["store", "destroy"]]);
     
-    // Route::get("search", "SearchController@index")->name("search.index");
+    Route::get("search", "SearchController@index")->name("search.index");
     
     // Route::get("youtube", "SongsController@youtube")->name("songs.youtube");
 });

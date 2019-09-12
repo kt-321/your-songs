@@ -80,12 +80,12 @@
         @include("user_follow.follow_button", ["user" => $user])
     </div>
    
-    <div>
-        @include("users.navtabs", ["user" => $user])
-        @if (count($songs) > 0)
-            @include("songs.songs", ["songs" => $songs])
-        @endif 
-    </div>
+    @include("users.navtabs", ["user" => $user])
+        
+    ドラッグ＆ドロップで曲の順番を入れ替えることが出来ます。
+    
+    <!--VueDraggableで投稿した曲一覧を表示-->
+    <recommends-component :songs="{{ $songs }}"/>
     
     <div class="my-3 mr-3 text-right">
         <a class="btn btn-light" href="#" v-scroll-to="toTop">ページのトップに戻る</a>

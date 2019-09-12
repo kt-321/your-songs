@@ -25,7 +25,7 @@
             @if($song->image_url)
                 <img src="{{ $song->image_url }}" style="width:150px; height:150px;" class="img-thumbnail">
             @else
-                <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/song.jpeg" style="width:150px; height:150px;" class="img-thumbnail">
+                <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/song.jpeg" style="width:150px; height:150px;" class="img-thumbnail">
             @endif
             
             <figcaption>

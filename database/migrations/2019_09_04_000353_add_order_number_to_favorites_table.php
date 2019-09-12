@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddOrderNumberToSongsTable extends Migration
+class AddOrderNumberToFavoritesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddOrderNumberToSongsTable extends Migration
      */
     public function up()
     {
-        Schema::table('songs', function (Blueprint $table) {
-            //
+        Schema::table("favorites", function (Blueprint $table) {
+            $table->integer("order_number")->default(0)->after("id");
         });
     }
 
@@ -25,8 +25,8 @@ class AddOrderNumberToSongsTable extends Migration
      */
     public function down()
     {
-        Schema::table('songs', function (Blueprint $table) {
-            //
+        Schema::table("favorites", function (Blueprint $table) {
+            $table->dropColumn("order_number");
         });
     }
 }

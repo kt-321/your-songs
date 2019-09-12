@@ -14,7 +14,7 @@
                         @if($song->image_url)
                             <img src="{{ $song->image_url }}" style="width:100px; height:100px;" class="img-thumbnail">
                         @else
-                            <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/song.jpeg" style="width:100px; height:100px;" class="img-thumbnail">
+                            <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/song.jpeg" style="width:100px; height:100px;" class="img-thumbnail">
                         @endif
                     
                         <figcaption>
@@ -73,11 +73,11 @@
                                 @if($song->user->image_url)
                                     <img src="{{ $song->user->image_url }}" alt="画像" class="circle2" > 
                                 @elseif($song->user->gender == 1)
-                                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/man.jpeg" alt="画像" class="circle2">
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/man.jpeg" alt="画像" class="circle2">
                                 @elseif($song->user->gender == 2)
-                                    <img src="https://s3-ap-northeast-1.amazonaws.com/original-yoursongs/woman.jpeg" alt="画像" class="circle2">
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/woman.jpeg" alt="画像" class="circle2">
                                 @else
-                                    <img src="https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/qustion-mark.jpeg" alt="画像" class="circle2">
+                                    <img src="https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/user.png" alt="画像" class="circle2">
                                 @endif
                                 <figcaption class="text-center m-0">
                                     <a href="{{ route("users.show", ["id" => $song->user->id]) }}">{{ $song->user->name }}</a>

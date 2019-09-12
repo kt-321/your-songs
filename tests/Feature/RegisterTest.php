@@ -47,14 +47,13 @@ class RegisterTest extends TestCase
         $response->assertRedirect(route("home"));
         
         // データベースのusersテーブルに追加されていることを確認
-        $this->assertDatabaseHas('users', [
+        $this->assertDatabaseHas("users", [
             "name" => "aaa",
             "email" => "bbb@gmail.com",
-            // "password" => Hash::make("cccccc"),
         ]);
         
-        $user = User::where('email', 'bbb@gmail.com')->first();
-        $this->assertTrue(Hash::check('cccccc', $user->password));
+        $user = User::where("email", "bbb@gmail.com")->first();
+        $this->assertTrue(Hash::check("cccccc", $user->password));
     }
     
     public function test_request_should_fail_when_no_name_is_provided()
@@ -72,10 +71,9 @@ class RegisterTest extends TestCase
         $response->assertRedirect(route("signup.get"));
         
         // データベースのusersテーブルに追加されていないことを確認
-        $this->assertDatabaseMissing('users', [
+        $this->assertDatabaseMissing("users", [
             "name" => "",
             "email" => "bbb@gmail.com",
-            "password" => bcrypt("cccccc"),
         ]);
     }
     
@@ -94,10 +92,9 @@ class RegisterTest extends TestCase
         $response->assertRedirect(route("signup.get"));
         
         // データベースのusersテーブルに追加されていないことを確認
-        $this->assertDatabaseMissing('users', [
+        $this->assertDatabaseMissing("users", [
             "name" => "aaa",
             "email" => "",
-            "password" => bcrypt("cccccc"),
         ]);
     }
     
@@ -116,10 +113,9 @@ class RegisterTest extends TestCase
         $response->assertRedirect(route("signup.get"));
         
         // データベースのusersテーブルに追加されていないことを確認
-        $this->assertDatabaseMissing('users', [
+        $this->assertDatabaseMissing("users", [
             "name" => "aaa",
             "email" => "bbb@gmail.com",
-            "password" => "",
         ]);
     }
     
@@ -138,7 +134,7 @@ class RegisterTest extends TestCase
         $response->assertRedirect(route("signup.get"));
         
         // データベースのusersテーブルに追加されていないことを確認
-        $this->assertDatabaseMissing('users', [
+        $this->assertDatabaseMissing("users", [
             "name" => "aaa",
             "email" => "bbb@gmail.com",
             "password" => bcrypt("cccccc"),

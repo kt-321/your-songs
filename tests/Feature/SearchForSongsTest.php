@@ -36,7 +36,7 @@ class SearchForSongsTest extends TestCase
         $user = factory(User::class)->create();
         
         // 曲を1つ作成
-        $user = factory(Song::class)->create([
+        $song = factory(Song::class)->create([
             "song_name" => "AAA",
             "artist_name" => "BBB",
             "music_age" => 1970,
@@ -50,7 +50,7 @@ class SearchForSongsTest extends TestCase
         
         // 曲の検索画面で検索結果を表示する
         $response->assertStatus(200);
-        
+        $response->assertSee("AAA");
     }
     
     public function test_user_can_search_for_songs_by_artist_name_ordered_by_favorites_ranking()
@@ -59,7 +59,7 @@ class SearchForSongsTest extends TestCase
         $user = factory(User::class)->create();
         
         // 曲を1つ作成
-        $user = factory(Song::class)->create([
+        $song = factory(Song::class)->create([
             "song_name" => "AAA",
             "artist_name" => "BBB",
             "music_age" => 1970,
@@ -73,6 +73,7 @@ class SearchForSongsTest extends TestCase
         
         // 曲の検索画面で検索結果を表示する
         $response->assertStatus(200);
+        $response->assertSee("AAA");
     }
     
     public function test_user_can_search_for_songs_by_music_age_ordered_by_comments_ranking()
@@ -81,7 +82,7 @@ class SearchForSongsTest extends TestCase
         $user = factory(User::class)->create();
         
         // 曲を1つ作成
-        $user = factory(Song::class)->create([
+        $song = factory(Song::class)->create([
             "song_name" => "AAA",
             "artist_name" => "BBB",
             "music_age" => 1970,
@@ -96,5 +97,6 @@ class SearchForSongsTest extends TestCase
         
         // 曲の検索画面で検索結果を表示する
         $response->assertStatus(200);
+        $response->assertSee("AAA");
     }
 }
