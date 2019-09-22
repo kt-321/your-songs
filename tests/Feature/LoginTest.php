@@ -32,6 +32,8 @@ class LoginTest extends TestCase
     
     public function test_valid_user_can_login()
     {   
+        $this->withoutExceptionHandling();
+        
         // ユーザーを１つ作成
         $user = factory(User::class)->create([
             "password" => bcrypt("test1111")
