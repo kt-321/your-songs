@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @section("content")
-    <h1 class="text-center mb-4"><i class="fas fa-plus-circle mr-2"></i>おすすめ曲を投稿</h1>
+    <h1 class="text-center mb-4 page-title"><i class="fas fa-plus-circle mr-2"></i>おすすめ曲を投稿</h1>
     
     <div class="row">
         <div class="create-form col-sm-6 offset-sm-3">

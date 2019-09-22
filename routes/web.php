@@ -11,25 +11,48 @@
 |
 */
 
-Route::get('/', "SongsController@index");
 
-Route::get("signup", "Auth\RegisterController@showRegistrationForm")->name("signup.get");
-Route::post("signup", "Auth\RegisterController@register")->name("signup.post");
+// 未ログイン時
+Route::group(["middleware" => "guest"], function(){
+    // 未ログイン時のトップページ
+    Route::get("/", "WelcomeController@welcome")->name("welcome");
+    
+    // ユーザ登録
+    Route::get("signup", "Auth\RegisterController@showRegistrationForm")->name("signup.get");
+    Route::post("signup", "Auth\RegisterController@register")->name("signup.post");
+    
+    // ログイン認証
+    Route::get("login", "Auth\LoginController@showLoginForm")->name("login");
+    Route::post("login", "Auth\LoginController@login")->name("login.post");
+    
+    Route::get("about", "WelcomeController@about")->name("about");
+    
+    Route::get('login/{provider}', 'Auth\SocialAccountController@redirectToProvider')->name("socialOAuth");
+    Route::get('login/{provider}/callback', 'Auth\SocialAccountController@handleProviderCallback')->name("oauthCallback");
+    
+    Route::get("password/reset", "Auth\ForgotPasswordController@showLinkRequestForm")->name("password.request");
+    Route::post("password/email", "Auth\ForgotPasswordController@sendResetLinkEmail")->name("password.email");
+    
+    Route::get("password/reset/{token}", "Auth\ResetPasswordController@showResetForm")->name("password.reset");
+    Route::post("password/reset", "Auth\ResetPasswordController@reset")->name("password.update");
+});
 
-Route::get("login", "Auth\LoginController@showLoginForm")->name("login");
-Route::post("login", "Auth\LoginController@login")->name("login.post");
-Route::get("logout", "Auth\LoginController@logout")->name("logout.get");
-
-// Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-// Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-
-// 全ユーザ
+// ログインしている全ユーザー
 Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
+    // ログイン時のトップページ
+    Route::get("/home", "SongsController@index")->name("home");
+    
+    // ログアウト
+    Route::get("logout", "Auth\LoginController@logout")->name("logout.get");
+    
+   
+    
     Route::resource("users", "UsersController", ["only" => ["index", "show", "edit", "update"]]);
     
     Route::group(["prefix" => "users/{id}"], function(){
         Route::post("follow", "UserFollowController@store")->name("user.follow");
         Route::delete("unfollow", "UserFollowController@destroy")->name("user.unfollow");
+        Route::get("timeline", "UsersController@timeline")->name("users.timeline");
         Route::get("followings", "UsersController@followings")->name("users.followings");
         Route::get("followers", "UsersController@followers")->name("users.followers");
         Route::get("favorites", "UsersController@favorites")->name("users.favorites");
@@ -47,19 +70,28 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
         
     });
     
-    Route::resource("songs", "SongsController", ["only" => ["create", "store", "show", "edit", "update", "destroy"]]);
+    // 曲の一覧表示・登録画面表示・登録処理・取得表示・更新画面表示・更新処理・削除処理
+    Route::resource("songs", "SongsController");
    
+<<<<<<< HEAD
     Route::get("favorites-ranking/all", "SongsController@favoritesRankingAll")->name("songs.favoritesRankingAll");
     Route::get("favorites-ranking/{id}", "SongsController@favoritesRanking")->name("songs.favoritesRanking");
     Route::get("comments-ranking/all", "SongsController@commentsRankingAll")->name("songs.commentsRankingAll");
     Route::get("comments-ranking/{id}", "SongsController@commentsRanking")->name("songs.commentsRanking");
     
+=======
+>>>>>>> 87900444ae2cc6a77883d0bf3ad040c59c2cceef
     Route::resource("comments", "CommentsController", ["only" =>["store", "destroy"]]);
     
     Route::get("search", "SearchController@index")->name("search.index");
+    
+    // Route::get("youtube", "SongsController@youtube")->name("songs.youtube");
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 87900444ae2cc6a77883d0bf3ad040c59c2cceef
 // 管理者権限機能
 Route::group(["middleware" => ["auth", "can:admin-higher"]], function(){
         Route::get("index-for-admin", "SongsController@indexForAdmin")->name("songs.indexForAdmin");
@@ -67,3 +99,4 @@ Route::group(["middleware" => ["auth", "can:admin-higher"]], function(){
         Route::get("restore/{id}", "SongsController@restore")->name("songs.restore");
         Route::get("force-delete/{id}", "SongsController@forceDelete")->name("songs.forceDelete");
 });
+

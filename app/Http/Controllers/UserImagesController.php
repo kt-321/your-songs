@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UploadUserImageRequest;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -16,7 +17,7 @@ class UserImagesController extends Controller
         return view("users.image_upload", ["user" => $user]);
     }
     
-    public function upload(Request $request)
+    public function upload(UploadUserImageRequest $request)
     {
         $file = $request->file("file");
 
