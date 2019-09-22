@@ -5,7 +5,7 @@
 .header-before-login{
     position: relative;
     height: 50vh;
-    background: url("https://original-yoursongs.s3-ap-northeast-1.amazonaws.com/header-live.jpg");
+    background: url("https://your-songs-laravel.s3-ap-northeast-1.amazonaws.com/music_life.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
