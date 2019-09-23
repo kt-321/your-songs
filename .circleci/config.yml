@@ -1,136 +1,52 @@
-version: 2.1
-executors:
-  default:
-    working_directory: ~/repo
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
+version: 2
+jobs:
+  build:
     docker:
-      - image: circleci/php:7.3-stretch-node-browsers
-    environment:
-      - APP_ENV: testing
-  testing-image:
-    working_directory: ~/repo
-    docker:
-      - image: circleci/php:7.3-stretch-node-browsers
-      - image: circleci/mysql:8.0.17
-        command: mysqld --default-authentication-plugin=mysql_native_password
+      # specify the version you desire here
+      - image: circleci/php:7.2.1-apache-node-browsers
+      - image: circleci/mysql:5.7
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mysql:9.4
+
     environment:
       - APP_DEBUG: true
       - APP_ENV: testing
-      - APP_KEY: base64:YlIJx6uH3OUb3hxN+PAiJKlC+EGZ2KYi8VHxsfdJpLk=
-      - DB_CONNECTION: circleci
-commands:
-  install-dockerize:
+      - APP_KEY: base64:83t/bUyaVosssvmz3PGRArjbGEeBR1HGnDFN8WP1Uq0=
+      - DB_CONNECTION: circle_test
+      - MYSQL_ALLOW_EMPTY_PASSWORD: true
+
+    working_directory: ~/repo
+
     steps:
-      - run:
-          name: Install dockerize
-          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-          environment:
-            DOCKERIZE_VERSION: v0.6.1
-  install-php-extensions:
-    steps:
-      - run:
-          name: Install PHP Extensions
-          command: sudo docker-php-ext-install pdo_mysql
-  restore-cache-composer:
-    steps:
+      - checkout
+
+      # Install PHP Extension
+      - run: sudo docker-php-ext-install pdo_mysql
+
+      # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "laravel/composer.json" }}
-            - v1-dependencies-
-  composer-install:
-    steps:
-      - run:
-          name: composer install
-          working_directory: laravel
-          command: composer install -n --prefer-dist
-  save-cache-composer:
-    steps:
+          - v1-dependencies-{{ checksum "composer.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: composer install -n --prefer-dist
+
       - save_cache:
           paths:
             - ./vendor
-          key: v1-dependencies-{{ checksum "laravel/composer.json" }}
-  wait-for-mysql:
-    steps:
-      - run:
-          name: Wait for MySQL
-          command: dockerize -wait tcp://localhost:3306 -timeout 1m
-  migration-seeding:
-    steps:
-      - run:
-          name: Migration & Seeding
-          working_directory: laravel
-          command: php artisan migrate --seed
-  test-static-code-analysis:
-    steps:
-      - run:
-          name: Coding rules check
-          working_directory: laravel
-          command: ./vendor/bin/phpcs --standard=phpcs.xml ./
+          key: v1-dependencies-{{ checksum "composer.json" }}
 
-      - run:
-          name: Static code analysis
-          working_directory: laravel
-          command: php artisan code:analyse --paths='app,tests' --level=max
-  test-unittest:
-    steps:
-      - run:
-          name: Unittest
-          working_directory: laravel
-          command: ./vendor/bin/phpunit
-  test-e2etest:
-    steps:
-      - run:
-          name: Install Chrome Driver
-          working_directory: laravel
-          command: php artisan dusk:chrome-driver 76
-      - run:
-          name: Start Chrome Driver
-          working_directory: laravel
-          command: ./vendor/laravel/dusk/bin/chromedriver-linux
-          background: true
-      - run:
-          name: Start Laravel Server
-          working_directory: laravel
-          command: php artisan serve
-          background: true
-      - run:
-          name: Run Dusk
-          working_directory: laravel
-          command: php artisan dusk
-          environment:
-            APP_URL: http://localhost:8000
-jobs:
-  build:
-    executor:
-      name: default
-    steps:
-      - checkout
-      - install-php-extensions
-      - restore-cache-composer
-      - composer-install
-      - save-cache-composer
-      - run:
-          name: npm install
-          working_directory: laravel
-          command: npm install
-  test:
-    executor:
-      name: testing-image
-    steps:
-      - checkout
-      - install-dockerize
-      - install-php-extensions
-      - restore-cache-composer
-      - composer-install
-      - save-cache-composer
-      - wait-for-mysql
-      - migration-seeding
-      - test-static-code-analysis
-      - test-unittest
-      - test-e2etest
-workflows:
-  build-and-test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
+      # run seeding
+      - run: php artisan migrate
+      - run: php artisan db:seed
+
+      # run tests!
+      - run: php ./vendor/bin/phpunit
