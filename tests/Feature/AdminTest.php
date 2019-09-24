@@ -20,11 +20,6 @@ class AdminTest extends TestCase
      */
      
     use RefreshDatabase;
-    // {
-    //     parent::setUp();
-
-    //     $user = factory(User::class)->create();
-    // }
      
     public function test_admin_user_can_see_songs_index_for_admin()
     {
