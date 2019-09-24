@@ -29,9 +29,9 @@ jobs:
     
     steps:
       - checkout
-
-      - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
-      - run: sudo docker-php-ext-install zip
+    
+    # Install PHP Extension
+      - run: sudo docker-php-ext-install pdo_mysql
 
       # Download and cache dependencies
       - restore_cache:
@@ -56,12 +56,10 @@ jobs:
           key: node-v1-{{ checksum "package.json" }}
           paths:
             - node_modules
+ 
+      # run seeding
+      - run: php artisan migrate
+      - run: php artisan db:seed
 
-      # prepare the database
-      - run: touch storage/testing.mysql
-      - run: php artisan migrate --env=testing --database=circle_test --force
-
-      # run tests with phpunit or codecept
-      #- run: ./vendor/bin/phpunit
-      - run: ./vendor/bin/codecept build
-      - run: ./vendor/bin/codecept run
+      # run tests!
+      - run: php ./vendor/bin/phpunit
