@@ -10,25 +10,7 @@
     
     <body>
         @include("commons.navbar")
-<<<<<<< HEAD
-        @if(Auth::check())
-            <header></header>
             
-            <div class="container p-4">
-                @include("commons.error_messages")
-                
-                <h1 class="mb-4 text-center"><i class="far fa-lightbulb mr-1"></i>新しく投稿された曲</h1>
-    
-                @if (count($songs) > 0)
-                     @include("songs.songs", ["songs" => $songs])
-                @endif
-            </div>
-            
-        @else
-            <header class="text-center header-before-login">
-                <h1 class="caption">YourSongs</h1>
-            </header>
-=======
         <header class="text-center header-before-login">
             <h1 class="app-title">Your Songs</h1>
         </header>
@@ -46,7 +28,6 @@
             <div>
                 <p>「おすすめの曲」をシェアしよう</p>
             </div>
->>>>>>> 87900444ae2cc6a77883d0bf3ad040c59c2cceef
             
             <div>
                 <p>「YourSongs」はあなたの好きな曲を紹介することができるサービスです。</p>

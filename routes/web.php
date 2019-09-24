@@ -73,14 +73,11 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
     // 曲の一覧表示・登録画面表示・登録処理・取得表示・更新画面表示・更新処理・削除処理
     Route::resource("songs", "SongsController");
    
-<<<<<<< HEAD
     Route::get("favorites-ranking/all", "SongsController@favoritesRankingAll")->name("songs.favoritesRankingAll");
     Route::get("favorites-ranking/{id}", "SongsController@favoritesRanking")->name("songs.favoritesRanking");
     Route::get("comments-ranking/all", "SongsController@commentsRankingAll")->name("songs.commentsRankingAll");
     Route::get("comments-ranking/{id}", "SongsController@commentsRanking")->name("songs.commentsRanking");
     
-=======
->>>>>>> 87900444ae2cc6a77883d0bf3ad040c59c2cceef
     Route::resource("comments", "CommentsController", ["only" =>["store", "destroy"]]);
     
     Route::get("search", "SearchController@index")->name("search.index");
@@ -88,10 +85,6 @@ Route::group(["middleware" => ["auth", "can:user-higher"]], function(){
     // Route::get("youtube", "SongsController@youtube")->name("songs.youtube");
 });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 87900444ae2cc6a77883d0bf3ad040c59c2cceef
 // 管理者権限機能
 Route::group(["middleware" => ["auth", "can:admin-higher"]], function(){
         Route::get("index-for-admin", "SongsController@indexForAdmin")->name("songs.indexForAdmin");

@@ -20,29 +20,6 @@ class SongsController extends Controller
     */
     
     public function index()
-<<<<<<< HEAD
-    {   
-        // $data = [];
-        // if(\Auth::check()) {
-        //     $songs = Song::withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(20);
-        //     $data = [
-        //         "songs" => $songs,
-        //      ];
-        //  }
-        
-        // return view("welcome", $data);
-        
-        $data = [];
-        if(\Auth::check()) {
-        $songs = Song::orderBy("created_at", "desc")->paginate(20);;
-        
-        $data = [
-            "songs" => $songs,
-        ];
-        }
-        return view("welcome", $data);
-        
-=======
     {  
         $data = [];
         if (\Auth::check()) {
@@ -56,7 +33,6 @@ class SongsController extends Controller
             $data += $this->counts($user);
         }
         return view("songs.index", $data);
->>>>>>> 87900444ae2cc6a77883d0bf3ad040c59c2cceef
     }
     
     public function create()
@@ -171,12 +147,6 @@ class SongsController extends Controller
     //     $songs = $query->withCount("comments")->orderBy("comments_count", "desc")->paginate(5);
         
     //     $data = [
-    //     "music_age" => $music_age,
-    //     "songs" => $songs,
-    //     ];
-        
-    //     return view("songs.comments_ranking", $data);
-    // }
     
     public function indexForAdmin()
     {   
@@ -205,22 +175,9 @@ class SongsController extends Controller
     {
         Song::onlyTrashed()->find($id)->forceDelete();
         return redirect()->route("songs.indexForAdmin");
-<<<<<<< HEAD
-=======
-    }
     
   
   
   
-  
-  
-  
-    public function youtube()
-    {
-        
-    return view ("songs.youtube");
-        
-        
->>>>>>> 87900444ae2cc6a77883d0bf3ad040c59c2cceef
-    }
+}  
 }
