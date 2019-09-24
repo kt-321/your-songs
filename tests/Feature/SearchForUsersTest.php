@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 use App\User;
 
-class SearchForSongsTest extends TestCase
+class SearchForUsersTest extends TestCase
 {
     /**
      * A basic feature test example.
