@@ -1,43 +1,47 @@
 <div class="form-group">
     <i class="fas fa-user-circle mr-1"></i>
     {!! Form::label("name", "名前") !!}
+    <span class="badge badge-pill badge-danger mb-2">必須</span>
     {!! Form::text("name", old("name"), ["class" => "form-control"]) !!}
 </div>
                 
 <div class="form-group">
     <i class="far fa-envelope mr-1"></i>
     {!! Form::label("email", "メールアドレス") !!}
+    <span class="badge badge-pill badge-danger mb-2">必須</span>
     {!! Form::email("email", old("email"), ["class" => "form-control"]) !!}
 </div>
             
 <div class="form-group">
     <i class="fas fa-unlock-alt mr-1"></i>
     {!! Form::label("password", "パスワード") !!}
+    <span class="badge badge-pill badge-danger mb-2">必須</span>
     {!! Form::password("password", ["class" => "form-control"]) !!}
 </div>
                 
 <div class="form-group">
     <i class="fas fa-unlock-alt mr-1"></i>
     {!! Form::label("password_confirmation", "パスワード（確認）") !!}
+    <span class="badge badge-pill badge-danger mb-2">必須</span>
     {!! Form::password("password_confirmation", ["class" => "form-control"]) !!}
 </div>
                 
 <div class="form-group">
     <i class="fas fa-sort-numeric-up mr-1"></i>
     {!! Form::label("age", "年齢") !!}
-    {!! Form::select("age", [10 => "10代", 20 => "20代", 30 => "30代", 40 => "40代", 50 => "50代", 60 => "60代", 70 => "70代"], old("age"), ["placeholder" => "－"]) !!}
+    {!! Form::select("age", [10 => "10代", 20 => "20代", 30 => "30代", 40 => "40代", 50 => "50代", 60 => "60代", 70 => "70代"], old("age"), ["placeholder" => " － "]) !!}
 </div>
                 
 <div class="form-group">
     <i class="fas fa-venus-mars mr-1"></i>
     {!! Form::label("gender", "性別") !!}
-    {!! Form::select("gender", [1 => "男性", 2 => "女性"], old("gender"), ["placeholder" => "－"]) !!}
+    {!! Form::select("gender", [1 => "男性", 2 => "女性"], old("gender"), ["placeholder" => " － "]) !!}
 </div>
                 
 <div class="form-group">
     <i class="fas fa-history mr-1"></i>
     {!! Form::label("favorite_music_age", "好きな音楽の年代（任意）") !!}
-    {!! Form::select("favorite_music_age", [1970 => "1970年代", 1980 => "1980年代", 1990 => "1990年代", 2000 => "2000年代", 2010 => "2010年代"], old("favorite_music_age"), ["placeholder" => "－"]) !!}
+    {!! Form::select("favorite_music_age", [1970 => "1970年代", 1980 => "1980年代", 1990 => "1990年代", 2000 => "2000年代", 2010 => "2010年代"], old("favorite_music_age"), ["placeholder" => " － "]) !!}
 </div>
                 
 <div class="form-group">

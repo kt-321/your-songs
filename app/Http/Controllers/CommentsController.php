@@ -3,25 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Http\Requests\CreateCommentRequest;
 
 use App\Song;
-
 use App\User;
-
 use App\Comment;
 
 class CommentsController extends Controller
 {
-    public function store(Request $request)
+    public function store(CreateCommentRequest $request)
     {
-        $this->validate($request,[
-            "user_id" => "required",
-            "song_id" => "required",
-            "body" => "required|max:2000",
-        ]);
-        
         Comment::create([
             'user_id' => $request->user()->id,
             'song_id' => $request->song_id,

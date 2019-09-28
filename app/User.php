@@ -38,6 +38,7 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
     
+    
    
     public function followings()
     {
@@ -54,7 +55,7 @@ class User extends Authenticatable
         // すでにフォローしているかの確認
         $exist = $this->is_following($userId);
         // 相手が自分自身でないかの確認
-        $its_me = $this->id == $userId;
+        $its_me = $this->id === $userId;
         
         if ($exist || $its_me){
             // すでにフォローしていれば何もしない
@@ -71,7 +72,7 @@ class User extends Authenticatable
         // すでにフォローしているかの確認
         $exist = $this->is_following($userId);
         // 相手が自分自身でないかの確認
-        $its_me = $this->id == $userId;
+        $its_me = $this->id === $userId;
         
         if ($exist && !$its_me){
             // すでにフォローしていればフォローを外す
@@ -128,5 +129,9 @@ class User extends Authenticatable
     public function is_favoriting($songId)
     {
         return $this->favorites()->where("song_id", $songId)->exists();
+    }
+    
+    public function accounts(){
+        return $this->hasMany('App\LinkedSocialAccount');
     }
 }

@@ -3,26 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateSongRequest;
+use App\Http\Requests\UpdateSongRequest;
 
 use Illuminate\Support\Facades\Storage;
 
 use App\User;
-
 use App\Song;
 
 class SongsController extends Controller
-{
+{   
+    /**
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    
     public function index()
-    {   
+    {  
         $data = [];
-        if(\Auth::check()) {
-            $songs = Song::withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(20);
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $songs = $user->feed_songs()->orderBy("created_at", "desc")->paginate(5);
+
             $data = [
+                "user" => $user,
                 "songs" => $songs,
-             ];
-         }
-        
-        return view("welcome", $data);
+            ];
+            $data += $this->counts($user);
+        }
+        return view("songs.index", $data);
     }
     
     public function create()
@@ -31,17 +41,9 @@ class SongsController extends Controller
         return view("songs.create", ["user" => $user]);
     }
     
-    public function store(Request $request)
+    public function store(CreateSongRequest $request)
     {   
         $user = \Auth::user();
-        
-        $this->validate($request,[
-            "song_name" => "required|max:15",
-            "artist_name" => "required|max:15",
-            "music_age" => "required|integer",
-            "description" => "nullable|max:200",
-            "video_url" => "nullable|string|max:200",
-        ]);
         
         $request->user()->songs()->create([
             "song_name" => $request->song_name,
@@ -51,12 +53,11 @@ class SongsController extends Controller
             "video_url" => $request->video_url,
         ]);
         
-        return redirect()->route("users.show", ['id' => $user->id]);
+        return redirect("users/".$user->id);
     }
     
-    public function show($id)
+    public function show(Song $song)
     {
-        $song = Song::find($id);
         $comments = $song->comments()->orderBy("created_at", "desc")->paginate(10);
         $user = \Auth::user();
         
@@ -67,19 +68,15 @@ class SongsController extends Controller
         ]);
     }
     
-    public function edit($id)
+    public function edit(Song $song)
     {
-        $song = Song::find($id);
-        
-        return view("songs.edit",[
+       return view("songs.edit",[
             "song" => $song,
         ]);
     }
     
-    public function update(Request $request, $id)
+    public function update(UpdateSongRequest $request, Song $song)
     {
-        $song = Song::find($id);
-        
         $song->song_name = $request->song_name;
         $song->artist_name = $request->artist_name;
         $song->music_age = $request->music_age;
@@ -88,50 +85,68 @@ class SongsController extends Controller
         
         $song->save();
         
-        return redirect()->route('songs.show', ['id' => $song->id]);
+        return redirect("songs/".$song->id);
     }
     
-   
-    public function destroy($id)
+    public function destroy(Song $song)
     {  
-        $user = User::find(auth()->id());
-        $song = Song::find($id);
+        $user = \Auth::user();
         
-        if(\Auth::id() === $song->user_id){
+        if($user->id === $song->user_id){
             $song->delete();
         }
         
-        return redirect()->route('users.show', ['id' => $user->id]);
+        return redirect("users/". $user->id);
     }
     
-    
-    public function favoritesRankingAll()
-    {    
-        $songs = Song::withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(20);
+    // public function favoritesRanking(Request $request)
+    // {    
+    //     // 値を取得
+    //     $music_age = $request->input("music_age");
         
-        return view("songs.favorites_ranking", ["songs" => $songs]);
-    }
-    
-    public function favoritesRanking($id)
-    {    
-        $songs = Song::withCount("favorite_users")->where("music_age", $id)->orderBy("favorite_users_count", "desc")->paginate(20);
+    //     // 検索QUERY
+    //     $query = Song::query();
         
-        return view("songs.favorites_ranking", ["songs" => $songs]);
-    }
+    //     // もし「年代」が選択されていれば
+    //     if(!empty($music_age))
+    //     {
+    //         $query->where("music_age", $music_age);
+    //     }
+        
+    //     // ページネーション
+    //     // $songs = $query->orderBy("created_at", "desc")->paginate(5);
+    //     // $songs = Song::withCount("favorite_users")->where("music_age", $id)->orderBy("favorite_users_count", "desc")->paginate(20);
+    //     $songs = $query->withCount("favorite_users")->orderBy("favorite_users_count", "desc")->paginate(5);
+        
+    //     $data = [
+    //     "music_age" => $music_age,
+    //     "songs" => $songs,
+    //     ];
+        
+    //     return view("songs.favorites_ranking", $data);
+    // }
     
-     public function commentsRankingAll()
-    {    
-        $songs = Song::withCount("comments")->orderBy("comments_count", "desc")->paginate(20);
-            
-        return view("songs.comments_ranking", ["songs" => $songs]);
-    } 
-    
-    public function commentsRanking($id)
-    {    
-        $songs = Song::withCount("comments")->where("music_age", $id)->orderBy("comments_count", "desc")->paginate(20);
-            
-        return view("songs.comments_ranking", ["songs" => $songs]);
-    }
+    // public function commentsRanking(Request $request)
+    // {   
+    //     // 値を取得
+    //     $music_age = $request->input("music_age");
+        
+    //     // 検索QUERY
+    //     $query = Song::query();
+        
+    //     // もし「年代」が選択されていれば
+    //     if(!empty($music_age))
+    //     {
+    //         $query->where("music_age", $music_age);
+    //     }
+        
+    //     // ページネーション
+    //     // $songs = $query->orderBy("created_at", "desc")->paginate(5);
+        
+    //     // $songs = Song::withCount("favorite_users")->where("music_age", $id)->orderBy("favorite_users_count", "desc")->paginate(20);
+    //     $songs = $query->withCount("comments")->orderBy("comments_count", "desc")->paginate(5);
+        
+    //     $data = [
     
     public function indexForAdmin()
     {   
@@ -153,12 +168,16 @@ class SongsController extends Controller
     public function restore($id)
     {
         Song::onlyTrashed()->find($id)->restore();
-        return back();
+        return redirect()->route("songs.indexForAdmin");
     }
     
     public function forceDelete($id)
     {
         Song::onlyTrashed()->find($id)->forceDelete();
-        return back();
-    }
+        return redirect()->route("songs.indexForAdmin");
+    
+  
+  
+  
+}  
 }

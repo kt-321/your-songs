@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @section("content")
-<h1 class="mb-4 text-center"><i class="fas fa-trash-alt mr-1"></i>曲の管理画面</h1>
+<h1 class="mb-4 text-center page-title"><i class="fas fa-trash-alt mr-1"></i>曲の管理画面</h1>
 
 <div class="users-index mb-3">
     <h4 class="text-center">未削除</h4>
@@ -29,7 +29,7 @@
                          <a class="btn btn-success btn-sm" href="{{ route("songs.show", ["id" => $song->id]) }}">曲の詳細</a>
                     </td>
                     <td>
-                        <a href="/delete/{{ $song->id}}">削除</a>
+                        <a href="/delete/{{ $song->id}}" onclick="delete_alert();return false;">削除</a>
                     </td>
                 </tr>
             @empty
@@ -71,7 +71,7 @@
                         <a href="/restore/{{ $delete->id}}">復旧</a>
                     </td>
                     <td>
-                        <a href="/force-delete/{{ $delete->id}}">完全削除</a>
+                        <a href="/force-delete/{{ $delete->id}}" onclick="force_delete_alert();return false;">完全削除</a>
                     </td>
                 </tr>
             @empty
