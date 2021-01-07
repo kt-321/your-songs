@@ -1,1 +1,1 @@
-<p>アプリケーション「Your Songs」がPHP/Laravel+Nuxt.jsの構成であったときのPHP/Laravelソースコード</p>
+<p>アプリケーション「Your Songs」がPHP/Laravelオンリーの構成であったときのPHP/Laravelソースコード</p>
